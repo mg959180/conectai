@@ -51,7 +51,8 @@
             if (res.sts == true) {
                 window.location = "<?= SITE_ADMIN_URL ?>";
             } else {
-                custom_alert(res.type, res.msg);
+                window.location = "<?= SITE_ADMIN_URL ?>login";
+                // custom_alert(res.type, res.msg);
             }
         }
         xhr.send(data);

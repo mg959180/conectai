@@ -6,7 +6,7 @@ if (defined('ENVIRONMENT')) {
             $server_database = 'connectai';
             $server_user_name = 'root';
             $server_password = '';
-            $document_root = $_SERVER['DOCUMENT_ROOT'] . '/conectai/';
+            $document_root = $_SERVER['DOCUMENT_ROOT'] . '/conectai';
             ini_set('display_errors', 1);
             ini_set('display_startup_errors', 1);
             error_reporting(E_ALL);
@@ -30,7 +30,7 @@ if (defined('ENVIRONMENT')) {
 define('APP_ROOT', dirname(__FILE__));
 ini_set('log_errors', 1);   // Mechanism to log errors
 defined('ABSOLUTE_URL') || define('ABSOLUTE_URL', $document_root);
-defined('UPLOAD_ROOT') || define('UPLOAD_ROOT', ABSOLUTE_URL . '/public/uploads');
+defined('UPLOAD_ROOT') || define('UPLOAD_ROOT', ABSOLUTE_URL . '/public/uploads/');
 defined('SITE_URL') || define('SITE_URL', $server_url);
 defined('PUBLIC_URL') || define('PUBLIC_URL', $server_url.'public/');
 defined('ADMIN_ASSETS_URL') || define('ADMIN_ASSETS_URL', $server_url.'public/admin/assets/');
@@ -45,7 +45,7 @@ defined('VIEW_DIR') || define('VIEW_DIR', APP_DIR . 'views/');
 defined('ADMIN_VIEW_DIR') || define('ADMIN_VIEW_DIR', APP_DIR . 'views/admin/');
 defined('MODEL_DIR') || define('MODEL_DIR', APP_DIR . 'model/');
 defined('CONTROLLER_DIR') || define('CONTROLLER_DIR', APP_DIR . 'controllers/');
-defined('UPLOAD_URL') || define('UPLOAD_URL', SITE_URL . '/public/uploads/');
+defined('UPLOAD_URL') || define('UPLOAD_URL', SITE_URL . 'public/uploads/');
 // File maximum size, in mb
 defined('FILE_MAX_SIZE') || define('FILE_MAX_SIZE', 4);
 // Cookie expiry time in seconds

@@ -320,3 +320,36 @@ function getOTP()
 {
     return  mt_rand(100000, 999999);
 }
+
+function uploadImage($image, $folder, $valid_mime = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/svg+xml'])
+{
+    $img_mime = $image['type'];
+
+    if (!in_array($img_mime, $valid_mime)) {
+        return response(['sts' => false, 'type' => 'error', 'msg' => 'File Type must be valid', 'results' => null]);
+        //invalid image mime or format
+    } else if (($image['size'] / (1024 * 1024)) > 2) {
+        return response(['sts' => false, 'type' => 'error', 'msg' => 'Image Size Must be below 10 mb', 'results' => null]);
+        //invalid image mime or format
+    } else {
+        $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
+        $r_name = 'IMG_' . random_int(11111, 99999) . ".$ext";
+
+        $img_path = $folder . $r_name;
+        if (move_uploaded_file($image['tmp_name'], $img_path)) {
+            return  ['sts' => true, 'type' => 'success', 'msg' => 'Image Upload successfully', 'results' => $r_name];
+        } else {
+            return response(['sts' => false, 'type' => 'error', 'msg' => 'Failed to upload image', 'results' => null]);
+            //invalid image mime or format
+        }
+    }
+}
+
+function deleteImage($image, $folder)
+{
+    if (unlink($folder . $image)) {
+        return true;
+    } else {
+        return false;
+    }
+}
