@@ -1,0 +1,114 @@
+
+#Pricing{
+
+    .switch-wrapper {
+      position: relative;
+    }
+
+    .switch-wrapper [type=radio] {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .switch-wrapper [type=radio]:checked#monthly ~ label[for=monthly],
+    .switch-wrapper [type=radio]:checked#yearly ~ label[for=yearly] {
+      color: #fff;
+    }
+
+    .switch-wrapper [type=radio]:checked#monthly ~ label[for=monthly]:hover,
+    .switch-wrapper [type=radio]:checked#yearly ~ label[for=yearly]:hover {
+      background: transparent;
+    }
+
+    .switch-wrapper [type=radio]:checked#monthly + label[for=yearly] ~ .highlighter {
+      transform: none;
+    }
+
+    .switch-wrapper [type=radio]:checked#yearly + label[for=monthly] ~ .highlighter {
+      transform: translateX(100%);
+    }
+
+    .switch-wrapper label {
+      z-index: 1;
+      min-width: 100px;
+      cursor: pointer;
+      border-radius: 8px;
+      text-align: center;
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      transition: all 0.2s ease-in-out;
+      font-weight: 500;
+    }
+
+    .switch-wrapper label:hover {
+      color: #902885;
+    }
+
+    .switch-wrapper .highlighter {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: calc(50% - 8px);
+      height: calc(100% - 16px);
+      border-radius: 8px;
+      background: #902885;
+      transition: all 0.2s ease-in-out;
+    }
+
+
+    .pricing-card {
+      border: 1px solid #c3d1e3;
+      transition: all 0.2s ease-in-out;
+      position: relative;
+      border-radius: 10px;
+    }
+    .pricing-card:hover, .pricing-card.active {
+      border-color: #902885;
+    }
+    .pricing-btn{
+      border-radius: 10px;
+      font-weight: 500;
+    }
+    .pricing-card:hover .pricing-btn, .pricing-card.active .pricing-btn {
+      color: #fff;
+      background-color: #902885;
+      border-color: #902885;
+    }
+    .pricing-card:hover {
+      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+    }
+    .pricing-card .badge {
+      position: absolute;
+      top: 2rem;
+      font-size: 14px;
+      right: 0;
+      background-color: #902885;
+      border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px;
+
+    }
+
+    .fw-semibold {
+      font-weight: 600 !important;
+    }
+
+    .w-full {
+      width: 100% !important;
+    }
+
+    .pricing-list{
+      li{
+        font-size: 18px;
+      }
+    }
+    p.lead{
+      font-weight: 500;
+
+    }
+    label{
+      font-size: 18px;
+    }
+    p{
+      font-size: 18px;
+    }
+}
