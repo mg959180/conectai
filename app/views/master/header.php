@@ -60,7 +60,7 @@
                                     <a class="nav-link " href="<?= SITE_URL ?>our-pricing">Pricing</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link " href="#Features">Features</a>
+                                    <a class="nav-link " href="<?= SITE_URL ?>features">Features</a>
                                 </li>
 
                                 <li class="nav-item dropdown">

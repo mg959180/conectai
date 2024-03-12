@@ -446,9 +446,6 @@
     <section class="py-2 py-lg-2 mb-5">
         <div class="container text-center">
             <img src="<?=SITE_URL?>public/front/assets/images/Conect AI Website Images/6/Untitled-2.png" alt="" class="img-fluid mb-5">
-            <!-- <img src="<?=SITE_URL?>public/front/assets/images/multi-channel-inte.png" alt="" class="img-fluid mb-5"> -->
-
-
         </div>
     </section>
 

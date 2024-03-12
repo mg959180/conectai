@@ -1,3 +1,6 @@
+<?php if ($header_footer) {
+    require_once ADMIN_VIEW_DIR . 'nav_bar_end.php';
+} ?>
 <!-- Bootstrap core JavaScript-->
 <script src="<?= ADMIN_ASSETS_URL ?>vendor/jquery/jquery.min.js"></script>
 <script src="<?= ADMIN_ASSETS_URL ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

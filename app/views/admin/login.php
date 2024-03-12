@@ -49,7 +49,7 @@
         xhr.onload = function() {
             let res = JSON.parse(this.response);
             if (res.sts == true) {
-                window.location = "<?= SITE_URL ?>index.php";
+                window.location = "<?= SITE_ADMIN_URL ?>";
             } else {
                 custom_alert(res.type, res.msg);
             }

@@ -771,3 +771,7 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+INSERT INTO `ca_admin_users` (`adm_id`, `adm_fname`, `adm_lname`, `adm_screen_name`, `adm_user_name`, `adm_role`, `adm_slug`, `adm_unique_pin`, `adm_email`, `adm_phone1`, `adm_type`, `adm_password`, `adm_password_reset_pin`, `adm_password_reset_time`, `adm_status`, `adm_remember_me`, `adm_profile_pic`, `adm_last_login`, `adm_ip_information`, `adm_is_deleted`, `adm_deleted_date`, `adm_created_date`, `adm_created_by`, `adm_modified_date`, `adm_modifiedby`) VALUES (NULL, 'Mayank', 'Gupta', 'Mayank Gupta', 'mayankGupta', 'master', 'mayank-gupta', NULL, NULL, NULL, '0', '123456', NULL, NULL, 'ACTIVE', '0', NULL, NULL, NULL, '0', NULL, '2024-03-12 05:17:51.000000', NULL, NULL, NULL);

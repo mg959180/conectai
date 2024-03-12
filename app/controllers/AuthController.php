@@ -1,15 +1,16 @@
 <?php
-
-
-require_once APP_DIR.'libs/BaseController.php';
-class AuthController extends BaseController
+require_once APP_DIR . 'libs/View.php';
+class AuthController
 {
+    private $_view;
+    public function __construct()
+    {
+        $this->_view  = new View();
+    }
     public function forgotPassword()
     {
-        
-        $this->set_header_footer = false;
-        $this->setVal('poo', 'hello');
-        $this->frontPageRender(VIEW_DIR . 'forget-password');
+        $this->_view->set_header_footer = false;
+        $this->_view->frontPageRender(VIEW_DIR . 'forget-password');
     }
 
     

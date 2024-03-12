@@ -1,12 +1,15 @@
 <?php
-
-require_once APP_DIR.'libs/BaseController.php';
-class PageNotFoundController extends BaseController
+require_once APP_DIR . 'libs/View.php';
+class PageNotFoundController
 {
-
+    private $_view;
+    public function __construct()
+    {
+        $this->_view  = new View();
+    }
     public function index()
     {
-        $this->setVal('poo', 'hello');
-        $this->frontPageRender(VIEW_DIR . 'page-not-found');
+        $this->_view->setVal('poo', 'hello');
+        $this->_view->frontPageRender(VIEW_DIR . 'page-not-found');
     }
 }

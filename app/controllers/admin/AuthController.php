@@ -1,9 +1,8 @@
 <?php
 
-require_once APP_DIR . 'libs/BaseController.php';
 require_once APP_DIR . 'libs/Input.php';
 require_once APP_DIR . 'models/admin/AuthModel.php';
-class AuthController extends BaseController
+class AuthController
 {
 
     public function __construct()
@@ -22,32 +21,28 @@ class AuthController extends BaseController
             if (!(isset($data['pass']) && !empty($data['pass']) == true)) {
                 response(['sts' => false, 'type' => 'error', 'msg' => 'Please Enter password!', 'results' => '0']);
             }
-            $amobj = new AuthModel();
-            $u_exist = $amobj->CheckUser(); 
 
-            print_r($amobj);
-            
-            // $u_exist = select(
-            //     "SELECT * FROM users WHERE uname = ? ",
-            //     [$data['uname']],
-            //     "s"
-            // );
-
-            if (mysqli_num_rows($u_exist) == 0) {
+            $authObj = new AuthModel();
+            $u_exist = $authObj->CheckUser('user', $data['uname']);
+            if (count($u_exist) == 0) {
                 response(['sts' => false, 'type' => 'error', 'msg' => 'Login Details Not found!', 'results' => '0']);
             } else {
-                $u_fetch = mysqli_fetch_assoc($u_exist);
-                if ($u_fetch['status'] == 0) {
+                $u_fetch = $u_exist[0];
+                if ($u_fetch['adm_status'] == 0) {
                     response(['sts' => false, 'type' => 'error', 'msg' => 'Your Account is inactive contact your administrator!', 'results' => '0']);
                 } else {
-                    // if (!password_verify($data['pass'], $u_fetch['password'])) {
-                    if (!($data['pass'] == $u_fetch['password'])) {
+                    if (is_production()) {
+                        $check_password = password_verify($data['pass'], $u_fetch['adm_password']);
+                    } else {
+                        $check_password = $data['pass'] == $u_fetch['adm_password'];
+                    }
+                    if (!$check_password) {
                         response(['sts' => false, 'type' => 'error', 'msg' => 'Password Invalid, Please Enter Correct Password!', 'results' => '0']);
                     } else {
                         $_SESSION['admin']['login'] = true;
-                        $_SESSION['admin']['uId'] = $u_fetch['id'];
-                        $_SESSION['admin']['uName'] = $u_fetch['uname'];
-                        $_SESSION['admin']['Name'] = $u_fetch['name'];
+                        $_SESSION['admin']['uId'] = $u_fetch['adm_id'];
+                        $_SESSION['admin']['uName'] = $u_fetch['adm_user_name'];
+                        $_SESSION['admin']['Name'] = $u_fetch['adm_screen_name'];
                         response(['sts' => true, 'type' => 'success', 'msg' => 'Login Successful!', 'results' => '1']);
                     }
                 }

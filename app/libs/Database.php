@@ -6,9 +6,9 @@ class Database
     private $pw = PASSWORD;
     private $dbname = DATABASE;
 
-    private $db;
-    private $stmt;
-    private $error;
+    public $db;
+    public $stmt;
+    public $error;
 
     public function __construct()
     {

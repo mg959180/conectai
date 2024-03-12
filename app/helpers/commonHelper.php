@@ -4,6 +4,10 @@ function get_controller_name($url)
     return str_replace(' ', '', ucwords(str_replace('-', ' ', $url))) . 'Controller';
 }
 
+function is_production()
+{
+    return (ENVIRONMENT == 'PRODUCTION') ? true : false;
+}
 
 function redirect($url)
 {
