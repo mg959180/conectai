@@ -1,13 +1,19 @@
 <?php
 
+require_once APP_DIR . 'libs/View.php';
 require_once APP_DIR . 'libs/Input.php';
 require_once APP_DIR . 'models/admin/AuthModel.php';
+require_once APP_DIR . 'libs/Session.php';
 class AuthController
 {
 
+    private $_view;
+    private $_db;
     public function __construct()
     {
-        check_login();
+        check_login('index');
+        $this->_view  = new View();
+        $this->_db = new Database();
     }
 
     public function index()
@@ -48,5 +54,35 @@ class AuthController
                 }
             }
         }
+    }
+
+    public function profile()
+    {
+        $id = Session::get('admin')['uId'];
+        $this->_db->query("SELECT * FROM " . ADMINS . " WHERE adm_id  = '" . $id . "'");
+        $this->_db->stmt->execute();
+        $admin_data =  $this->_db->stmt->fetch();
+
+        $this->_view->setVal('admin_data', $admin_data);
+        $this->_view->set_header_footer = true;
+        $this->_view->setVal('meta_description', 'Admin || Profile Page');
+        $this->_view->setVal('title', 'Admin || Profile Page');
+        $this->_view->setVal('meta_author', 'Mayank Gupta');
+        $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'profile');
+    }
+
+    public function changePassword()
+    {
+        $this->_view->set_header_footer = true;
+        $this->_view->setVal('meta_description', 'Admin || Profile Page');
+        $this->_view->setVal('title', 'Admin || Profile Page');
+        $this->_view->setVal('meta_author', 'Mayank Gupta');
+        $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'change-password');
+    }
+
+    public function logOut()
+    {
+        SESSION::flash('admin');
+        redirect(SITE_ADMIN_URL . 'login');
     }
 }

@@ -1,6 +1,6 @@
 <?php
-
-
+require_once APP_DIR . 'libs/Session.php';
+require_once APP_DIR . 'libs/Database.php';
 class View
 {
     protected $set_val = [];
@@ -73,6 +73,18 @@ class View
 
     public function adminPageRender($viewScript)
     {
+        $db = new Database();
+        $id = Session::get('admin')['uId'];
+        $db->query("SELECT adm_screen_name as s_name, adm_profile_pic  as pic FROM " . ADMINS . " WHERE adm_id  = '" . $id . "'");
+        $db->stmt->execute();
+        $admin_data =  $db->stmt->fetch();
+
+        $db->query("SELECT con_name as cname, con_message as cmessage, con_date as cdate FROM " . CONTACT_US . " WHERE 1 AND con_is_read = 0 ");
+        $db->stmt->execute();
+        $contact_us_data =  $db->stmt->fetchAll();
+
+        $this->set_val['admin_data'] = $admin_data;
+        $this->set_val['recent_contact_us_data'] = $contact_us_data;
         $this->set_val['header_footer'] = $this->set_header_footer;
         $this->set_val['show_data_table'] = $this->show_data_table;
         $this->set_val['show_chart'] = $this->show_chart;

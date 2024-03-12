@@ -45,6 +45,7 @@ defined('VIEW_DIR') || define('VIEW_DIR', APP_DIR . 'views/');
 defined('ADMIN_VIEW_DIR') || define('ADMIN_VIEW_DIR', APP_DIR . 'views/admin/');
 defined('MODEL_DIR') || define('MODEL_DIR', APP_DIR . 'model/');
 defined('CONTROLLER_DIR') || define('CONTROLLER_DIR', APP_DIR . 'controllers/');
+defined('UPLOAD_URL') || define('UPLOAD_URL', SITE_URL . '/public/uploads/');
 // File maximum size, in mb
 defined('FILE_MAX_SIZE') || define('FILE_MAX_SIZE', 4);
 // Cookie expiry time in seconds
