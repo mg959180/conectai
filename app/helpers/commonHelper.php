@@ -57,7 +57,7 @@ function alert($type, $msg)
     echo <<<alert
       <div class="alert $bs_class alert-dismissible fade show custom-alert" role="alert">
         <strong class="me-3">$msg</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" onclick="return remAlert();" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     alert;
 }
@@ -67,8 +67,8 @@ function set_session_alert($type, $msg)
 {
     $bs_class = (($type == "success") ? "alert-success" : "alert-danger");
     $msg = "<div class='alert $bs_class alert-dismissible fade show custom-alert' role='alert'>
-        <strong class='me-3'>$msg</strong>
-        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        <strong class='me-3'>$msg</strong>        
+        <button type='button' class='btn-close' onclick='return remAlert();' data-bs-dismiss='alert' aria-label='Close'></button>
       </div>";
     $_SESSION['msg_stack'][] = $msg;
 }

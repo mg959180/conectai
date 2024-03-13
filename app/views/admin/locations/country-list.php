@@ -37,8 +37,8 @@
                                     <td>
                                         <div class="form-group">
                                             <select class="form-control" onchange="changeStatus('<?= $cnt_data['cun_id'] ?>',this)">
-                                                <option value="1">Active</option>
-                                                <option value="0">inactive</option>
+                                                <option value="1" <?= $cnt_data['cun_status'] == 1 ? 'selected' : ''?>>Active</option>
+                                                <option value="0" <?= $cnt_data['cun_status'] == 0 ? 'selected' : ''?>>inactive</option>
                                             </select>
                                         </div>
                                     </td>
@@ -66,15 +66,12 @@
             let data = new FormData();
             data.append('id', id);
             data.append('status', status);
+            data.append('change_status', 1);
             let xhr = new XMLHttpRequest();
-            xhr.open("POST", "<?= SITE_ADMIN_URL ?>country-status", true);
+            xhr.open("POST", "<?= SITE_ADMIN_URL ?>countries/country-status", true);
             xhr.onload = function() {
                 let res = JSON.parse(this.response);
-                if (res.sts == true) {
-                    // window.location = "< ?= SITE_ADMIN_URL ?>countries";
-                } else {
-                    // custom_alert(res.type, res.msg);
-                }
+                custom_alert(res.type, res.msg);
             }
             xhr.send(data);
         }

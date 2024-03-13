@@ -775,3 +775,11 @@ COMMIT;
 
 
 INSERT INTO `ca_admin_users` (`adm_id`, `adm_fname`, `adm_lname`, `adm_screen_name`, `adm_user_name`, `adm_role`, `adm_slug`, `adm_unique_pin`, `adm_email`, `adm_phone1`, `adm_type`, `adm_password`, `adm_password_reset_pin`, `adm_password_reset_time`, `adm_status`, `adm_remember_me`, `adm_profile_pic`, `adm_last_login`, `adm_ip_information`, `adm_is_deleted`, `adm_deleted_date`, `adm_created_date`, `adm_created_by`, `adm_modified_date`, `adm_modifiedby`) VALUES (NULL, 'Mayank', 'Gupta', 'Mayank Gupta', 'mayankGupta', 'master', 'mayank-gupta', NULL, NULL, NULL, '0', '123456', NULL, NULL, 'ACTIVE', '0', NULL, NULL, NULL, '0', NULL, '2024-03-12 05:17:51.000000', NULL, NULL, NULL);
+
+ALTER TABLE `ca_countries` ADD `cun_status` TINYINT(1) NOT NULL DEFAULT '0' AFTER `cun_region`;
+
+ALTER TABLE `ca_taxes` ADD FOREIGN KEY (`tax_cnt_id`) REFERENCES `ca_countries`(`cun_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `ca_taxes` ADD FOREIGN KEY (`tax_created_by`) REFERENCES `ca_admin_users`(`adm_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `ca_taxes` ADD FOREIGN KEY (`tax_modifiedby`) REFERENCES `ca_admin_users`(`adm_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `ca_taxes` ADD `tax_value_type` INT(5) NOT NULL DEFAULT '1' COMMENT '1 - percentage,2 - fixed' AFTER `tax_value`;

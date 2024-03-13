@@ -48,6 +48,7 @@ class AuthController
                         $_SESSION['admin']['uId'] = $u_fetch['adm_id'];
                         $_SESSION['admin']['uName'] = $u_fetch['adm_user_name'];
                         $_SESSION['admin']['Name'] = $u_fetch['adm_screen_name'];
+                        set_session_alert('success', 'Login Successful!');
                         response(['sts' => true, 'type' => 'success', 'msg' => 'Login Successful!', 'results' => '1']);
                     }
                 }
@@ -131,7 +132,7 @@ class AuthController
         if (isset($_POST['edit_profile'])) {
 
             $data = Input::filter_param($_POST);
-           
+
             if (is_production()) {
                 $check_password = password_verify($data['current_password'], $admin_edit_data['adm_password']);
             } else {

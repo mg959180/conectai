@@ -6,6 +6,8 @@
 
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
+                    <div id="error-div">
+                    </div>
                     <!-- Nested Row within Card Body -->
                     <div class="row">
                         <div class="col-lg-2 d-none d-lg-block"></div>
@@ -51,8 +53,7 @@
             if (res.sts == true) {
                 window.location = "<?= SITE_ADMIN_URL ?>";
             } else {
-                window.location = "<?= SITE_ADMIN_URL ?>login";
-                // custom_alert(res.type, res.msg);
+                custom_alert(res.type, res.msg);
             }
         }
         xhr.send(data);

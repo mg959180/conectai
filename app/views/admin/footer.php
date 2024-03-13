@@ -27,6 +27,28 @@
     <script src="<?= ADMIN_ASSETS_URL ?>js/chart/chart-pie.js"></script>
 <?php } ?>
 
+<script>
+    function custom_alert(type, msg) {
+        let bs_class = (type == 'success') ? 'alert-success' : 'alert-danger';
+        let element = document.createElement('div');
+        element.innerHTML = `
+      <div class="alert ${bs_class} alert-dismissible fade show" role="alert">
+        <strong class="me-3">${msg}</strong>
+        <button type="button" class="btn-close" onclick="return remAlert();" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    `;
+        let error_div = document.getElementById('error-div');
+        error_div.appendChild(element);
+        setTimeout(remAlert, 3000);
+    }
+
+    function remAlert() {
+        if (document.getElementsByClassName('alert').length) {
+            document.getElementsByClassName('alert')[0].remove();
+        }
+
+    }
+</script>
 </body>
 
 </html>

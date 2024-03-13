@@ -191,4 +191,6 @@
 
             </nav>
             <!-- End of Topbar -->
-            <?php echo display_alert(); ?>
+            <div id="error-div" class="container-fluid">
+                <?php echo display_alert(); ?>
+            </div>
