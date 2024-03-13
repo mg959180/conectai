@@ -14,10 +14,10 @@ if (defined('ENVIRONMENT')) {
         case 'PRODUCTION':
             $is_https = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on');
             $http = ($is_https == true ? 'https://' : 'http://');
-            $server_url = $http . 'mtechlabs.co.in/';
-            $server_database = ' mtechlabsco_connectai';
-            $server_user_name = 'mtechlabsco_connectai';
-            $server_password = 'mtechlabsco@700783';
+            $server_url = $http . 'conectai.chat/';
+            $server_database = 'conectai_conectchat';
+            $server_user_name = 'conectai_conectchat';
+            $server_password = 'conectchat@123';
             $document_root = $_SERVER['DOCUMENT_ROOT'] . '/';
             error_reporting(E_ALL);
             ini_set('display_errors', 0);

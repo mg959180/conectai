@@ -192,45 +192,6 @@ Last Update: 9 May 2023
 		},
 	});
 
-	// 8. Contact form
-	const form = document.querySelector("#contact-form");
-
-	if (form) {
-		const formStatus = form.querySelector(".status");
-
-		form.addEventListener("submit", function (e) {
-			e.preventDefault();
-			let formData = new FormData(form);
-
-			let xhr = new XMLHttpRequest();
-			xhr.open("POST", form.action);
-			xhr.onload = function () {
-				if (xhr.status === 200) {
-					formStatus.classList.remove("d-none");
-					formStatus.classList.remove("alert-danger");
-					formStatus.classList.add("alert-success");
-					formStatus.textContent = xhr.responseText;
-					form.reset();
-					setTimeout(() => {
-						formStatus.classList.add("d-none");
-					}, 6000);
-				} else {
-					formStatus.classList.remove("d-none");
-					formStatus.classList.remove("alert-success");
-					formStatus.classList.add("alert-danger");
-					if (xhr.responseText !== "") {
-						formStatus.textContent = xhr.responseText;
-					} else {
-						formStatus.textContent = "Oops! An error occurred and your message could not be sent.";
-					}
-					setTimeout(() => {
-						formStatus.classList.add("d-none");
-					}, 6000);
-				}
-			};
-			xhr.send(formData);
-		});
-	}
 
 	// 9. Sticky navbar
 	const header = document.querySelector(".navbar");

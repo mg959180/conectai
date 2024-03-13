@@ -50,7 +50,10 @@
 
             <div class="row justify-center mt-18" data-aos="fade-up-sm" data-aos-delay="50">
                 <div class="col-lg-8 col-xl-6">
-                    <form class="vstack gap-8" id="contact-form" method="post" action="<?= FRONT_ASSETS_URL?>php/contact_email.php">
+                    <form class="vstack gap-8" id="contact-form">
+                        <div id="error-div" class="">
+
+                        </div>
                         <div class="">
                             <label for="name" class="form-label fs-lg fw-medium mb-4"> Your name* </label>
                             <div class="input-group with-icon">
@@ -101,7 +104,7 @@
                             <textarea id="message" name="message" class="form-control rounded-2" placeholder="Write here your details message" rows="4" required></textarea>
                         </div>
                         <div class="">
-                            <button type="submit" class="btn btn-primary">Send Message</button>
+                            <button type="submit" name="sendData" class="btn btn-primary">Send Message</button>
                         </div>
                         <div class="status alert mb-0 d-none"></div>
                     </form>
@@ -115,7 +118,7 @@
         <div class="container">
             <div class="rounded-5 border position-relative z-1 gradient-bg">
                 <div class="animate-scale position-absolute w-full h-full z-n1">
-                    <img src="<?= FRONT_ASSETS_URL?>images/shapes/blurry-shape-4.svg" alt="" class="bg-shape img-fluid" />
+                    <img src="<?= FRONT_ASSETS_URL ?>images/shapes/blurry-shape-4.svg" alt="" class="bg-shape img-fluid" />
                 </div>
                 <div class="row justify-center">
                     <div class="col-lg-10">
@@ -135,7 +138,7 @@
                                     <path fill="currentColor" d="M22.85 71.546c-.873 5.764-1.778 11.525-2.588 17.298-.462-.304-.922-.605-1.384-.91 2.439-1.254 4.864-2.527 7.207-3.954 2.158-1.317 4.212-3.127 6.536-4.109.733-.31 1.331.688.841 1.25-1.713 1.972-4.396 3.318-6.619 4.634-2.326 1.378-4.712 2.663-7.172 3.78-.633.287-1.294-.395-1.174-1.015 1.098-5.725 2.104-11.464 3.137-17.2.137-.79 1.337-.563 1.215.226Z" />
                                 </svg>
                                 <div class="cta-img rounded-top-4">
-                                    <img src="<?= FRONT_ASSETS_URL?>images/screens/screen-6.png" alt="" class="img-fluid w-full h-full object-cover" />
+                                    <img src="<?= FRONT_ASSETS_URL ?>images/screens/screen-6.png" alt="" class="img-fluid w-full h-full object-cover" />
                                 </div>
                             </div>
                         </div>
@@ -146,3 +149,46 @@
     </section>
 
 </main>
+
+<script>
+    let contact_form = document.getElementById('contact-form');
+    contact_form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let data = new FormData();
+        data.append('name', contact_form.elements['name'].value);
+        data.append('email', contact_form.elements['email'].value);
+        data.append('phone', contact_form.elements['phone'].value);
+        data.append('message', contact_form.elements['message'].value);
+        data.append('sendData', '1');
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "<?= SITE_URL . 'contact-us/send-data' ?>", true);
+        xhr.onload = function() {
+            let res = JSON.parse(this.response);
+            custom_alert(res.type, res.msg);
+        }
+        xhr.send(data);
+    });
+</script>
+<script>
+    function custom_alert(type, msg) {
+        let bs_class = (type == 'success') ? 'alert-success' : 'alert-danger';
+        let element = document.createElement('div');
+        element.innerHTML = `
+      <div class="alert ${bs_class} alert-dismissible fade show" role="alert">
+        <strong class="me-3">${msg}</strong>
+        <button type="button" class="btn-close" onclick="return remAlert();" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    `;
+        let error_div = document.getElementById('error-div');
+        error_div.appendChild(element);
+        setTimeout(remAlert, 3000);
+    }
+
+    function remAlert() {
+        if (document.getElementsByClassName('alert').length) {
+            document.getElementsByClassName('alert')[0].remove();
+        }
+
+    }
+</script>
