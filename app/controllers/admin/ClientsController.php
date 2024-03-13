@@ -1,7 +1,6 @@
 <?php
 
-require_once APP_DIR . 'libs/BaseController.php';
-class ClientsController extends BaseController
+class ClientsController
 {
 
     public function __construct()

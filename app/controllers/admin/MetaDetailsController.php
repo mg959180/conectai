@@ -1,7 +1,6 @@
 <?php
 
-require_once APP_DIR . 'libs/BaseController.php';
-class MetaDetailsController extends BaseController
+class MetaDetailsController
 {
 
     public function __construct()

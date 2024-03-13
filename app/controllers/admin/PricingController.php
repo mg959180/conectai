@@ -1,7 +1,6 @@
 <?php
 
-require_once APP_DIR . 'libs/BaseController.php';
-class PricingController extends BaseController
+class PricingController
 {
 
     public function __construct()

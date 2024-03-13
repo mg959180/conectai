@@ -79,7 +79,6 @@ class TaxesController
             $this->_view->setVal('meta_description', 'Admin || Taxes Add Page');
             $this->_view->setVal('title', 'Admin || Taxes Add Page');
         }
-        $this->_view->show_data_table = true;
         $this->_view->set_header_footer = true;
         $this->_view->setVal('meta_author', 'Mayank Gupta');
         $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'taxes/taxes-form');
