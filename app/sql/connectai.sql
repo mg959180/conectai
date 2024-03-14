@@ -5861,5 +5861,22 @@ AFTER `wes_maintenance_end_time`,
 AFTER `wes_modified_by`;
 ALTER TABLE `ca_website_settings`
 ADD FOREIGN KEY (`wes_modified_by`) REFERENCES `ca_admin_users`(`adm_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-INSERT INTO `ca_website_settings` (`wes_id`, `wes_name`, `wes_maintenance_mode`, `wes_maintenance_start_time`, `wes_maintenance_end_time`, `wes_modified_by`, `wes_modified_date`) VALUES (NULL, 'Conect Ai', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `ca_website_settings` (
+    `wes_id`,
+    `wes_name`,
+    `wes_maintenance_mode`,
+    `wes_maintenance_start_time`,
+    `wes_maintenance_end_time`,
+    `wes_modified_by`,
+    `wes_modified_date`
+  )
+VALUES (NULL, 'Conect Ai', '0', NULL, NULL, NULL, NULL);
+ALTER TABLE `ca_website_settings`
+ADD `wes_mailer` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_name`,
+ADD `wes_mailer_host` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer`,
+ADD `wes_mailer_port` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer_host`,
+ADD `wes_mailer_uname` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer_port`,
+ADD `wes_mailer_upass` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer_uname`,
+ADD `wes_mailer_encryption` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer_upass`,
+ADD `wes_mailer_from_address` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer_encryption`,
+ADD `wes_mailer_from_name` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer_from_address`;
