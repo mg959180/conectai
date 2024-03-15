@@ -998,8 +998,8 @@
                     <div class="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-whitedark shadow-lg" style="border-color: #902885">
                         <span class="badge text-bg-primary px-4 py-2 rounded-end-0">Most Popular</span>
                         <h3 class=" mb-0">Professional</h3>
-                        <h1 class="display-2   mb-0 mt-4 price monthly">$39</h1>
-                        <h1 class="display-2   mb-0 mt-4 price yearly d-none">$279</h1>
+                        <h1 class="display-2 mb-0 mt-4 price monthly">$39</h1>
+                        <h1 class="display-2 mb-0 mt-4 price yearly d-none">$279</h1>
                         <p class=" lead  mt-4 mb-0">
                             A 10X faster way to writing your professional copy
                         </p>

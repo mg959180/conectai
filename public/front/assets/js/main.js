@@ -262,13 +262,16 @@ Last Update: 9 May 2023
 
 
 
-// For Page Load Open Modal
 // Initialize the modal
-let model_disp = document.getElementById('ModalRefresh')
-if(model_disp){
-var myModal = new bootstrap.Modal(model_disp, {});
-// Show the modal after 3 seconds
-setTimeout(function() {
-myModal.show();
-}, 3000);
+function openModel() {
+	let model_display = document.getElementById('ModalRefresh');
+	if (model_display) {
+		var myModal = new bootstrap.Modal(model_display, {});
+		// Show the modal after 3 seconds
+		myModal.show();
+	}
 }
+// For Page Load Open Modal
+setTimeout(function () {
+	openModel();
+}, 3000);

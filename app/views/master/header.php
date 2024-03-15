@@ -33,7 +33,7 @@
             <nav class="navbar navbar-expand-lg fixed-top bg-white">
                 <div class="container">
                     <!-- Logo -->
-                    <a href="<?=SITE_URL?>" class="navbar-logo">
+                    <a href="<?= SITE_URL ?>" class="navbar-logo">
                         <img src="<?= SITE_URL ?>public/front/assets/images/connect_ai_png.png" alt="" width="200">
                     </a>
 
@@ -78,7 +78,7 @@
                                     <a class="nav-link " href="<?= SITE_URL ?>contact-us">Contact</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?= SITE_URL ?>login">Login/Signup</a>
+                                    <a class="nav-link" href="javascript:void(0);" onclick="openModel()">Login/Signup</a>
                                 </li>
                             </ul>
                             <div class="">
