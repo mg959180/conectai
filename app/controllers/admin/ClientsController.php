@@ -35,7 +35,7 @@ class ClientsController
             $id = $data['id'];
             if ($id > 0) {
                 try {
-                    $sql = "UPDATE  " . BLOGS . " SET poi_status = '" . $data['status'] . "'  WHERE poi_id = " . $id;
+                    $sql = "UPDATE  " . CLIENTS . " SET poi_status = '" . $data['status'] . "'  WHERE poi_id = " . $id;
                     $this->_db->beginTransaction();
                     $this->_db->query($sql);
                     $retVal = $this->_db->execute();
@@ -62,7 +62,7 @@ class ClientsController
             $id = $data['id'];
             if ($id > 0) {
                 try {
-                    $sql = "UPDATE  " . BLOGS . " SET poi_sort_order = '" . $data['order'] . "'  WHERE poi_id = " . $id;
+                    $sql = "UPDATE  " . CLIENTS . " SET poi_sort_order = '" . $data['order'] . "'  WHERE poi_id = " . $id;
                     $this->_db->beginTransaction();
                     $this->_db->query($sql);
                     $retVal = $this->_db->execute();

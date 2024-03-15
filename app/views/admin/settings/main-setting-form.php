@@ -18,8 +18,8 @@
                         <label for="maintenance_mode">Select Maintenance Status</label>
                         <select class="form-control" name="maintenance_mode" id="maintenance_mode">
                             <option value="">Select</option>
-                            <option value="1" <?= ($website_data['wes_maintenance_mode'] == 1 ? 'selected' : '') ?>>Active</option>
-                            <option value="0" <?= ($website_data['wes_maintenance_mode'] == 0 ? 'selected' : '') ?>>inactive</option>
+                            <option value="1" <?= (!empty($website_data['wes_maintenance_mode']) ? ($website_data['wes_maintenance_mode'] == 1 ? 'selected' : '') : '') ?>>Active</option>
+                            <option value="0" <?= (!empty($website_data['wes_maintenance_mode']) ? ($website_data['wes_maintenance_mode'] == 0 ? 'selected' : '') : '') ?>>inactive</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
@@ -27,7 +27,7 @@
                         <input type="date" class="form-control " id="start_date" name="start_date" value="<?= change_to_custom_date($website_data['wes_maintenance_start_time'], SYSTEM_DATE_TIME) ?? '' ?>" placeholder="Start Date">
                     </div>
                     <div class="col-sm-3">
-                        <label for="end_date">Tax Value</label>
+                        <label for="end_date">Maintenance End Value</label>
                         <input type="date" class="form-control " id="end_date" name="end_date" value="<?= change_to_custom_date($website_data['wes_maintenance_end_time'], SYSTEM_DATE_TIME) ?? '' ?>" placeholder="End Date">
                     </div>
                 </div>

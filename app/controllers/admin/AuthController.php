@@ -117,7 +117,7 @@ class AuthController
         $this->_view->setVal('meta_description', 'Admin || Profile Page');
         $this->_view->setVal('title', 'Admin || Profile Page');
         $this->_view->setVal('meta_author', 'Mayank Gupta');
-        $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'profile');
+        $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'settings/profile');
     }
 
     public function changePassword()
@@ -174,7 +174,7 @@ class AuthController
         $this->_view->setVal('meta_description', 'Admin || Change Password Page');
         $this->_view->setVal('title', 'Admin || Change Password Page');
         $this->_view->setVal('meta_author', 'Mayank Gupta');
-        $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'change-password');
+        $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'settings/change-password');
     }
 
     public function logOut()

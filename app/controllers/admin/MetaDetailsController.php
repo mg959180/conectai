@@ -17,33 +17,33 @@ class MetaDetailsController
 
     public function index()
     {
-        $this->_db->query("SELECT * FROM " . CLIENTS . " WHERE 1 ");
-        $clients_data = $this->_db->resultSet();
+        $this->_db->query("SELECT * FROM " . META_DETAILS . " WHERE 1 ");
+        $meta_data = $this->_db->resultSet();
         $this->_view->show_data_table = true;
         $this->_view->set_header_footer = true;
-        $this->_view->setVal('clients_data', $clients_data);
-        $this->_view->setVal('meta_description', 'Admin || Clients Page');
-        $this->_view->setVal('title', 'Admin || Clients Page');
+        $this->_view->setVal('meta_data', $meta_data);
+        $this->_view->setVal('meta_description', 'Admin || Meta data Page');
+        $this->_view->setVal('title', 'Admin || Meta data Page');
         $this->_view->setVal('meta_author', 'Mayank Gupta');
-        $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'clients/clients-list');
+        $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'meta-details/meta-list');
     }
 
-    public function clientsStatus()
+    public function metaDetailsStatus()
     {
         if (Input::post('change_status')) {
             $data = Input::filter_param($_POST);
             $id = $data['id'];
             if ($id > 0) {
                 try {
-                    $sql = "UPDATE  " . BLOGS . " SET poi_status = '" . $data['status'] . "'  WHERE poi_id = " . $id;
+                    $sql = "UPDATE  " . META_DETAILS . " SET wmd_active = '" . $data['status'] . "'  WHERE wmd_id = " . $id;
                     $this->_db->beginTransaction();
                     $this->_db->query($sql);
                     $retVal = $this->_db->execute();
                     if ($retVal) {
                         $this->_db->commit();
-                        response(['sts' => true, 'type' => 'success', 'msg' => 'Clients Status Updated Successfully', 'results' => '0']);
+                        response(['sts' => true, 'type' => 'success', 'msg' => 'Meta Details Status Updated Successfully', 'results' => '0']);
                     } else {
-                        response(['sts' => false, 'type' => 'error', 'msg' => 'Failed to upload Clients Status', 'results' => '0']);
+                        response(['sts' => false, 'type' => 'error', 'msg' => 'Failed to upload Meta Details Status', 'results' => '0']);
                     }
                 } catch (Exception $ex) {
                     $this->_db->rollBack();
@@ -54,46 +54,46 @@ class MetaDetailsController
             }
         }
     }
+
     public function mode($id = null)
     {
         if ($id > 0) {
-            $this->_db->query("SELECT * FROM " . CLIENTS . " WHERE 1 AND poi_id  = " . $id);
-            $clients_data = $this->_db->single();
-            $this->_view->setVal('clients_data', $clients_data);
+            $this->_db->query("SELECT * FROM " . META_DETAILS . " WHERE 1 AND wmd_id  = " . $id);
+            $meta_data = $this->_db->single();
+            $this->_view->setVal('meta_data', $meta_data);
             $this->_view->setVal('mode', 'edit');
-            $this->_view->setVal('page_title', 'Clients Edit Page');
-            $this->_view->setVal('meta_description', 'Admin || Clients Edit Page');
-            $this->_view->setVal('title', 'Admin || Clients Edit Page');
+            $this->_view->setVal('page_title', 'Meta Details Edit Page');
+            $this->_view->setVal('meta_description', 'Admin || Meta Details Edit Page');
+            $this->_view->setVal('title', 'Admin || Meta Details Edit Page');
         } else {
-            $this->_view->setVal('page_title', 'Clients Add Page');
+            $this->_view->setVal('page_title', 'Meta Details Add Page');
             $this->_view->setVal('mode', 'add');
-            $this->_view->setVal('meta_description', 'Admin || Clients Add Page');
-            $this->_view->setVal('title', 'Admin || Clients Add Page');
+            $this->_view->setVal('meta_description', 'Admin || Meta Details Add Page');
+            $this->_view->setVal('title', 'Admin || Meta Details Add Page');
         }
         $this->_view->set_header_footer = true;
         $this->_view->enable_jquery = true;
         $this->_view->setVal('meta_author', 'Mayank Gupta');
-        $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'clients/clients-form');
+        $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'meta-details/meta-form');
     }
 
     public function save()
     {
-        if (isset($_POST['save_clients'])) {
-
+        if (isset($_POST['save_meta'])) {
             $data = Input::filter_param($_POST);
             $file_name = Input::files('images');
 
             $image_name = '';
             if ($file_name['name']) {
-                $results =  uploadImage($file_name, UPLOAD_ROOT . 'admin/client_images/');
+                $results =  uploadImage($file_name, UPLOAD_ROOT . 'admin/meta_images/');
                 if ($results['sts'] == true) {
                     $image_name = $results['results'];
                 } else {
                     set_session_alert($results['type'], $results['msg']);
                     if ($data['mode'] == 'edit') {
-                        redirect(SITE_ADMIN_URL . 'clients/mode/' . $data['id']);
+                        redirect(SITE_ADMIN_URL . 'meta-details/mode/' . $data['id']);
                     } else if ($data['mode'] == 'add') {
-                        redirect(SITE_ADMIN_URL . 'clients/mode');
+                        redirect(SITE_ADMIN_URL . 'meta-details/mode');
                     }
                 }
             } else {
@@ -101,21 +101,30 @@ class MetaDetailsController
             }
 
             if ($data['mode'] == 'edit') {
-                $sql = "UPDATE  " . CLIENTS . " SET poi_title = :title, poi_desc = :url, poi_image = :images, poi_image_alt_text = :image_alt_text, poi_status = :status, poi_sort_order = :sort_order, poi_modified_by = :by, poi_modified_date = :date WHERE poi_id = " . $data['id'];
+                $sql = "UPDATE  " . META_DETAILS . " SET wmd_name = :name, wmd_website_url = :website_url, wmd_meta_image = :meta_image, wmd_meta_image_alt = :image_alt,
+                 wmd_lang = :lang, wmd_meta_title = :meta_title, wmd_meta_description = :meta_description, wmd_meta_keyword = :meta_keyword, wmd_active = :active,
+                  wmd_maintenance_mode = :maintenance_mode, wmd_maintenance_start_time = :maintenance_start_time, wmd_maintenance_end_time = :maintenance_end_time,
+                   wmd_modified_by = :by, wmd_modified_date = :date WHERE wmd_id = " . $data['id'];
             } else if ($data['mode'] == 'add') {
-                $sql = " INSERT INTO  " . CLIENTS . " (poi_title, poi_desc, poi_image, poi_image_alt_text, poi_status, poi_sort_order, poi_created_by, poi_created_date)
-                 VALUES (:title,:url,:images,:image_alt_text,:status,:sort_order,:by,:date)";
+                $sql = " INSERT INTO " . META_DETAILS . " (wmd_name, wmd_website_url, wmd_meta_image, wmd_meta_image_alt, wmd_lang, wmd_meta_title, wmd_meta_description, wmd_meta_keyword, wmd_active, wmd_maintenance_mode, wmd_maintenance_start_time, wmd_maintenance_end_time, wmd_created_by, wmd_created_date) 
+                VALUES (:name,:website_url,:meta_image,:image_alt,:lang,:meta_title,:meta_description,:meta_keyword,:active,:maintenance_mode,:maintenance_start_time,:maintenance_end_time,:by,:date)";
             }
 
             try {
                 $this->_db->beginTransaction();
                 $this->_db->query($sql);
-                $this->_db->bind(":title", $data['client_name']);
-                $this->_db->bind(":url", $data['client_url']);
-                $this->_db->bind(":images", $image_name);
-                $this->_db->bind(":image_alt_text", $data['image_alt']);
-                $this->_db->bind(":status", $data['client_status']);
-                $this->_db->bind(":sort_order", $data['sort_order']);
+                $this->_db->bind(":name", $data['name']);
+                $this->_db->bind(":website_url", $data['website_url']);
+                $this->_db->bind(":meta_image", $image_name);
+                $this->_db->bind(":image_alt", $data['image_alt']);
+                $this->_db->bind(":lang", $data['lang']);
+                $this->_db->bind(":meta_title", $data['meta_title']);
+                $this->_db->bind(":meta_description", $data['meta_description']);
+                $this->_db->bind(":meta_keyword", $data['meta_keyword']);
+                $this->_db->bind(":active", $data['active']);
+                $this->_db->bind(":maintenance_mode", $data['maintenance_mode']);
+                $this->_db->bind(":maintenance_start_time", $data['maintenance_start_time']);
+                $this->_db->bind(":maintenance_end_time", $data['maintenance_end_time']);
                 $this->_db->bind(":by", Session::get('admin')['uId']);
                 $this->_db->bind(":date", date(SYSTEM_DATE_TIME_FORMAT_LONG));
                 $retVal = $this->_db->execute();
@@ -129,21 +138,21 @@ class MetaDetailsController
                 }
                 if ($retVal) {
                     $this->_db->commit();
-                    set_session_alert('success', 'Clients Details ' . $label . ' Successfully');
-                    redirect(SITE_ADMIN_URL . 'clients/mode/' . $last_id);
+                    set_session_alert('success', 'Meta Details Details ' . $label . ' Successfully');
+                    redirect(SITE_ADMIN_URL . 'meta-details/mode/' . $last_id);
                 }
             } catch (Exception $ex) {
                 $this->_db->rollBack();
                 set_session_alert('error', $ex->getMessage());
                 if ($data['mode'] == 'edit') {
-                    redirect(SITE_ADMIN_URL . 'clients/mode/' . $data['id']);
+                    redirect(SITE_ADMIN_URL . 'meta-details/mode/' . $data['id']);
                 } else if ($data['mode'] == 'add') {
-                    redirect(SITE_ADMIN_URL . 'clients/mode');
+                    redirect(SITE_ADMIN_URL . 'meta-details/mode');
                 }
             }
         } else {
             set_session_alert('error', 'Invalid Data');
-            redirect(SITE_ADMIN_URL . 'clients');
+            redirect(SITE_ADMIN_URL . 'meta-details');
         }
     }
 }

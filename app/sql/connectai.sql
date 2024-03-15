@@ -5871,6 +5871,7 @@ INSERT INTO `ca_website_settings` (
     `wes_modified_date`
   )
 VALUES (NULL, 'Conect Ai', '0', NULL, NULL, NULL, NULL);
+
 ALTER TABLE `ca_website_settings`
 ADD `wes_mailer` VARCHAR(100) NULL DEFAULT NULL
 AFTER `wes_name`,
