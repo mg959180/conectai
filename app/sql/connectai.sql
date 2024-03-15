@@ -5872,11 +5872,27 @@ INSERT INTO `ca_website_settings` (
   )
 VALUES (NULL, 'Conect Ai', '0', NULL, NULL, NULL, NULL);
 ALTER TABLE `ca_website_settings`
-ADD `wes_mailer` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_name`,
-ADD `wes_mailer_host` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer`,
-ADD `wes_mailer_port` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer_host`,
-ADD `wes_mailer_uname` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer_port`,
-ADD `wes_mailer_upass` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer_uname`,
-ADD `wes_mailer_encryption` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer_upass`,
-ADD `wes_mailer_from_address` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer_encryption`,
-ADD `wes_mailer_from_name` VARCHAR(100) NULL DEFAULT NULL AFTER `wes_mailer_from_address`;
+ADD `wes_mailer` VARCHAR(100) NULL DEFAULT NULL
+AFTER `wes_name`,
+  ADD `wes_mailer_host` VARCHAR(100) NULL DEFAULT NULL
+AFTER `wes_mailer`,
+  ADD `wes_mailer_port` VARCHAR(100) NULL DEFAULT NULL
+AFTER `wes_mailer_host`,
+  ADD `wes_mailer_uname` VARCHAR(100) NULL DEFAULT NULL
+AFTER `wes_mailer_port`,
+  ADD `wes_mailer_upass` VARCHAR(100) NULL DEFAULT NULL
+AFTER `wes_mailer_uname`,
+  ADD `wes_mailer_encryption` VARCHAR(100) NULL DEFAULT NULL
+AFTER `wes_mailer_upass`,
+  ADD `wes_mailer_from_address` VARCHAR(100) NULL DEFAULT NULL
+AFTER `wes_mailer_encryption`,
+  ADD `wes_mailer_from_name` VARCHAR(100) NULL DEFAULT NULL
+AFTER `wes_mailer_from_address`;
+ALTER TABLE `ca_blogs` DROP `blo_extra_meta_details`;
+ALTER TABLE `ca_portfolio_images` DROP `poi_thumbh_image`,
+  DROP `poi_type`,
+  DROP `poi_category`;
+ALTER TABLE `ca_website_meta_details` DROP `wmd_short_description`,
+  DROP `wmd_description`,
+  DROP `wmd_extra_meta_details`;
+ALTER TABLE `ca_website_meta_details` CHANGE `wmd_meta_image_alt` `wmd_meta_image_alt` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `wmd_name`;

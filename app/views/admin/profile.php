@@ -47,10 +47,10 @@
                             <div class="form-group">
                                 <?php if (!empty($admin_edit_data['adm_profile_pic'])) { ?>
                                     <input type="file" name="images" onchange="preview()" id="imagess" value="<?php echo $admin_edit_data['adm_profile_pic']  ?? ''; ?>" style="display: none">
-                                    <img id="frame" onclick="selectImage()" src="<?php echo !empty($admin_edit_data['adm_profile_pic']) ? UPLOAD_URL . 'admin/profile_images/' . $admin_edit_data['adm_profile_pic'] : '#'; ?>" class="img-thumbnail img-responsive d-block rounded " style="height: 100px; width: 100px;" />
+                                    <img id="frame" onclick="selectImage()" src="<?php echo !empty($admin_edit_data['adm_profile_pic']) ? UPLOAD_URL . 'admin/profile_images/' . $admin_edit_data['adm_profile_pic'] : '#'; ?>" class="img-thumbnail img-responsive d-block rounded " onerror=" src='<?= UPLOAD_URL . 'admin/default.png' ?>'" style="height: 100px; width: 100px;" />
                                 <?php } else { ?>
                                     <input type="file" name="images" onchange="preview()" id="imagess" style="display: none">
-                                    <img id="frame" onclick="selectImage()" class="img-thumbnail img-responsive d-block rounded " src="#" style="height: 100px; width: 100px;" />
+                                    <img id="frame" onclick="selectImage()" class="img-thumbnail img-responsive d-block rounded " src="#" onerror=" src='<?= UPLOAD_URL . 'admin/default.png' ?>'" style="height: 100px; width: 100px;" />
                                 <?php } ?>
                                 <label for="imagess">upload Image</label>
                             </div>

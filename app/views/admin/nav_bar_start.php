@@ -86,7 +86,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Pages:</h6>
                     <a class="collapse-item" href="<?= SITE_ADMIN_URL ?>blogs">Blogs</a>
-                    <a class="collapse-item" href="<?= SITE_ADMIN_URL ?>Clients">Clients</a>
+                    <a class="collapse-item" href="<?= SITE_ADMIN_URL ?>clients">Clients</a>
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Countries & Taxes:</h6>
                     <a class="collapse-item" href="<?= SITE_ADMIN_URL ?>countries">Countries</a>

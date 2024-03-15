@@ -10,6 +10,7 @@ class View
     public $show_project_model = false;
     public $show_data_table = false;
     public $show_chart = false;
+    public $enable_jquery = false;
     protected $view;
 
     public function __construct()
@@ -91,6 +92,7 @@ class View
         $this->set_val['header_footer'] = $this->set_header_footer;
         $this->set_val['show_data_table'] = $this->show_data_table;
         $this->set_val['show_chart'] = $this->show_chart;
+        $this->set_val['enable_jquery'] = $this->enable_jquery;
         extract($this->set_val);
         require_once VIEW_DIR . 'admin/header.php';
         require_once $viewScript . '.php';

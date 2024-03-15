@@ -18,12 +18,13 @@
 
     <!-- Custom styles for this template-->
     <link href="<?= ADMIN_ASSETS_URL ?>css/main.min.css" rel="stylesheet">
+    <?php if ($enable_jquery) {  ?>
+        <script src="<?= ADMIN_ASSETS_URL . 'vendor/jquery/jquery.min.js' ?>"></script>
+    <?php  } ?>
     <?php if ($show_data_table) {  ?>
         <link href="<?= ADMIN_ASSETS_URL ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <?php  } ?>
     <!-- Custom styles for this page -->
-
-
 </head>
 
 <body id="page-top" class="<?= $login_class ?? '' ?>">

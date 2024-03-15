@@ -2,6 +2,7 @@
 defined('TBL_PREFIX') || define('TBL_PREFIX', 'ca_');
 defined('ADMINS') || define('ADMINS', TBL_PREFIX . 'admin_users');
 defined('BLOGS') || define('BLOGS', TBL_PREFIX . 'blogs');
+defined('CLIENTS') || define('CLIENTS', TBL_PREFIX . 'portfolio_images');
 defined('CONTACT_US') || define('CONTACT_US', TBL_PREFIX . 'contact_us');
 defined('COUNTRIES') || define('COUNTRIES', TBL_PREFIX . 'countries');
 defined('ORDERS') || define('ORDERS', TBL_PREFIX . 'orders');
