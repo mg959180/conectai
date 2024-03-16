@@ -8,6 +8,7 @@ class AuthController
     {
         $this->_view  = new View();
     }
+    
     public function index()
     {
         $start_date =  date(SYSTEM_DATE_TIME_FORMAT_LONG);
@@ -40,7 +41,7 @@ class AuthController
             $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $server_output = curl_exec($ch);
             if ($status !== 201 || $status !== 200) {
-                response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => "Error: call to URL $url failed with status $status, response $server_output, curl_error " . curl_error($ch) . ", curl_errno " . curl_errno($ch)]);
+                response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => $server_output]);
             } else {
                 response(['sts' => true, 'type' => 'success', 'msg' => 'Successfully Created', 'results' =>  $server_output]);
             }
@@ -48,6 +49,7 @@ class AuthController
             response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => 0]);
         }
     }
+
     public function forgotPassword()
     {
         $this->_view->set_header_footer = false;
