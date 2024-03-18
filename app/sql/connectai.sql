@@ -5871,7 +5871,6 @@ INSERT INTO `ca_website_settings` (
     `wes_modified_date`
   )
 VALUES (NULL, 'Conect Ai', '0', NULL, NULL, NULL, NULL);
-
 ALTER TABLE `ca_website_settings`
 ADD `wes_mailer` VARCHAR(100) NULL DEFAULT NULL
 AFTER `wes_name`,
@@ -5896,4 +5895,21 @@ ALTER TABLE `ca_portfolio_images` DROP `poi_thumbh_image`,
 ALTER TABLE `ca_website_meta_details` DROP `wmd_short_description`,
   DROP `wmd_description`,
   DROP `wmd_extra_meta_details`;
-ALTER TABLE `ca_website_meta_details` CHANGE `wmd_meta_image_alt` `wmd_meta_image_alt` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `wmd_name`;
+ALTER TABLE `ca_website_meta_details` CHANGE `wmd_meta_image_alt` `wmd_meta_image_alt` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+AFTER `wmd_name`;
+ALTER TABLE `ca_website_settings`
+ADD `wes_mail_active` TINYINT(1) NOT NULL DEFAULT '0'
+AFTER `wes_name`;
+ALTER TABLE `ca_website_settings`
+ADD `wes_open_ai_uid` TEXT NULL DEFAULT NULL
+AFTER `wes_maintenance_end_time`,
+  ADD `wes_open_ai_upass` TEXT NULL DEFAULT NULL
+AFTER `wes_open_ai_uid`,
+  ADD `wes_open_ai_key` TEXT NULL DEFAULT NULL
+AFTER `wes_open_ai_upass`,
+  ADD `wes_demo_websites` MEDIUMINT(10) NULL DEFAULT '10'
+AFTER `wes_open_ai_key`,
+  ADD `wes_demo_pages` MEDIUMINT(10) NULL DEFAULT '1'
+AFTER `wes_demo_websites`,
+  ADD `wes_open_ai_demo_days` MEDIUMINT(3) NULL DEFAULT '3'
+AFTER `wes_demo_websites`;

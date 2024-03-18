@@ -9,6 +9,9 @@
         <div class="card-body">
             <form class="user" method="post" action="<?= SITE_ADMIN_URL . 'settings'; ?>">
                 <input type="hidden" name="id" value="<?= $website_data['wes_id'] ?>">
+                <div>
+                    <h6 style="font-weight: bold;">Website Settings</h2>
+                </div>
                 <div class="form-group row">
                     <div class="col-sm-3">
                         <label for="name">Website Name</label>
@@ -31,20 +34,31 @@
                         <input type="date" class="form-control " id="end_date" name="end_date" value="<?= change_to_custom_date($website_data['wes_maintenance_end_time'], SYSTEM_DATE_TIME) ?? '' ?>" placeholder="End Date">
                     </div>
                 </div>
+                <div>
+                    <h6 style="font-weight: bold;">Mail Settings</h2>
+                </div>
                 <div class="form-group row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
+                        <label for="mail_status">Mailer Active</label>
+                        <select class="form-control" name="mail_status" id="mail_status">
+                            <option value="">Select</option>
+                            <option value="1" <?= (!empty($website_data['wes_mail_active']) ? ($website_data['wes_mail_active'] == 1 ? 'selected' : '') : '') ?>>Active</option>
+                            <option value="0" <?= (!empty($website_data['wes_mail_active']) ? ($website_data['wes_mail_active'] == 0 ? 'selected' : '') : '') ?>>inactive</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
                         <label for="mail_name">Mailer Name</label>
                         <input type="text" class="form-control" id="mail_name" name="mail_name" value="<?= $website_data['wes_mailer'] ?? '' ?>" placeholder="Website Mailer Name">
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <label for="mail_host">Mailer Host</label>
                         <input type="text" class="form-control" id="mail_host" name="mail_host" value="<?= $website_data['wes_mailer_host'] ?? '' ?>" placeholder="Website Mailer Host">
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <label for="mail_port">Mailer Port</label>
                         <input type="text" class="form-control" id="mail_port" name="mail_port" value="<?= $website_data['wes_mailer_port'] ?? '' ?>" placeholder="Website Mailer Port">
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <label for="mail_enc">Mailer Encryption </label>
                         <input type="text" class="form-control" id="mail_enc" name="mail_enc" value="<?= $website_data['wes_mailer_encryption'] ?? '' ?>" placeholder="Website Mailer Encryption">
                     </div>
@@ -65,6 +79,43 @@
                     <div class="col-sm-3">
                         <label for="mail_from_name">Mailer From Name</label>
                         <input type="text" class="form-control" id="mail_from_name" name="mail_from_name" value="<?= $website_data['wes_mailer_from_name'] ?? '' ?>" placeholder="Website Mailer From Name">
+                    </div>
+                </div>
+                <div>
+                    <h6 style="font-weight: bold;">OpenAi Settings</h2>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <label for="open_ai_uid">OpenAi User Id</label>
+                        <input type="text" class="form-control" id="open_ai_uid" name="open_ai_uid" value="<?= $website_data['wes_open_ai_uid'] ?? '' ?>" placeholder="Website OpenAi User Name">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="open_ai_upass">OpenAi User Password</label>
+                        <input type="text" class="form-control" id="open_ai_upass" name="open_ai_upass" value="<?= $website_data['wes_open_ai_upass'] ?? '' ?>" placeholder="Website OpenAi User Password">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="open_ai_key">OpenAi Key</label>
+                        <input type="text" class="form-control" id="open_ai_key" name="open_ai_key" value="<?= $website_data['wes_open_ai_key'] ?? '' ?>" placeholder="Website OpenAi Key">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="open_ai_website_no">OpenAi No of Website For Demo</label>
+                        <input type="text" class="form-control" id="open_ai_website_no" name="open_ai_website_no" value="<?= $website_data['wes_demo_websites'] ?? '' ?>" placeholder="OpenAi No of Website For Demo">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="open_ai_website_no_pages">OpenAi No of Website Pages For Demo</label>
+                        <input type="text" class="form-control" id="open_ai_website_no_pages" name="open_ai_website_no_pages" value="<?= $website_data['wes_demo_pages'] ?? '' ?>" placeholder="OpenAi No of Website Pages For Demo">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="open_ai_demo_days">OpenAi Demo Days</label>
+                        <select class="form-control" name="open_ai_demo_days" id="open_ai_demo_days">
+                            <option value="">Select</option>
+                            <option value="3" <?= (!empty($website_data['wes_open_ai_demo_days']) ? ($website_data['wes_open_ai_demo_days'] == 3 ? 'selected' : '') : '') ?>>3 days</option>
+                            <option value="5" <?= (!empty($website_data['wes_open_ai_demo_days']) ? ($website_data['wes_open_ai_demo_days'] == 5 ? 'selected' : '') : '') ?>>5 days</option>
+                            <option value="7" <?= (!empty($website_data['wes_open_ai_demo_days']) ? ($website_data['wes_open_ai_demo_days'] == 7 ? 'selected' : '') : '') ?>>7 days</option>
+                            <option value="10" <?= (!empty($website_data['wes_open_ai_demo_days']) ? ($website_data['wes_open_ai_demo_days'] == 10 ? 'selected' : '') : '') ?>>10 days</option>
+                            <option value="15" <?= (!empty($website_data['wes_open_ai_demo_days']) ? ($website_data['wes_open_ai_demo_days'] == 15 ? 'selected' : '') : '') ?>>15 days</option>
+                            <option value="30" <?= (!empty($website_data['wes_open_ai_demo_days']) ? ($website_data['wes_open_ai_demo_days'] == 30 ? 'selected' : '') : '') ?>>30 days</option>
+                        </select>
                     </div>
                 </div>
                 <button type="submit" name="save_setting" class="btn btn-sm btn-primary ">

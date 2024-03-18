@@ -47,6 +47,6 @@ class ContactEnquiryController
         $this->_view->setVal('meta_description', 'Admin || Contact Us Page');
         $this->_view->setVal('title', 'Admin || Contact Us Page');
         $this->_view->setVal('meta_author', 'Mayank Gupta');
-        $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'contact-us-list');
+        $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'contact-us/contact-us-list');
     }
 }
