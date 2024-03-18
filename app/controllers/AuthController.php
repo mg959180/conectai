@@ -35,7 +35,7 @@ class AuthController
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $server_output = curl_exec($ch);
