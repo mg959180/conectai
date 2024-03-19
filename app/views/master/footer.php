@@ -126,8 +126,8 @@
                     <span>Note: With the free plan you can only add a single website. So ensure you add right
                         website links above.
                     </span>
-                    <h5 class="text-center">Already have an account ? <a href="javascript:void(0);" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#ModalLogin">Login Now</a>
-
+                    <h5 class="text-center">
+                        Already have an account ? <a href="javascript:void(0);" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#ModalLogin">Login Now</a>
                     </h5>
                 </div>
             </div>
@@ -200,18 +200,26 @@
 <script>
     function openLoginForm() {
         let prev_model = document.getElementById('ModalRefresh');
-        prev_model.classList.remove('show');
-        prev_model.setAttribute('aria-hidden', 'true');
-        prev_model.setAttribute('style', 'display: none');
-        const modalsBackdrops = document.getElementsByClassName('modal-backdrop');
-        // remove every modal backdrop
-        for (let i = 0; i < modalsBackdrops.length; i++) {
-            document.body.removeChild(modalsBackdrops[i]);
+
+        let model_form = document.getElementById('website-detail-form');
+        let website_url = model_form.elements['website_url'].value;
+        let website_lang = model_form.elements['website_lang'].value;
+        if (website_url && website_lang) {
+            prev_model.classList.remove('show');
+            prev_model.setAttribute('aria-hidden', 'true');
+            prev_model.setAttribute('style', 'display: none');
+            const modalsBackdrops = document.getElementsByClassName('modal-backdrop');
+            // remove every modal backdrop
+            for (let i = 0; i < modalsBackdrops.length; i++) {
+                document.body.removeChild(modalsBackdrops[i]);
+            }
+            let model_display = document.getElementById('ModalLogin');
+            var myModal = new bootstrap.Modal(model_display, {});
+            // Show the modal after 3 seconds
+            myModal.show();
+        } else {
+
         }
-        let model_display = document.getElementById('ModalLogin');
-        var myModal = new bootstrap.Modal(model_display, {});
-        // Show the modal after 3 seconds
-        myModal.show();
     }
 
     let login_form = document.getElementById('login-form');
@@ -230,7 +238,7 @@
         xhr.onload = function() {
             let res = JSON.parse(this.response);
             if (res.sts == true) {
-                window.location.href = res.results.data;
+                window.location.href = res.results;
             } else {
                 alert(res.msg);
             }

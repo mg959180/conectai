@@ -27,19 +27,6 @@
                         <form action="#" class="pe-xl-10" data-aos="fade-up-sm" data-aos-delay="150">
                             <div class="input-group with-icon">
                                 <input type="text" class="form-control ps-2" value="https://www." required>
-                                <!-- <span class="icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                                <g
-                                                    stroke="currentColor"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    stroke-width="1.2">
-                                                    <path
-                                                        d="M2.25 5.25a1.5 1.5 0 0 1 1.5-1.5h10.5a1.5 1.5 0 0 1 1.5 1.5v7.5a1.5 1.5 0 0 1-1.5 1.5H3.75a1.5 1.5 0 0 1-1.5-1.5v-7.5Z" />
-                                                    <path d="M2.25 5.25 9 9.75l6.75-4.5" />
-                                                </g>
-                                            </svg>  
-							            </span> -->
                                 <button class="btn btn-primary px-4" type="submit">
                                     Create Free Chat
                                 </button>
@@ -279,7 +266,7 @@
             </div>
 
             <div class="text-center">
-                <a href="<?= SITE_URL ?>login" class="TryDemoBtn" type="button">Try a demo</a>
+                <a  href="javascript:void(0);" onclick="openModel()" class="TryDemoBtn" type="button">Try a demo</a>
             </div>
         </div>
     </section>
@@ -302,7 +289,7 @@
                                 Connect.AI inbox. You can analyse the chat and improve your customer service
                                 accordingly.
                             </p>
-                            <a href="<?= SITE_URL ?>login" class="arrow-link arrow-link-primary text-primary gap-3">
+                            <a  href="javascript:void(0);" onclick="openModel()" class="arrow-link arrow-link-primary text-primary gap-3">
                                 <span>Get Started Free</span>
                                 <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
@@ -331,7 +318,7 @@
                                 webpage design and look. Get the Widget support features like Chat History,
                                 Suggested FAQs, Super-Quick Replies etc.
                             </p>
-                            <a href="<?= SITE_URL ?>login" class="arrow-link arrow-link-primary text-primary gap-3">
+                            <a  href="javascript:void(0);" onclick="openModel()" class="arrow-link arrow-link-primary text-primary gap-3">
                                 <span>Request A Demo</span>
                                 <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
@@ -361,7 +348,7 @@
                                 technology
                                 powered responses.
                             </p>
-                            <a href="<?= SITE_URL ?>login" class="arrow-link arrow-link-primary text-primary gap-3">
+                            <a  href="javascript:void(0);" onclick="openModel()" class="arrow-link arrow-link-primary text-primary gap-3">
                                 <span>Get Started Free</span>
                                 <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
@@ -413,7 +400,7 @@
                     <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
                         <div class="content">
                             <p class="text-primary">Features 5</p>
-                            <h1 class=" mb-8">
+                            <h1 class="mb-8">
                                 Easy omni-channel deployment
                             </h1>
                             <p class="mb-6">
@@ -423,7 +410,7 @@
                                 they are and further centralise the data provided by customers from different
                                 channels
                             </p>
-                            <a href="<?= SITE_URL ?>login" class="arrow-link arrow-link-primary text-primary gap-3">
+                            <a  href="javascript:void(0);" onclick="openModel()" class="arrow-link arrow-link-primary text-primary gap-3">
                                 <span>Request A Demo</span>
                                 <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
@@ -433,9 +420,7 @@
                     </div>
                     <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
                         <div class="feature-img">
-                            <!-- <img src="<?=SITE_URL?>public/front/assets/images/illustrations/feature-illustration-2-yellow.svg" alt="" class="img-fluid" /> -->
                             <img src="<?=SITE_URL?>public/front/assets/images/Conect AI Website Images/omni-channel-marketing-1024x627.jpg" alt="" class="img-fluid" />
-
                         </div>
                     </div>
                 </div>

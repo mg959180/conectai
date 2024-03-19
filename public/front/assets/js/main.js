@@ -268,7 +268,10 @@ function openModel() {
 	if (model_display) {
 		var myModal = new bootstrap.Modal(model_display, {});
 		// Show the modal after 3 seconds
-		myModal.show();
+		if (!model_display.classList.contains('show')) {
+			myModal.show();
+		}
+
 	}
 }
 // For Page Load Open Modal

@@ -33,25 +33,27 @@ class AuthController
                 'Password' => $settings_data['wes_open_ai_upass'],
                 "Email" => $data['email'],
                 'StartDate' => $start_date,
-                'StartDate' => $end_date,
+                'EndDate' => $end_date,
                 'OpenAIKey' => $settings_data['wes_open_ai_key'],
                 'TotalWebsites' => $settings_data['wes_demo_websites'],
                 'TotalPages' => $settings_data['wes_demo_pages']
             );
+           
             //create user :- https://api.conectai.chat/v1/create-user
-            //Generate license :- https://api.conectai.chat/v1/generate-license
+            //Generate license :-
             $url = "https://api.conectai.chat/v1/create-user";
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $server_output = curl_exec($ch);
-            if ($status !== 201 || $status !== 200) {
-                response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => $server_output]);
+            $output = json_decode($server_output,1);
+            if ($output['responsestatuscode'] !== 200) {
+                response(['sts' => false, 'type' => 'error', 'msg' => "Error: call to URL $url failed with status $status, response $server_output, curl_error " . curl_error($ch) . ", curl_errno " . curl_errno($ch), 'results' => $output['message']]);
             } else {
-                response(['sts' => true, 'type' => 'success', 'msg' => 'Successfully Created', 'results' =>  $server_output]);
+                response(['sts' => true, 'type' => 'success', 'msg' => 'Successfully Created', 'results' => $output['data']]);
             }
         } else {
             response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => 0]);

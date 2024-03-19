@@ -24,22 +24,8 @@
                     <div class="account-wrapper h-full d-flex flex-column justify-center">
                         <div class="text-center">
                             <a href="">
-                                <img src="<?= FRONT_ASSETS_URL?>images/connect ai png.png" alt="" class="img-fluid" width="165" />
+                                <img src="<?= FRONT_ASSETS_URL?>images/connect_ai_png.png" alt="" class="img-fluid" width="165" />
                             </a>
-                            <div class="vstack gap-4 mt-10">
-                                <button type="button" class="btn account-btn py-4">
-                                    <img src="<?= FRONT_ASSETS_URL?>images/icons/google.svg" alt="" width="24" class="img-fluid icon" />
-                                    <span>Continue With Google</span>
-                                </button>
-                                <button type="button" class="btn account-btn py-4">
-                                    <img src="<?= FRONT_ASSETS_URL?>images/icons/apple-dark.svg" alt="" width="24" class="img-fluid icon" />
-                                    <span>Continue With Apple</span>
-                                </button>
-                            </div>
-
-                            <div class="divider-with-text my-10">
-                                <span>Or sign in with email</span>
-                            </div>
 
                             <form action="#" class="vstack gap-4">
                                 <div class="text-start">
