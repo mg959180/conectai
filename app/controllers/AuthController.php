@@ -1,34 +1,42 @@
 <?php
 require_once APP_DIR . 'libs/View.php';
 require_once APP_DIR . 'libs/Input.php';
+require_once APP_DIR . 'libs/Database.php';
 class AuthController
 {
     private $_view;
     public function __construct()
     {
         $this->_view  = new View();
+        $this->_db = new Database();
     }
-    
+
     public function index()
     {
-        $start_date =  date(SYSTEM_DATE_TIME_FORMAT_LONG);
-        $end_date =  date(SYSTEM_DATE_TIME_FORMAT_LONG, strtotime('-1 second', strtotime(date(SYSTEM_DATE_TIME_FORMAT_LONG) . ' +1 month')));
 
         if (Input::post('login')) {
+
+            $this->_db->query("SELECT wes_open_ai_uid,wes_open_ai_upass,wes_open_ai_key,wes_demo_websites,wes_open_ai_demo_days,wes_demo_pages FROM " . WEBSITE_SETTINGS . " WHERE wes_id   = 1");
+            $this->_db->stmt->execute();
+            $settings_data =  $this->_db->stmt->fetch();
+            $start_date =  date(SYSTEM_DATE_TIME_FORMAT_LONG);
+            $days =  $settings_data['wes_open_ai_demo_days'];
+            $end_date =  date(SYSTEM_DATE_TIME_FORMAT_LONG, strtotime('-1 second', strtotime(date(SYSTEM_DATE_TIME_FORMAT_LONG) . ' +' . $days . ' day')));
+
             $data = Input::filter_param($_POST);
             $ch = curl_init();
             $headers = [
                 'Content-Type: application/json'
             ];
             $postData = array(
-                'UserName' => 'AAA1111AAA678AAA988AAA765AAAAAAA',
-                'Password' => 'AAA2345AAA678AAA988AAA765AAAA222',
+                'UserName' => $settings_data['wes_open_ai_uid'],
+                'Password' => $settings_data['wes_open_ai_upass'],
                 "Email" => $data['email'],
                 'StartDate' => $start_date,
                 'StartDate' => $end_date,
-                'OpenAIKey' => '123',
-                'TotalWebsites' => '1',
-                'TotalPages' => '1'
+                'OpenAIKey' => $settings_data['wes_open_ai_key'],
+                'TotalWebsites' => $settings_data['wes_demo_websites'],
+                'TotalPages' => $settings_data['wes_demo_pages']
             );
             //create user :- https://api.conectai.chat/v1/create-user
             //Generate license :- https://api.conectai.chat/v1/generate-license

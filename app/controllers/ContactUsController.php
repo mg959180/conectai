@@ -39,11 +39,16 @@ class ContactUsController
                 $this->_db->bind(':date', date(SYSTEM_DATE_TIME_FORMAT_LONG));
                 $this->_db->bind(':ip', get_client_ip());
                 $retVal = $this->_db->execute();
+                $this->_db->commit();
+
                 if ($retVal) {
+                    $this->_db->query("SELECT wes_mailer_from_address,wes_mailer_from_name FROM " . WEBSITE_SETTINGS . " WHERE wes_id   = 1");
+                    $this->_db->stmt->execute();
+                    $settings_data =  $this->_db->stmt->fetch();
                     // Sender Email and Name 
                     $from = stripslashes($_POST['name']) . "<" . stripslashes($_POST['email']) . ">";
                     // Recipient Email Address 
-                    $to = 'mg959180@gmail.com';
+                    $to = $settings_data['wes_mailer_from_address'];
                     // Email Subject 
                     $subject = 'New Message from Conect AI Contact Form';
                     // Email Header 
@@ -52,8 +57,6 @@ class ContactUsController
                     // Message Body 
                     $body = "Name: " . $data['name'] . "\nEmail: " . $data['email'] . "\nPhone: " . $data['phone'] . "\nMessage:\n" . $data['message'];
                     // If there are no errors, send the email
-                    
-                    $this->_db->commit();
                     if (mail($to, $subject, $body, $headers)) {
                         response(['sts' => true, 'type' => 'success', 'msg' => 'Thank You! We will be in touch with you very soon.', 'results' => '1']);
                     } else {

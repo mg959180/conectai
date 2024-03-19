@@ -5888,6 +5888,7 @@ AFTER `wes_mailer_upass`,
 AFTER `wes_mailer_encryption`,
   ADD `wes_mailer_from_name` VARCHAR(100) NULL DEFAULT NULL
 AFTER `wes_mailer_from_address`;
+
 ALTER TABLE `ca_blogs` DROP `blo_extra_meta_details`;
 ALTER TABLE `ca_portfolio_images` DROP `poi_thumbh_image`,
   DROP `poi_type`,
@@ -5895,6 +5896,7 @@ ALTER TABLE `ca_portfolio_images` DROP `poi_thumbh_image`,
 ALTER TABLE `ca_website_meta_details` DROP `wmd_short_description`,
   DROP `wmd_description`,
   DROP `wmd_extra_meta_details`;
+  
 ALTER TABLE `ca_website_meta_details` CHANGE `wmd_meta_image_alt` `wmd_meta_image_alt` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
 AFTER `wmd_name`;
 ALTER TABLE `ca_website_settings`
