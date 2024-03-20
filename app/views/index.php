@@ -3,7 +3,7 @@
     <!-- Hero -->
     <section class="hero-section style-2 position-relative py-10 py-lg-15">
         <div class="striped-shape">
-            <img src="<?=SITE_URL?>public/front/assets/images/shapes/stripe-light.svg" alt="" />
+            <img src="<?= SITE_URL ?>public/front/assets/images/shapes/stripe-light.svg" alt="" />
         </div>
         <div class="container">
             <div class="row align-center">
@@ -24,13 +24,14 @@
                         <p data-aos="fade-up-sm" data-aos-delay="100">Create an integrated chatbot system for
                             resolution of queries, and drive growth with
                             complete customer satisfaction</p>
-                        <form action="#" class="pe-xl-10" data-aos="fade-up-sm" data-aos-delay="150">
+                        <form id="website_form" class="pe-xl-10" data-aos="fade-up-sm" data-aos-delay="150">
                             <div class="input-group with-icon">
-                                <input type="text" class="form-control ps-2" value="https://www." required>
+                                <input type="text" class="form-control ps-2" value="https://www." name="url" required>
+                                
                                 <button class="btn btn-primary px-4" type="submit">
                                     Create Free Chat
                                 </button>
-                            </div>
+                            </div><div id="add_url_error" class="text-danger"></div>
                         </form>
 
                         <div class="d-flex justify-between mt-2" data-aos="fade-up-sm" data-aos-delay="200">
@@ -42,16 +43,16 @@
                             </div>
                         </div>
                         <div class="d-flex gap-8 align-center justify-center justify-lg-start mt-4 review-badges" data-aos="fade-up-sm" data-aos-delay="200">
-                            <img class="img-fluid" src="<?=SITE_URL?>public/front/assets/images/review-logos/trustpilot_reviews_2.svg" alt="" />
-                            <img class="img-fluid" src="<?=SITE_URL?>public/front/assets/images/review-logos/capterra_reviews_2.svg" alt="" />
+                            <img class="img-fluid" src="<?= SITE_URL ?>public/front/assets/images/review-logos/trustpilot_reviews_2.svg" alt="" />
+                            <img class="img-fluid" src="<?= SITE_URL ?>public/front/assets/images/review-logos/capterra_reviews_2.svg" alt="" />
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-7" data-aos="fade-up-sm" data-aos-delay="200">
                     <div class="image-with-shape">
-                        <!-- <img src="<?=SITE_URL?>public/front/assets/images/shapes/blurry-shape-2.svg" alt="" class="shape animate-scale" /> -->
+                        <!-- <img src="<?= SITE_URL ?>public/front/assets/images/shapes/blurry-shape-2.svg" alt="" class="shape animate-scale" /> -->
                         <div class="mt-2 overflow-hidden" style="display: flex; justify-content: end;">
-                            <img class="img-fluid d-inline-block " src="<?=SITE_URL?>public/front/assets/images/Conect AI Website Images/1/Final Size.png" alt="" />
+                            <img class="img-fluid d-inline-block " src="<?= SITE_URL ?>public/front/assets/images/Conect AI Website Images/1/Final Size.png" alt="" />
                         </div>
                     </div>
                 </div>
@@ -66,7 +67,7 @@
                             <span class="text-primary">ConnectAi.</span>
                         </h3>
                         <div class=" align-center justify-center ">
-                            <img src="<?=SITE_URL?>public/front/assets/images/Conect AI Website Images/2/HD.png" alt="" class="img-fluid" data-aos-delay="100" data-aos-offset="50">
+                            <img src="<?= SITE_URL ?>public/front/assets/images/Conect AI Website Images/2/HD.png" alt="" class="img-fluid" data-aos-delay="100" data-aos-offset="50">
                         </div>
                     </div>
                 </div>
@@ -78,19 +79,19 @@
                         <h4 class="fs-20 font-weight-600 jettext">Supported Website</h4>
                         <div class="row mt-3">
                             <div class=" col-md-3 text-center px-1 mb-2">
-                                <img src="<?=SITE_URL?>public/front/assets/images/webflow.png" alt="" class="img-fluid" width="70">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/webflow.png" alt="" class="img-fluid" width="70">
                                 <p class="mb-0 pt-3">Webflow</p>
                             </div>
                             <div class=" col-md-3 text-center px-1 mb-2">
-                                <img src="<?=SITE_URL?>public/front/assets/images/wix.png" alt="" class="img-fluid" width="70">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/wix.png" alt="" class="img-fluid" width="70">
                                 <p class="mb-0 pt-3">Wix</p>
                             </div>
                             <div class=" col-md-3 text-center px-1 mb-2">
-                                <img src="<?=SITE_URL?>public/front/assets/images/shopify.png" alt="" class="img-fluid" width="70">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/shopify.png" alt="" class="img-fluid" width="70">
                                 <p class="mb-0 pt-3">Shopify</p>
                             </div>
                             <div class=" col-md-3 text-center px-1 mb-2">
-                                <img src="<?=SITE_URL?>public/front/assets/images/world-wide-web.png" alt="" class="img-fluid" width="70">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/world-wide-web.png" alt="" class="img-fluid" width="70">
                                 <p class="mb-0 pt-3">Any Public <br>
                                     Website</p>
                             </div>
@@ -102,15 +103,15 @@
                         <h4 class="fs-20 font-weight-600 jettext">Supported Content</h4>
                         <div class="row mt-3">
                             <div class=" col-md-4 text-center px-1 mb-2">
-                                <img src="<?=SITE_URL?>public/front/assets/images/doc.png" alt="" class="img-fluid" width="100">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/doc.png" alt="" class="img-fluid" width="100">
                                 <p class="mb-0 pt-3">Document</p>
                             </div>
                             <div class=" col-md-4 text-center px-1 mb-2">
-                                <img src="<?=SITE_URL?>public/front/assets/images/pdf-doc.png" alt="" class="img-fluid" width="100">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/pdf-doc.png" alt="" class="img-fluid" width="100">
                                 <p class="mb-0 pt-3">PDF</p>
                             </div>
                             <div class=" col-md-4 text-center px-1 mb-2">
-                                <img src="<?=SITE_URL?>public/front/assets/images/web-programming.png" alt="" class="img-fluid" width="100">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/web-programming.png" alt="" class="img-fluid" width="100">
                                 <p class="mb-0 pt-3">Web Pages</p>
                             </div>
 
@@ -125,23 +126,23 @@
                         <h4 class="fs-20 font-weight-600 jettext">Supported Languages</h4>
                         <div class="row mt-3">
                             <div class=" col-md-2 text-center px-1 mb-2">
-                                <img src="<?=SITE_URL?>public/front/assets/images/english.png" alt="" class="img-fluid" width="90">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/english.png" alt="" class="img-fluid" width="90">
                                 <p class="mb-0 pt-3">English</p>
                             </div>
                             <div class=" col-md-2 text-center px-1 mb-2">
-                                <img src="<?=SITE_URL?>public/front/assets/images/spanish.png" alt="" class="img-fluid" width="90">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/spanish.png" alt="" class="img-fluid" width="90">
                                 <p class="mb-0 pt-3">Spanish</p>
                             </div>
                             <div class=" col-md-2 text-center px-1 mb-2">
-                                <img src="<?=SITE_URL?>public/front/assets/images/portugues.png" alt="" class="img-fluid" width="90">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/portugues.png" alt="" class="img-fluid" width="90">
                                 <p class="mb-0 pt-3">Portuguese</p>
                             </div>
                             <div class=" col-md-2 text-center mb-2">
-                                <img src="<?=SITE_URL?>public/front/assets/images/hin.png" alt="" class="img-fluid" width="90">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/hin.png" alt="" class="img-fluid" width="90">
                                 <p class="mb-0 pt-1">Hindi</p>
                             </div>
                             <div class=" col-md-2 text-center mb-2">
-                                <img src="<?=SITE_URL?>public/front/assets/images/Arabic.png" alt="" class="img-fluid" width="90">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/Arabic.png" alt="" class="img-fluid" width="90">
                                 <p class="mb-0 pt-1">Arabic</p>
                             </div>
                             <div class=" col-md-2 text-center px-1 mb-2">
@@ -160,7 +161,7 @@
     <!-- Features -->
     <section class="features-section has-blurry-shape position-relative overflow-hidden py-10 py-lg-15 ">
         <div class="blurry-shape">
-            <img src="<?=SITE_URL?>public/front/assets/images/shapes/blurry-shape-3.svg" alt="" class="img-fluid" />
+            <img src="<?= SITE_URL ?>public/front/assets/images/shapes/blurry-shape-3.svg" alt="" class="img-fluid" />
         </div>
         <div class="container">
             <div class="text-center mb-18">
@@ -266,7 +267,7 @@
             </div>
 
             <div class="text-center">
-                <a  href="javascript:void(0);" onclick="openModel()" class="TryDemoBtn" type="button">Try a demo</a>
+                <a href="javascript:void(0);" onclick="openModel()" class="TryDemoBtn" type="button">Try a demo</a>
             </div>
         </div>
     </section>
@@ -289,7 +290,7 @@
                                 Connect.AI inbox. You can analyse the chat and improve your customer service
                                 accordingly.
                             </p>
-                            <a  href="javascript:void(0);" onclick="openModel()" class="arrow-link arrow-link-primary text-primary gap-3">
+                            <a href="javascript:void(0);" onclick="openModel()" class="arrow-link arrow-link-primary text-primary gap-3">
                                 <span>Get Started Free</span>
                                 <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
@@ -299,7 +300,7 @@
                     </div>
                     <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
                         <div class="feature-img">
-                            <img src="<?=SITE_URL?>public/front/assets/images/Conect AI Website Images/4/Chatbot Inbox Final Size.png" alt="" class="img-fluid">
+                            <img src="<?= SITE_URL ?>public/front/assets/images/Conect AI Website Images/4/Chatbot Inbox Final Size.png" alt="" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -318,7 +319,7 @@
                                 webpage design and look. Get the Widget support features like Chat History,
                                 Suggested FAQs, Super-Quick Replies etc.
                             </p>
-                            <a  href="javascript:void(0);" onclick="openModel()" class="arrow-link arrow-link-primary text-primary gap-3">
+                            <a href="javascript:void(0);" onclick="openModel()" class="arrow-link arrow-link-primary text-primary gap-3">
                                 <span>Request A Demo</span>
                                 <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
@@ -328,7 +329,7 @@
                     </div>
                     <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
                         <div class="feature-img">
-                            <img src="<?=SITE_URL?>public/front/assets/images/Conect AI Website Images/3/Customised Chatbot Widget size.png" alt="" class="img-fluid">
+                            <img src="<?= SITE_URL ?>public/front/assets/images/Conect AI Website Images/3/Customised Chatbot Widget size.png" alt="" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -348,7 +349,7 @@
                                 technology
                                 powered responses.
                             </p>
-                            <a  href="javascript:void(0);" onclick="openModel()" class="arrow-link arrow-link-primary text-primary gap-3">
+                            <a href="javascript:void(0);" onclick="openModel()" class="arrow-link arrow-link-primary text-primary gap-3">
                                 <span>Get Started Free</span>
                                 <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
@@ -358,7 +359,7 @@
                     </div>
                     <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
                         <div class="feature-img">
-                            <img src="<?=SITE_URL?>public/front/assets/images/Conect AI Website Images/5/customise-chatbot-widget.png" alt="" class="img-fluid" />
+                            <img src="<?= SITE_URL ?>public/front/assets/images/Conect AI Website Images/5/customise-chatbot-widget.png" alt="" class="img-fluid" />
 
                         </div>
                     </div>
@@ -369,7 +370,7 @@
                 <div class="row g-6 g-lg-14 g-xl-20 align-center">
                     <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
                         <div class="feature-img">
-                            <img src="<?=SITE_URL?>public/front/assets/images/Conect AI Website Images/24 support/Untitled-6.jpg" alt="" class="img-fluid" style="border-radius: 10px;">
+                            <img src="<?= SITE_URL ?>public/front/assets/images/Conect AI Website Images/24 support/Untitled-6.jpg" alt="" class="img-fluid" style="border-radius: 10px;">
                         </div>
                     </div>
                     <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
@@ -410,7 +411,7 @@
                                 they are and further centralise the data provided by customers from different
                                 channels
                             </p>
-                            <a  href="javascript:void(0);" onclick="openModel()" class="arrow-link arrow-link-primary text-primary gap-3">
+                            <a href="javascript:void(0);" onclick="openModel()" class="arrow-link arrow-link-primary text-primary gap-3">
                                 <span>Request A Demo</span>
                                 <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
@@ -420,7 +421,7 @@
                     </div>
                     <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
                         <div class="feature-img">
-                            <img src="<?=SITE_URL?>public/front/assets/images/Conect AI Website Images/omni-channel-marketing-1024x627.jpg" alt="" class="img-fluid" />
+                            <img src="<?= SITE_URL ?>public/front/assets/images/Conect AI Website Images/omni-channel-marketing-1024x627.jpg" alt="" class="img-fluid" />
                         </div>
                     </div>
                 </div>
@@ -430,7 +431,7 @@
 
     <section class="py-2 py-lg-2 mb-5">
         <div class="container text-center">
-            <img src="<?=SITE_URL?>public/front/assets/images/Conect AI Website Images/6/Untitled-2.png" alt="" class="img-fluid mb-5">
+            <img src="<?= SITE_URL ?>public/front/assets/images/Conect AI Website Images/6/Untitled-2.png" alt="" class="img-fluid mb-5">
         </div>
     </section>
 
@@ -448,7 +449,7 @@
     <section class="py-20 py-lg-30" id="WorkingAI">
         <div class="text-center">
             <h2 class="">How Does AI Chatbot Work?</h2>
-            <img src="<?=SITE_URL?>public/front/assets/images/Conect AI Website Images/7/How Does AI work.png" alt="" class="img-fluid">
+            <img src="<?= SITE_URL ?>public/front/assets/images/Conect AI Website Images/7/How Does AI work.png" alt="" class="img-fluid">
 
         </div>
     </section>
@@ -554,7 +555,7 @@
                         <h6 class="text-start"></h6>
                         <div class="text-center">
                             <a href="step1" class="">
-                                <img src="<?=SITE_URL?>public/front/assets/images/icons/step1.png" alt="" class="img-fluid text-center" width="100">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/icons/step1.png" alt="" class="img-fluid text-center" width="100">
                             </a>
                         </div>
                         <a href="step1" class="text-center mt-1" style="font-weight: bolder;">
@@ -568,7 +569,7 @@
                         <h6 class="text-start"></h6>
                         <div class="text-center">
                             <a href="step2" class="">
-                                <img src="<?=SITE_URL?>public/front/assets/images/icons/step2.png" alt="" class="img-fluid text-center" width="110">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/icons/step2.png" alt="" class="img-fluid text-center" width="110">
                             </a>
                         </div>
                         <a href="step2" class="text-center mt-1" style="font-weight: bolder;">
@@ -582,7 +583,7 @@
                         <h6 class="text-start"></h6>
                         <div class="text-center">
                             <a href="#" class="stretched-link" target="_blank">
-                                <img src="<?=SITE_URL?>public/front/assets/images/icons/step3.png" alt="" class="img-fluid text-center" width="100">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/icons/step3.png" alt="" class="img-fluid text-center" width="100">
                             </a>
                         </div>
                         <a href="step3" class="text-center mt-1 stretched-link" target="_blank" style="font-weight: bolder;">
@@ -597,7 +598,7 @@
                         <h6 class="text-start"></h6>
                         <div class="text-center">
                             <a href="#" class="" target="_blank">
-                                <img src="<?=SITE_URL?>public/front/assets/images/icons/step4.png" alt="" class="img-fluid text-center" width="120">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/icons/step4.png" alt="" class="img-fluid text-center" width="120">
                             </a>
                         </div>
                         <a href="step4" class="text-center mt-1 stretched-link" target="_blank" style="font-weight: bolder;">
@@ -622,7 +623,7 @@
                     <div class="text-center">
                         <h1 class="" data-aos="fade-up-sm" data-aos-delay="50">
                             <span class="text-primary">ConnectAi.</span>
-                            Received <img src="<?=SITE_URL?>public/front/assets/images/icons/star.png" alt="" /> 4.8/5 Stars in Over
+                            Received <img src="<?= SITE_URL ?>public/front/assets/images/icons/star.png" alt="" /> 4.8/5 Stars in Over
                             10,000+ Reviews.
                         </h1>
                     </div>
@@ -635,7 +636,7 @@
                             <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
                                 <div class="d-flex items-center gap-4 mb-6">
                                     <div class="w-12 h-12 rounded-circle overflow-hidden">
-                                        <img src="<?=SITE_URL?>public/front/assets/images/review/1.png" alt="" class="w-full h-full object-cover" />
+                                        <img src="<?= SITE_URL ?>public/front/assets/images/review/1.png" alt="" class="w-full h-full object-cover" />
                                     </div>
                                     <div class="">
                                         <h6 class=" mb-1">Wade Warrent</h6>
@@ -672,7 +673,7 @@
                             <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
                                 <div class="d-flex items-center gap-4 mb-6">
                                     <div class="w-12 h-12 rounded-circle overflow-hidden">
-                                        <img src="<?=SITE_URL?>public/front/assets/images/review/2.png" alt="" class="w-full h-full object-cover" />
+                                        <img src="<?= SITE_URL ?>public/front/assets/images/review/2.png" alt="" class="w-full h-full object-cover" />
                                     </div>
                                     <div class="">
                                         <h6 class=" mb-1">Dianne Russell</h6>
@@ -709,7 +710,7 @@
                             <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
                                 <div class="d-flex items-center gap-4 mb-6">
                                     <div class="w-12 h-12 rounded-circle overflow-hidden">
-                                        <img src="<?=SITE_URL?>public/front/assets/images/review/3.png" alt="" class="w-full h-full object-cover" />
+                                        <img src="<?= SITE_URL ?>public/front/assets/images/review/3.png" alt="" class="w-full h-full object-cover" />
                                     </div>
                                     <div class="">
                                         <h6 class=" mb-1">Jenny Wilson</h6>
@@ -748,7 +749,7 @@
                             <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
                                 <div class="d-flex items-center gap-4 mb-6">
                                     <div class="w-12 h-12 rounded-circle overflow-hidden">
-                                        <img src="<?=SITE_URL?>public/front/assets/images/review/4.png" alt="" class="w-full h-full object-cover" />
+                                        <img src="<?= SITE_URL ?>public/front/assets/images/review/4.png" alt="" class="w-full h-full object-cover" />
                                     </div>
                                     <div class="">
                                         <h6 class=" mb-1">Guy Hawkins</h6>
@@ -785,7 +786,7 @@
                             <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
                                 <div class="d-flex items-center gap-4 mb-6">
                                     <div class="w-12 h-12 rounded-circle overflow-hidden">
-                                        <img src="<?=SITE_URL?>public/front/assets/images/review/1.png" alt="" class="w-full h-full object-cover" />
+                                        <img src="<?= SITE_URL ?>public/front/assets/images/review/1.png" alt="" class="w-full h-full object-cover" />
                                     </div>
                                     <div class="">
                                         <h6 class=" mb-1">Bessie Cooper</h6>
@@ -824,7 +825,7 @@
                             <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
                                 <div class="d-flex items-center gap-4 mb-6">
                                     <div class="w-12 h-12 rounded-circle overflow-hidden">
-                                        <img src="<?=SITE_URL?>public/front/assets/images/review/1.png" alt="" class="w-full h-full object-cover" />
+                                        <img src="<?= SITE_URL ?>public/front/assets/images/review/1.png" alt="" class="w-full h-full object-cover" />
                                     </div>
                                     <div class="">
                                         <h6 class=" mb-1">Wade Warrent</h6>
@@ -1188,7 +1189,7 @@
                                 <path fill="currentColor" d="M14.98 28.142C10.7 32.102 6.441 36.087 2.12 40l1.531.634c-.332-2.723-.642-5.443-.777-8.184-.123-2.526.22-5.24-.273-7.715-.155-.782-1.317-.715-1.506.006-.67 2.525-.275 5.5-.115 8.079.166 2.698.443 5.394.902 8.056.118.686 1.054.85 1.499.402 4.119-4.124 8.302-8.18 12.467-12.258.576-.558-.285-1.422-.87-.878Z" />
                             </svg>
                             <div class="cta-img rounded-top-4">
-                                <img src="<?=SITE_URL?>public/front/assets/images/screens/screen-7.png" alt="" class="img-fluid w-full h-full object-cover" />
+                                <img src="<?= SITE_URL ?>public/front/assets/images/screens/screen-7.png" alt="" class="img-fluid w-full h-full object-cover" />
                             </div>
                         </div>
                     </div>

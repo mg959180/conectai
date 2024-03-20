@@ -103,8 +103,10 @@
                     <form id="website-detail-form" class="p-2">
                         <h6 class="mb-3">Website URL</h6>
                         <input type="text" name="website_url" id="website_url" class="form-control form-control-sm mb-2" value="https://www.">
+                        <div id="add_Website_url_error" class="text-danger"></div>
                         <h6 class="mb-3">Website Language</h6>
                         <input type="text" name="website_lang" id="website_lang" class="form-control form-control-sm mb-2" value="English">
+                        <div id="add_Website_lang_error" class="text-danger"></div>
                         <div class="d-grid gap-2 mt-5">
                             <a class="btn btn-primary" onclick="openLoginForm()">NEXT <i class="fas fa-chevron-circle-right"></i></a>
                         </div>
@@ -146,7 +148,8 @@
                     <h4 class="text-center">Let's Create A Chatbot For Your Website</h4>
                     <form id="login-form" class="p-2">
                         <h6 class="mb-3">Email</h6>
-                        <input type="text" name="email" id="email" class="form-control form-control-sm mb-2" placeholder="Enter Email Address">
+                        <input type="email" name="email" id="email" class="form-control form-control-sm mb-2" placeholder="Enter Email Address">
+                        <div id="add_email_error" class="text-danger"></div>
                         <div class="d-grid gap-2 mt-5">
                             <button type="submit" id="btn-submit" class="btn btn-primary">Continue <i class="fas fa-chevron-circle-right"></i></button>
                         </div>
@@ -193,6 +196,8 @@
 <script src="<?= SITE_URL ?>public/front/assets/js/plugins.js"></script>
 <script src="<?= SITE_URL ?>public/front/assets/js/main.js"></script>
 
+<link rel="stylesheet" href="<?= SITE_URL ?>public/front/assets/css/sweet_alert.css" />
+<script src="<?= SITE_URL ?>public/front/assets/js/sweet_alert.js"></script>
 <?php if ($show_extra_script) { ?>
     <!-- Pricing JS -->
     <script src="<?= SITE_URL ?>public/front/assets/js/price.js"></script>
@@ -204,6 +209,21 @@
         let model_form = document.getElementById('website-detail-form');
         let website_url = model_form.elements['website_url'].value;
         let website_lang = model_form.elements['website_lang'].value;
+        let websiteURL = website_url.trim();
+
+        // Check if the URL input is empty
+        if (websiteURL === '' || websiteURL.replace("https://www.", "") == "") {
+            document.getElementById("add_Website_url_error").innerHTML = "Please enter website URL to proceed further.";
+            document.getElementById('website_url').focus();
+            return false;
+        }
+        var websitePattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w.-]*)*\/?$/i;
+        if (!websiteURL.replace("https://www.", "").match(websitePattern)) {
+            document.getElementById("add_Website_url_error").innerHTML = "Invalid website URL.";
+            return false;
+        }
+
+
         if (website_url && website_lang) {
             prev_model.classList.remove('show');
             prev_model.setAttribute('aria-hidden', 'true');
@@ -218,32 +238,78 @@
             // Show the modal after 3 seconds
             myModal.show();
         } else {
-
+            Swal.fire({
+                title: "Please Fill Website Url",
+                icon: "error"
+            });
         }
     }
 
     let login_form = document.getElementById('login-form');
     login_form.addEventListener('submit', (e) => {
         e.preventDefault();
-        let submit_btn = document.getElementById('btn-submit');
-        submit_btn.setAttribute('disabled', 'disabled');
         let model_form = document.getElementById('website-detail-form');
-        let data = new FormData();
-        data.append('email', login_form.elements['email'].value);
-        data.append('website_url', model_form.elements['website_url'].value);
-        data.append('website_lang', model_form.elements['website_lang'].value);
-        data.append('login', '1');
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "<?= SITE_URL ?>auth", true);
-        xhr.onload = function() {
-            let res = JSON.parse(this.response);
-            if (res.sts == true) {
-                window.location.href = res.results;
+        let email_value = login_form.elements['email'].value;
+        if (email_value) {
+            if (email_value.trim()) {
+                if (email_value.length < 5 || email_value.length > 150) {
+                    document.getElementById('add_email_error').innerHTML = "Email should be between 5-150 characters.";
+                    document.getElementById('email').focus();
+                    return false;
+                }
+                let submit_btn = document.getElementById('btn-submit');
+                submit_btn.setAttribute('disabled', 'disabled');
+                let data = new FormData();
+                data.append('email', login_form.elements['email'].value);
+                data.append('website_url', model_form.elements['website_url'].value);
+                data.append('website_lang', model_form.elements['website_lang'].value);
+                data.append('login', '1');
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "<?= SITE_URL ?>auth", true);
+                xhr.onload = function() {
+                    let res = JSON.parse(this.response);
+                    if (res.sts == true) {
+                        window.location.href = res.results;
+                    } else {
+                        Swal.fire({
+                            title: res.msg,
+                            icon: "error"
+                        });
+                    }
+                }
+                xhr.send(data);
             } else {
-                alert(res.msg);
+                document.getElementById("add_email_error").innerHTML = "Email Address Must be required!";
+                return false;
             }
+        } else {
+            document.getElementById("add_email_error").innerHTML = "Email Address Must be required!";
+            return false;
         }
-        xhr.send(data);
+    });
+
+
+    let website_form = document.getElementById('website_form');
+    website_form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let website_url = website_form.elements['url'].value;
+        if (website_url === '' || website_url.replace("https://www.", "") == "") {
+            document.getElementById("add_url_error").innerHTML = "Please enter website URL to proceed further.";
+            document.getElementById('website_url').focus();
+            return false;
+        }
+        var websitePattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w.-]*)*\/?$/i;
+        if (!website_url.replace("https://www.", "").match(websitePattern)) {
+            document.getElementById("add_Website_url_error").innerHTML = "Invalid website URL.";
+            return false;
+        }
+        let prev_model = document.getElementById('ModalRefresh');
+        var myModal = new bootstrap.Modal(prev_model, {});
+        // Show the modal after 3 seconds
+        myModal.show();
+
+        let model_form = document.getElementById('website-detail-form');
+        model_form.elements['website_url'].value = website_url;
     });
 </script>
 
