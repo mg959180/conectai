@@ -141,8 +141,8 @@ class BlogsController
                 $this->_db->query($sql);
                 $this->_db->bind(":title", $data['blo_name']);
                 $this->_db->bind(":slug", $data['blo_slug']);
-                $this->_db->bind(":desc", $data['blo_desc']);
-                $this->_db->bind(":extra_dec", $data['blo_short_desc']);
+                $this->_db->bind(":desc", $data['blo_short_desc']);
+                $this->_db->bind(":extra_dec", $data['blo_desc']);
                 $this->_db->bind(":images", $image_name);
                 $this->_db->bind(":image_alt_text", $data['image_alt']);
                 $this->_db->bind(":meta_title", $data['blo_meta_title']);

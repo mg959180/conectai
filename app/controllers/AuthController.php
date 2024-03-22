@@ -5,6 +5,7 @@ require_once APP_DIR . 'libs/Database.php';
 class AuthController
 {
     private $_view;
+    private $_db;
     public function __construct()
     {
         $this->_view  = new View();

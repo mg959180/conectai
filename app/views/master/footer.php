@@ -290,27 +290,29 @@
 
 
     let website_form = document.getElementById('website_form');
-    website_form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        let website_url = website_form.elements['url'].value;
-        if (website_url === '' || website_url.replace("https://www.", "") == "") {
-            document.getElementById("add_url_error").innerHTML = "Please enter website URL to proceed further.";
-            document.getElementById('website_url').focus();
-            return false;
-        }
-        var websitePattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w.-]*)*\/?$/i;
-        if (!website_url.replace("https://www.", "").match(websitePattern)) {
-            document.getElementById("add_Website_url_error").innerHTML = "Invalid website URL.";
-            return false;
-        }
-        let prev_model = document.getElementById('ModalRefresh');
-        var myModal = new bootstrap.Modal(prev_model, {});
-        // Show the modal after 3 seconds
-        myModal.show();
+    if (website_form) {
+        website_form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let website_url = website_form.elements['url'].value;
+            if (website_url === '' || website_url.replace("https://www.", "") == "") {
+                document.getElementById("add_url_error").innerHTML = "Please enter website URL to proceed further.";
+                document.getElementById('website_url').focus();
+                return false;
+            }
+            var websitePattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w.-]*)*\/?$/i;
+            if (!website_url.replace("https://www.", "").match(websitePattern)) {
+                document.getElementById("add_Website_url_error").innerHTML = "Invalid website URL.";
+                return false;
+            }
+            let prev_model = document.getElementById('ModalRefresh');
+            var myModal = new bootstrap.Modal(prev_model, {});
+            // Show the modal after 3 seconds
+            myModal.show();
 
-        let model_form = document.getElementById('website-detail-form');
-        model_form.elements['website_url'].value = website_url;
-    });
+            let model_form = document.getElementById('website-detail-form');
+            model_form.elements['website_url'].value = website_url;
+        });
+    }
 </script>
 
 </body>
