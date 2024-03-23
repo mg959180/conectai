@@ -17,11 +17,11 @@
                                         <a href="<?= SITE_URL ?>blogs" target="_blank">Blog</a>
                                     </li>
                                     <li>
-                                        <a href="<?= SITE_URL ?>login" target="_blank">Sign in</a>
+                                        <a href="https://app.conectai.chat/" target="_blank">Sign in</a>
                                     </li>
-                                    <li>
-                                        <a href="<?= SITE_URL ?>register" target="_blank">Register</a>
-                                    </li>
+                                    <!-- <li>
+                                        <a href="< ?= SITE_URL ?>register" target="_blank">Register</a>
+                                    </li> -->
                                     <li>
                                         <a href="<?= SITE_URL ?>contact-us" target="_blank">Contact Us</a>
                                     </li>
@@ -146,24 +146,26 @@
                 </div>
                 <div class="modal-body ">
                     <h4 class="text-center">Let's Create A Chatbot For Your Website</h4>
-                    <form id="login-form" class="p-2">
-                        <h6 class="mb-3">Email</h6>
-                        <input type="email" name="email" id="email" class="form-control form-control-sm mb-2" placeholder="Enter Email Address">
-                        <div id="add_email_error" class="text-danger"></div>
-                        <div class="d-grid gap-2 mt-5">
-                            <button type="submit" id="btn-submit" class="btn btn-primary">Continue <i class="fas fa-chevron-circle-right"></i></button>
-                        </div>
-                        <?php if (0) { ?>
-                            <div class="text-center mt-2">
-                                <a href="https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?client_id=1031032234556-8j15t0r4j6vd5sn57720pejifu6mf6us.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fwww.robofy.ai%2FGoogleCallback.aspx&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&response_type=code&service=lso&o2v=1&theme=glif&flowName=GeneralOAuthFlow">
-                                    <img src="<?= SITE_URL ?>public/front/assets/images/google-signin-button-1024x260.png" alt="" class="img-fluid" height="60" width="250">
-                                </a>
+                    <div id="email-form">
+                        <form id="login-form" class="p-2">
+                            <h6 class="mb-3">Email</h6>
+                            <input type="email" name="email" id="email" class="form-control form-control-sm mb-2" placeholder="Enter Email Address">
+                            <div id="add_email_error" class="text-danger"></div>
+                            <div class="d-grid gap-2 mt-5">
+                                <button type="submit" id="btn-submit" class="btn btn-primary">Continue <i class="fas fa-chevron-circle-right"></i></button>
                             </div>
-                        <?php } ?>
-                        <div class="text-center mt-2">
-                            <img src="<?= SITE_URL ?>public/front/assets/images/login-social-proof.png" alt="" class="img-fluid" height="60" width="450">
-                        </div>
-                    </form>
+                            <?php if (0) { ?>
+                                <div class="text-center mt-2">
+                                    <a href="https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?client_id=1031032234556-8j15t0r4j6vd5sn57720pejifu6mf6us.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fwww.robofy.ai%2FGoogleCallback.aspx&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&response_type=code&service=lso&o2v=1&theme=glif&flowName=GeneralOAuthFlow">
+                                        <img src="<?= SITE_URL ?>public/front/assets/images/google-signin-button-1024x260.png" alt="" class="img-fluid" height="60" width="250">
+                                    </a>
+                                </div>
+                            <?php } ?>
+                            <div class="text-center mt-2">
+                                <img src="<?= SITE_URL ?>public/front/assets/images/login-social-proof.png" alt="" class="img-fluid" height="60" width="450">
+                            </div>
+                        </form>
+                    </div>
                     <div class="row">
                         <div class="col-md-4">
                             <p> <i class="fas fa-check-circle text-primary" style="font-size: 12px;"></i>
@@ -205,7 +207,6 @@
 <script>
     function openLoginForm() {
         let prev_model = document.getElementById('ModalRefresh');
-
         let model_form = document.getElementById('website-detail-form');
         let website_url = model_form.elements['website_url'].value;
         let website_lang = model_form.elements['website_lang'].value;
@@ -265,11 +266,11 @@
                 data.append('website_lang', model_form.elements['website_lang'].value);
                 data.append('login', '1');
                 let xhr = new XMLHttpRequest();
-                xhr.open("POST", "<?= SITE_URL ?>auth", true);
+                xhr.open("POST", "<?= SITE_URL ?>send-otp-details", true);
                 xhr.onload = function() {
                     let res = JSON.parse(this.response);
                     if (res.sts == true) {
-                        window.location.href = res.results;
+                        document.getElementById("email-form").innerHTML = this.responses;
                     } else {
                         Swal.fire({
                             title: res.msg,

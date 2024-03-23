@@ -13,3 +13,4 @@ defined('PLANS_FEATURES') || define('PLANS_FEATURES', TBL_PREFIX . 'plan_feature
 defined('PLANS_PRICES') || define('PLANS_PRICES', TBL_PREFIX . 'plan_prices');
 defined('META_DETAILS') || define('META_DETAILS', TBL_PREFIX . 'website_meta_details');
 defined('WEBSITE_SETTINGS') || define('WEBSITE_SETTINGS', TBL_PREFIX . 'website_settings');
+defined('USERS') || define('USERS', TBL_PREFIX . 'users');

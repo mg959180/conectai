@@ -5915,3 +5915,32 @@ AFTER `wes_open_ai_key`,
 AFTER `wes_demo_websites`,
   ADD `wes_open_ai_demo_days` MEDIUMINT(3) NULL DEFAULT '3'
 AFTER `wes_demo_websites`;
+
+
+
+
+
+CREATE TABLE `ca_users` (
+  `usr_id` int(11) NOT NULL,
+  `usr_email` varchar(250) NOT NULL,
+  `usr_email_verified` tinyint(1) NOT NULL DEFAULT 0,
+  `usr_email_verification_sent` tinyint(1) NOT NULL DEFAULT 0,
+  `usr_website_name` varchar(250) NOT NULL,
+  `usr_lang` varchar(250) NOT NULL,
+  `usr_email_otp` varchar(11) NOT NULL,
+  `usr_email_otp_sent_time` datetime NOT NULL,
+  `usr_email_otp_attempt` int(11) NOT NULL,
+  `usr_created_date` datetime NOT NULL,
+  `usr_modified_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `ca_users`
+--
+ALTER TABLE `ca_users`
+  ADD PRIMARY KEY (`usr_id`);
+COMMIT;

@@ -20,13 +20,12 @@ class Core
         $params = explode('/', rtrim($url));
         $constants_lists = glob(APP_DIR . 'constants/*');
         $helpers_lists = glob(APP_DIR . 'helpers/*');
-        // $libraries_lists = glob(APP_DIR . 'libs/*');
         self::requireFiles($constants_lists);
         self::requireFiles($helpers_lists);
-        // self::requireFiles($libraries_lists);
         $directory_path = APP_DIR . 'controllers/';
+        
         if (!empty($params[0])) {
-            if (is_dir($directory_path. $params[0])) {
+            if (is_dir($directory_path . $params[0])) {
                 if (isset($params[1]) && !empty($params[1])) {
                     if (is_dir($directory_path . $params[0] . '/' . $params[1])) {
                         $directory = $params[0];
@@ -95,11 +94,15 @@ class Core
         $arguments = array_values($params);
         if (file_exists($file_name)) {
             require_once $file_name;
-            $conObj = new $controllerName();
-            if (method_exists($conObj, $method_name)) {
-                $conObj->$method_name(...$arguments);
+            if (class_exists($controllerName)) {
+                $conObj = new $controllerName();
+                if (method_exists($conObj, $method_name)) {
+                    $conObj->$method_name(...$arguments);
+                } else {
+                    exit('Undefined Method in Class:- ' . $controllerName);
+                }
             } else {
-                exit('Undefined Method in Class:- ' . $controllerName);
+                return redirect('page-not-found');
             }
         } else {
             redirect(SITE_URL . 'page-not-found');

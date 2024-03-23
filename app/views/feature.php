@@ -114,7 +114,7 @@
                                 user
                                 experience
                             </p>
-                            <a href="<?= SITE_URL ?>login" class="arrow-link arrow-link-primary text-primary gap-3">
+                            <a href="https://app.conectai.chat/" class="arrow-link arrow-link-primary text-primary gap-3">
                                 <span>Get Started Free</span>
                                 <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />

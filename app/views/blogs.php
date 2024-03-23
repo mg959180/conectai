@@ -12,15 +12,16 @@
                 Integration guide for Chatbot using Google Tag Manager
             </h3>
             <div class="row  mb-18 pt-5 ">
-                <?php $counter = 0;
+                <?php $counter = $i = 0;
                 foreach ($blogs_data as $bk => $bv) {
-                    if ($bk % 4 == 0) {
+                    if ($bk % 2 == 0) {
                         ++$counter;
                     }
+                    ++$i;
                 ?>
                     <div class="col-md-6 col-lg-4 col-xl-4 col-sm-12 mb-5 text-center" data-aos="fade-up-sm" data-aos-delay="50">
-                        <div class="card p-2 shadow" id="Step<?= $counter ?>Card">
-                            <h6 class="text-start">Blog <?= $bk++; ?></h6>
+                        <div class="card p-2 shadow" id="Step<?= (($bk % 2 == 0) ? 1 : 2) ?>Card">
+                            <h6 class="text-start">Blog <?= $i; ?></h6>
                             <div class="text-center">
                                 <a href="<?= SITE_URL ?>blogs/detail/<?= $bv['blo_slug'] ?>">
                                     <img src="<?= UPLOAD_URL . 'admin/blog_images/' . $bv['blo_images']; ?>" alt="<?= $bv['blo_image_alt_text'] ?>" class="img-fluid text-center" width="100">

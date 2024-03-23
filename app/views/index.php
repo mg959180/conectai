@@ -27,11 +27,12 @@
                         <form id="website_form" class="pe-xl-10" data-aos="fade-up-sm" data-aos-delay="150">
                             <div class="input-group with-icon">
                                 <input type="text" class="form-control ps-2" value="https://www." name="url" required>
-                                
+
                                 <button class="btn btn-primary px-4" type="submit">
                                     Create Free Chat
                                 </button>
-                            </div><div id="add_url_error" class="text-danger"></div>
+                            </div>
+                            <div id="add_url_error" class="text-danger"></div>
                         </form>
 
                         <div class="d-flex justify-between mt-2" data-aos="fade-up-sm" data-aos-delay="200">
@@ -385,7 +386,7 @@
                                 user
                                 experience
                             </p>
-                            <a href="<?= SITE_URL ?>login" class="arrow-link arrow-link-primary text-primary gap-3">
+                            <a href="https://app.conectai.chat/" class="arrow-link arrow-link-primary text-primary gap-3">
                                 <span>Get Started Free</span>
                                 <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
@@ -550,66 +551,26 @@
                 steps for integration-
             </h4>
             <div class="row mb-2">
-                <div class="col-md-6 col-lg-3 col-xl-3 col-sm-12 mb-2 text-center" data-aos="fade-up-sm" data-aos-delay="50">
-                    <div class="card p-2" id="Step1Card">
-                        <h6 class="text-start"></h6>
-                        <div class="text-center">
-                            <a href="step1" class="">
-                                <img src="<?= SITE_URL ?>public/front/assets/images/icons/step1.png" alt="" class="img-fluid text-center" width="100">
+                <?php $i = 0;
+                foreach ($blogs_data as $bk => $bv) {
+                    ++$i;
+                ?>
+                    <div class="col-md-6 col-lg-3 col-xl-3 col-sm-12 mb-2 text-center" data-aos="fade-up-sm" data-aos-delay="50">
+                        <div class="card p-2" id="Step<?= $i ?>Card">
+                            <div class="text-center">
+                                <a href="<?= SITE_URL ?>blogs/detail/<?= $bv['blo_slug'] ?>">
+                                    <img src="<?= UPLOAD_URL . 'admin/blog_images/' . $bv['blo_images']; ?>" alt="<?= $bv['blo_image_alt_text'] ?>" class="img-fluid text-center" width="100">
+                                </a>
+                            </div>
+                            <a href="<?= SITE_URL ?>blogs/detail/<?= $bv['blo_slug'] ?>" class="text-center mt-1" style="font-weight: bolder;">
+                                <?= $bv['blo_title'] ?>
                             </a>
                         </div>
-                        <a href="step1" class="text-center mt-1" style="font-weight: bolder;">
-                            Integration guide for Chatbot using Google Tag Manager
-                        </a>
+                        <a href="<?= SITE_URL ?>blogs/detail/<?= $bv['blo_slug'] ?>" class="text-center stretched-link" target="_blank" style="font-size: 18px;"> <?= $bv['blo_desc'] ?></a>
                     </div>
-                    <a href="step1" class="text-center stretched-link" target="_blank" style="font-size: 18px;"> 1. Integration guide for Chatbot using Google Tag Manager</a>
-                </div>
-                <div class="col-md-6 col-lg-3 col-xl-3 col-sm-12 mb-2 text-center" data-aos="fade-up-sm" data-aos-delay="100">
-                    <div class="card p-1" id="Step2Card">
-                        <h6 class="text-start"></h6>
-                        <div class="text-center">
-                            <a href="step2" class="">
-                                <img src="<?= SITE_URL ?>public/front/assets/images/icons/step2.png" alt="" class="img-fluid text-center" width="110">
-                            </a>
-                        </div>
-                        <a href="step2" class="text-center mt-1" style="font-weight: bolder;">
-                            How To Build a ChatGPT Based Chatbot for Your Website
-                        </a>
-                    </div>
-                    <a href="step2" class="text-center stretched-link" target="_blank" style="font-size: 18px;"> 2. Build a ChatGPT based chatbot in 5 simple steps</a>
-                </div>
-                <div class="col-md-6 col-lg-3 col-xl-3 col-sm-12 mb-2 text-center" data-aos="fade-up-sm" data-aos-delay="150">
-                    <div class="card p-2" id="Step3Card">
-                        <h6 class="text-start"></h6>
-                        <div class="text-center">
-                            <a href="#" class="stretched-link" target="_blank">
-                                <img src="<?= SITE_URL ?>public/front/assets/images/icons/step3.png" alt="" class="img-fluid text-center" width="100">
-                            </a>
-                        </div>
-                        <a href="step3" class="text-center mt-1 stretched-link" target="_blank" style="font-weight: bolder;">
-                            One Chatbot, Multiple Channels:A Complete Guide for Communication
-                        </a>
-                    </div>
-                    <a href="step3" class="text-center stretched-link" target="_blank" style="font-size: 18px;">Integrate WhatsApp, Calendly, Zoom, FB Messenger, Email with
-                        Connect Ai</a>
-                </div>
-                <div class="col-md-6 col-lg-3 col-xl-3 col-sm-12 mb-2 text-center" data-aos="fade-up-sm" data-aos-delay="200">
-                    <div class="card p-2" id="Step4Card">
-                        <h6 class="text-start"></h6>
-                        <div class="text-center">
-                            <a href="#" class="" target="_blank">
-                                <img src="<?= SITE_URL ?>public/front/assets/images/icons/step4.png" alt="" class="img-fluid text-center" width="120">
-                            </a>
-                        </div>
-                        <a href="step4" class="text-center mt-1 stretched-link" target="_blank" style="font-weight: bolder;">
-                            How to Improve chatbot response?
-                        </a>
-                    </div>
-                    <a href="step4" class="text-center stretched-link" target="_blank" style="font-size: 18px;"> How to improve Connect chatbot responses?</a>
-                </div>
-
+                <?php } ?>
                 <div class="text-end">
-                    <a href="blog" class="btn btn-primary">View All</a>
+                    <a href="<?= SITE_URL ?>blogs" class="btn btn-primary">View All</a>
                 </div>
             </div>
         </div>
@@ -1062,8 +1023,6 @@
                             <li><i class="fas fa-check-circle text-primary"></i> WordPress Plugin</li>
                             <li><i class="fas fa-check-circle text-primary"></i> ChatGPT 3.5</li>
                             <li><i class="fas fa-check-circle text-primary"></i> ChatGPT 4.0</li>
-
-
                         </ul>
                     </div>
                 </div>
@@ -1175,7 +1134,7 @@
                                 <span class="text-primary">ConnectAi</span>
                                 you can save hours each week creating long-form content.
                             </h2>
-                            <a href="<?= SITE_URL ?>login" class="btn btn-primary">Get Started Free</a>
+                            <a href="https://app.conectai.chat/" class="btn btn-primary">Get Started Free</a>
                         </div>
                     </div>
 

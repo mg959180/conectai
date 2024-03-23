@@ -24,7 +24,7 @@
                     <div class="account-wrapper h-full d-flex flex-column justify-center">
                         <div class="text-center">
                             <div class="mb-4 text-start d-flex align-center gap-2">
-                                <a href="<?= SITE_URL ?>login" class="btn btn-sm p-0 d-flex align-center text-decoration-none w-8 h-8 justify-center">
+                                <a href="https://app.conectai.chat/" class="btn btn-sm p-0 d-flex align-center text-decoration-none w-8 h-8 justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="24">
                                         <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
                                             <path d="M5 12h14M5 12l4 4m-4-4 4-4" />
