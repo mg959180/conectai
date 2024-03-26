@@ -5944,3 +5944,41 @@ CREATE TABLE `ca_users` (
 ALTER TABLE `ca_users`
   ADD PRIMARY KEY (`usr_id`);
 COMMIT;
+
+
+ALTER TABLE `ca_website_settings` 
+ADD `wes_is_bank_active` TINYINT(1) NOT NULL DEFAULT '0' AFTER `wes_open_ai_demo_days`,
+ ADD `wes_bank_name` VARCHAR(250) NULL DEFAULT NULL AFTER `wes_is_bank_active`,
+  ADD `wes_bank_ac_holder_name` VARCHAR(250) NULL DEFAULT NULL AFTER `wes_bank_name`,
+   ADD `wes_bank_ac_no` VARCHAR(20) NULL DEFAULT NULL AFTER `wes_bank_ac_holder_name`,
+    ADD `wes_bank_ac_fcs_no` VARCHAR(20) NULL DEFAULT NULL AFTER `wes_bank_ac_no`;
+
+ALTER TABLE `ca_orders` ADD FOREIGN KEY (`ord_plan_id`) REFERENCES `ca_plans`(`plan_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ ALTER TABLE `ca_orders` ADD FOREIGN KEY (`ord_country_id`) REFERENCES `ca_countries`(`cun_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `ca_orders` DROP `ord_cookie_id`;
+ALTER TABLE `ca_orders` CHANGE `ord_state_id` `ord_state_name` VARCHAR(250) NULL;
+ALTER TABLE `ca_orders` CHANGE `ord_usr_id` `ord_usr_id` INT(11) NOT NULL;
+ALTER TABLE `ca_orders` ADD FOREIGN KEY (`ord_tax_id`) REFERENCES `ca_taxes`(`tax_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ ALTER TABLE `ca_orders` ADD FOREIGN KEY (`ord_usr_id`) REFERENCES `ca_users`(`usr_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `ca_orders` 
+ADD `ord_city_name` VARCHAR(250) NOT NULL AFTER `ord_state_name`,
+ADD `ord_pincode` VARCHAR(250) NOT NULL AFTER `ord_city_name`;
+ALTER TABLE `ca_orders` ADD `ord_tax_amount` DOUBLE NULL AFTER `ord_tax_percent`;
+ALTER TABLE `ca_orders` CHANGE `ord_tax_id` `ord_tax_id` INT(11) NULL DEFAULT NULL AFTER `ord_total`;
+ALTER TABLE `ca_orders` CHANGE `ord_status` `ord_status` TINYINT(1) NOT NULL DEFAULT '0' AFTER `ord_pincode`;
+ALTER TABLE `ca_orders` CHANGE `ord_transaction_status` `ord_transaction_status` INT(5) NOT NULL DEFAULT '0' AFTER `ord_status`;
+ALTER TABLE `ca_orders` CHANGE `ord_temp` `ord_temp` TINYINT(1) NOT NULL DEFAULT '0' AFTER `ord_transaction_status`;
+ALTER TABLE `ca_orders` CHANGE `ord_total` `ord_total` DOUBLE NOT NULL DEFAULT '0' AFTER `ord_tax_amount`;
+ALTER TABLE `ca_orders` CHANGE `ord_amount` `ord_amount` DOUBLE NOT NULL DEFAULT '0' AFTER `ord_txn_id`;
+
+ALTER TABLE `ca_orders` 
+ADD `ord_mobile_no` VARCHAR(100) NOT NULL AFTER `ord_payment_mode`,
+ ADD `ord_address` TEXT NOT NULL AFTER `ord_mobile_no`,
+ ADD `ord_gst_no` VARCHAR(100) NOT NULL AFTER `ord_address`;
+
+ ALTER TABLE `ca_users` ADD `usr_chat_account_created` TINYINT(1) NOT NULL DEFAULT '0' AFTER `usr_id`;
+
+ ALTER TABLE `ca_website_settings` ADD `wes_email_verification_time` INT(5) NOT NULL DEFAULT '60' COMMENT 'in seconds' AFTER `wes_name`;
+ ALTER TABLE `ca_website_settings` ADD `wes_otp_attempts` SMALLINT(5) NOT NULL DEFAULT '2' AFTER `wes_email_verification_time`;
