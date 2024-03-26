@@ -46,7 +46,12 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="website_url">Meta Page Url</label>
-                            <input type="text" class="form-control " id="website_url" name="website_url" value="<?= $meta_data['wmd_website_url'] ?? '' ?>" placeholder="Meta Page Url">
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><?= SITE_URL ?></div>
+                                </div>
+                                <input type="text" class="form-control " id="website_url" name="website_url" value="<?= $meta_data['wmd_website_url'] ?? '' ?>" placeholder="Meta Page Url">
+                            </div>
                         </div>
                     </div>
                 </div>
