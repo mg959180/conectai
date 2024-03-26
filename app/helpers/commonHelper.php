@@ -6,7 +6,8 @@ function get_controller_name($url)
 
 function is_production()
 {
-    return (ENVIRONMENT == 'PRODUCTION') ? true : false;
+    // return (ENVIRONMENT == 'PRODUCTION') ? true : false;
+    return false;
 }
 
 function redirect($url)
