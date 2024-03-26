@@ -5938,6 +5938,8 @@ CREATE TABLE `ca_users` (
 ALTER TABLE `ca_users`
 ADD PRIMARY KEY (`usr_id`);
 COMMIT;
+
+
 ALTER TABLE `ca_website_settings`
 ADD `wes_is_bank_active` TINYINT(1) NOT NULL DEFAULT '0'
 AFTER `wes_open_ai_demo_days`,
@@ -5998,4 +6000,4 @@ ADD `wes_otp_attempts` SMALLINT(5) NOT NULL DEFAULT '2'
 AFTER `wes_email_verification_time`;
 
 ALTER TABLE `ca_users` ADD `usr_chat_demo_start_date` DATETIME NULL DEFAULT NULL AFTER `usr_chat_account_created`;
-ALTER TABLE `ca_users` ADD `usr_chat_demo_end_date` DATETIME NULL DEFAULT NULL AFTER `user_chat_demo_start_date`;
+ALTER TABLE `ca_users` ADD `usr_chat_demo_end_date` DATETIME NULL DEFAULT NULL AFTER `usr_chat_demo_start_date`;
