@@ -249,7 +249,6 @@
                     var xhrPro = $.ajax(settings).done(function (response) {
                         const obj = JSON.parse(response);
                         if (obj.Response == 1) {
-
                             $(".resendBtn").addClass('disabled');
                             $(".resendBtn").removeAttr('onclick');
                             $('#OTPmodal').modal('show');

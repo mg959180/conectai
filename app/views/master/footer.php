@@ -154,13 +154,6 @@
                             <div class="d-grid gap-2 mt-5">
                                 <button type="submit" id="btn-submit" class="btn btn-primary">Continue <i class="fas fa-chevron-circle-right"></i></button>
                             </div>
-                            <?php if (0) { ?>
-                                <div class="text-center mt-2">
-                                    <a href="https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?client_id=1031032234556-8j15t0r4j6vd5sn57720pejifu6mf6us.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fwww.robofy.ai%2FGoogleCallback.aspx&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&response_type=code&service=lso&o2v=1&theme=glif&flowName=GeneralOAuthFlow">
-                                        <img src="<?= SITE_URL ?>public/front/assets/images/google-signin-button-1024x260.png" alt="" class="img-fluid" height="60" width="250">
-                                    </a>
-                                </div>
-                            <?php } ?>
                             <div class="text-center mt-2">
                                 <img src="<?= SITE_URL ?>public/front/assets/images/login-social-proof.png" alt="" class="img-fluid" height="60" width="450">
                             </div>
@@ -191,8 +184,6 @@
 
 <?php } ?>
 </div>
-
-
 
 <!-- JS -->
 <script src="<?= SITE_URL ?>public/front/assets/js/plugins.js"></script>
@@ -247,48 +238,67 @@
     }
 
     let login_form = document.getElementById('login-form');
-    login_form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        let model_form = document.getElementById('website-detail-form');
-        let email_value = login_form.elements['email'].value;
-        if (email_value) {
-            if (email_value.trim()) {
-                if (email_value.length < 5 || email_value.length > 150) {
-                    document.getElementById('add_email_error').innerHTML = "Email should be between 5-150 characters.";
-                    document.getElementById('email').focus();
+    if (login_form) {
+        login_form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let model_form = document.getElementById('website-detail-form');
+            let email_value = login_form.elements['email'].value;
+            if (email_value) {
+                if (email_value.trim()) {
+                    if (email_value.length < 5 || email_value.length > 150) {
+                        document.getElementById('add_email_error').innerHTML = "Email should be between 5-150 characters.";
+                        document.getElementById('email').focus();
+                        return false;
+                    }
+                    let submit_btn = document.getElementById('btn-submit');
+                    let data = new FormData();
+                    data.append('email', email_value);
+                    data.append('website_url', model_form.elements['website_url'].value);
+                    data.append('website_lang', model_form.elements['website_lang'].value);
+                    data.append('send_otp', '1');
+                    let send_otp = new XMLHttpRequest();
+                    send_otp.open("POST", "<?= SITE_URL ?>auth/send-otp-details", true);
+                    send_otp.onload = function() {
+                        let res = JSON.parse(this.response);
+                        if (res.sts == true) {
+                            submit_btn.setAttribute('disabled', 'disabled');
+                            let otp_verification = res.results;
+                            let display_otp = new XMLHttpRequest();
+                            let data1 = new FormData();
+                            data1.append('email', email_value);
+                            data1.append('display_otp', '1');
+                            display_otp.open("POST", "<?= SITE_URL ?>auth/display-otp-form", true);
+                            display_otp.onload = function() {
+                                document.getElementById("email-form").innerHTML = this.response;
+                                var mins = otp_verification; //Set the number of minutes you need
+                                var secs = parseInt(mins * 60);
+                                setInterval(function() {
+                                    secs--;
+                                    document.getElementById("show_otp_timer").innerHTML = 'Expires in ' + secs + ' Seconds';
+                                    if (secs < 0) {
+                                        document.getElementById("show_otp_timer").innerHTML = '<a href="javascript:void(0);" class="text-info " onclick="resendOtp(this)" data-email="' + email_value + '" data-expires="' + mins + '">Resend Otp</a>';
+                                    }
+                                }, 1000);
+                            }
+                            display_otp.send(data1);
+                        } else {
+                            Swal.fire({
+                                title: res.msg,
+                                icon: "error"
+                            });
+                        }
+                    }
+                    send_otp.send(data);
+                } else {
+                    document.getElementById("add_email_error").innerHTML = "Email Address Must be required!";
                     return false;
                 }
-                let submit_btn = document.getElementById('btn-submit');
-                submit_btn.setAttribute('disabled', 'disabled');
-                let data = new FormData();
-                data.append('email', login_form.elements['email'].value);
-                data.append('website_url', model_form.elements['website_url'].value);
-                data.append('website_lang', model_form.elements['website_lang'].value);
-                data.append('login', '1');
-                let xhr = new XMLHttpRequest();
-                xhr.open("POST", "<?= SITE_URL ?>send-otp-details", true);
-                xhr.onload = function() {
-                    let res = JSON.parse(this.response);
-                    if (res.sts == true) {
-                        document.getElementById("email-form").innerHTML = this.responses;
-                    } else {
-                        Swal.fire({
-                            title: res.msg,
-                            icon: "error"
-                        });
-                    }
-                }
-                xhr.send(data);
             } else {
                 document.getElementById("add_email_error").innerHTML = "Email Address Must be required!";
                 return false;
             }
-        } else {
-            document.getElementById("add_email_error").innerHTML = "Email Address Must be required!";
-            return false;
-        }
-    });
-
+        });
+    }
 
     let website_form = document.getElementById('website_form');
     if (website_form) {
@@ -313,6 +323,104 @@
             let model_form = document.getElementById('website-detail-form');
             model_form.elements['website_url'].value = website_url;
         });
+    }
+
+    function verification_form() {
+        let verification_form = document.getElementById('verification-form');
+        if (verification_form) {
+            let email_value = verification_form.elements['email'].value;
+            let otp_value = verification_form.elements['otp'].value;
+            if (email_value) {
+                if (email_value.trim()) {
+                    if (otp_value.trim()) {
+                        if (otp_value.length == 6) {
+                            let validate_otp = new XMLHttpRequest();
+                            let data1 = new FormData();
+                            data1.append('email', email_value);
+                            data1.append('otp', otp_value);
+                            data1.append('validate_otp', '1');
+                            validate_otp.open("POST", "<?= SITE_URL ?>auth/validate-otp", true);
+                            validate_otp.onload = function() {
+                                let res = JSON.parse(this.response);
+                                if (res.sts == true) {
+                                    let auth = new XMLHttpRequest();
+                                    let data1 = new FormData();
+                                    data1.append('email', email_value);
+                                    data1.append('login', '1');
+                                    auth.open("POST", "<?= SITE_URL ?>auth", true);
+                                    auth.onload = function() {
+                                        let res = JSON.parse(this.response);
+                                        if (res.sts == true) {
+                                            console.log(res);
+                                            return false;
+                                            window.location.href = res.results;
+                                        } else {
+                                            Swal.fire({
+                                                title: res.msg,
+                                                icon: "error"
+                                            });
+                                        }
+                                    }
+                                    auth.send(data1);
+                                } else {
+                                    Swal.fire({
+                                        title: res.msg,
+                                        icon: "error"
+                                    });
+                                }
+                            }
+                            validate_otp.send(data1);
+                        } else {
+                            document.getElementById('add_otp_error').innerHTML = "Otp should be 6 characters.";
+                            document.getElementById('add_otp_error').focus();
+                            return false;
+                        }
+                    } else {
+                        document.getElementById('add_otp_error').innerHTML = "Otp should be required.";
+                        document.getElementById('add_otp_error').focus();
+                        return false;
+                    }
+                } else {
+                    document.getElementById('add_otp_error').innerHTML = "Email Must be required!";
+                    document.getElementById('add_otp_error').focus();
+                    return false;
+                }
+            } else {
+                document.getElementById('add_otp_error').innerHTML = "Email Must be required!";
+                document.getElementById('add_otp_error').focus();
+                return false;
+            }
+        }
+    }
+
+    function resendOtp(_this) {
+        let email = _this.getAttribute('data-email');
+        let expires = _this.getAttribute('data-expires');
+        let display_otp = new XMLHttpRequest();
+        let data1 = new FormData();
+        data1.append('email', email);
+        data1.append('resend_otp', '1');
+        display_otp.open("POST", "<?= SITE_URL ?>auth/resend-otp", true);
+        display_otp.onload = function() {
+            let res = JSON.parse(this.response);
+            if (res.sts == true) {
+                var mins = expires; //Set the number of minutes you need
+                var secs = parseInt(mins * 60);
+                setInterval(function() {
+                    secs--;
+                    document.getElementById("show_otp_timer").innerHTML = 'Expires in ' + secs + ' Seconds';
+                    if (secs < 0) {
+                        document.getElementById("show_otp_timer").innerHTML = '<a href="javascript:void(0);" class="text-info " onclick="resendOtp(this)" data-email="' + email + '" data-expires="' + mins + '">Resend Otp</a>';
+                    }
+                }, 1000);
+            } else {
+                Swal.fire({
+                    title: res.msg,
+                    icon: "error"
+                });
+            }
+        }
+        display_otp.send(data1);
     }
 </script>
 

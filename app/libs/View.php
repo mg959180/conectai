@@ -30,7 +30,7 @@ class View
     public function render($viewScript)
     {
         extract($this->set_val);
-        require_once $viewScript;
+        require_once $viewScript . '.php';
     }
 
     public function frontBreadCrumb()

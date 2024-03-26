@@ -5939,6 +5939,7 @@ ALTER TABLE `ca_users`
 ADD PRIMARY KEY (`usr_id`);
 COMMIT;
 
+ALTER TABLE `ca_users` CHANGE `usr_id` `usr_id` INT(11) NOT NULL AUTO_INCREMENT; 
 
 ALTER TABLE `ca_website_settings`
 ADD `wes_is_bank_active` TINYINT(1) NOT NULL DEFAULT '0'
