@@ -16,7 +16,10 @@ class BlogsController
         $http_ref = explode('/', $http_ref);
         $http_ref = array_filter($http_ref);
         $http_ref = end($http_ref);
-        $this->_db->query("SELECT * FROM " . META_DETAILS . " WHERE 1 AND wmd_website_url = '" . SITE_URL . $http_ref . "'");
+        if (empty($http_ref)) {
+            $http_ref = 'home';
+        }
+        $this->_db->query("SELECT * FROM " . META_DETAILS . " WHERE 1 AND wmd_website_url = '" . $http_ref . "'");
         $meta_data =  $this->_db->single();
         if (!empty($meta_data)) {
             $this->_view->setVal('meta_title', $meta_data['wmd_meta_title']);

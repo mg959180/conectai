@@ -61,6 +61,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Website Setting:</h6>
                     <a class="collapse-item" href="<?= SITE_ADMIN_URL ?>settings">Main Setting</a>
+                    <a class="collapse-item" href="<?= SITE_ADMIN_URL ?>settings/payment-info-setting">Payment Info Setting</a>
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Meta Data:</h6>
                     <a class="collapse-item" href="<?= SITE_ADMIN_URL ?>meta-details">Meta Details</a>

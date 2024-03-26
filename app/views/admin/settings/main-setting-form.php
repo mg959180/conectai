@@ -33,6 +33,28 @@
                         <label for="end_date">Maintenance End Value</label>
                         <input type="date" class="form-control " id="end_date" name="end_date" value="<?= change_to_custom_date($website_data['wes_maintenance_end_time'], SYSTEM_DATE_TIME) ?? '' ?>" placeholder="End Date">
                     </div>
+                    <div class="col-sm-3">
+                        <label for="email_verification_time">Email Verification Time</label>
+                        <select class="form-control" name="email_verification_time" id="email_verification_time">
+                            <option value="">Select</option>
+                            <option value="1" <?= (!empty($website_data['wes_email_verification_time']) ? ($website_data['wes_email_verification_time'] == (1 * 60) ? 'selected' : '') : '') ?>>1 Minutes</option>
+                            <option value="2" <?= (!empty($website_data['wes_email_verification_time']) ? ($website_data['wes_email_verification_time'] == (2 * 60) ? 'selected' : '') : '') ?>>2 Minutes</option>
+                            <option value="3" <?= (!empty($website_data['wes_email_verification_time']) ? ($website_data['wes_email_verification_time'] == (3 * 60) ? 'selected' : '') : '') ?>>3 Minutes</option>
+                            <option value="4" <?= (!empty($website_data['wes_email_verification_time']) ? ($website_data['wes_email_verification_time'] == (4 * 60) ? 'selected' : '') : '') ?>>4 Minutes</option>
+                            <option value="5" <?= (!empty($website_data['wes_email_verification_time']) ? ($website_data['wes_email_verification_time'] == (5 * 60) ? 'selected' : '') : '') ?>>5 Minutes</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="otp_attempts">Email OTP Attempts</label>
+                        <select class="form-control" name="otp_attempts" id="otp_attempts">
+                            <option value="">Select</option>
+                            <option value="1" <?= (!empty($website_data['wes_otp_attempts']) ? ($website_data['wes_otp_attempts'] == 1 ? 'selected' : '') : '') ?>>1</option>
+                            <option value="2" <?= (!empty($website_data['wes_otp_attempts']) ? ($website_data['wes_otp_attempts'] == 2 ? 'selected' : '') : '') ?>>2</option>
+                            <option value="3" <?= (!empty($website_data['wes_otp_attempts']) ? ($website_data['wes_otp_attempts'] == 3 ? 'selected' : '') : '') ?>>3</option>
+                            <option value="4" <?= (!empty($website_data['wes_otp_attempts']) ? ($website_data['wes_otp_attempts'] == 4 ? 'selected' : '') : '') ?>>4</option>
+                            <option value="5" <?= (!empty($website_data['wes_otp_attempts']) ? ($website_data['wes_otp_attempts'] == 5 ? 'selected' : '') : '') ?>>5</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
                     <h6 style="font-weight: bold;">Mail Settings</h2>

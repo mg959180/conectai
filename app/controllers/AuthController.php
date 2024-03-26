@@ -61,9 +61,14 @@ class AuthController
                                         if ($output['responsestatuscode'] !== 200) {
                                             response(['sts' => false, 'type' => 'error', 'msg' => "Error: call to URL $url failed with status $status, response $server_output, curl_error " . curl_error($ch) . ", curl_errno " . curl_errno($ch), 'results' => $output['message']]);
                                         } else {
-                                            $sql = "UPDATE  " . USERS . " SET usr_chat_account_created = :account_created, usr_modified_date = :date WHERE usr_email = '" . $email . "'";
+                                            $sql = "UPDATE  " . USERS . " SET usr_chat_account_created = :account_created,
+                                             usr_chat_demo_start_date = :start_date, usr_chat_demo_end_date = :end_date,
+                                             usr_modified_date = :date WHERE usr_email = '" . $email . "'";
                                             $this->_db->beginTransaction();
                                             $this->_db->query($sql);
+                                            $this->_db->bind(":account_created", 1);
+                                            $this->_db->bind(":start_date",  $start_date);
+                                            $this->_db->bind(":end_date", $end_date);
                                             $this->_db->bind(":account_created", 1);
                                             $this->_db->bind(":date", date(SYSTEM_DATE_TIME_FORMAT_LONG));
                                             $retVal = $this->_db->execute();
@@ -226,7 +231,7 @@ class AuthController
 
                     $this->_db->query("SELECT wes_email_verification_time FROM " . WEBSITE_SETTINGS . " WHERE wes_id = 1");
                     $settings_data =  $this->_db->single();
-                    $expires_time  =  $settings_data['wes_email_verification_time'] * 60;
+                    $expires_time  =   (intVal($settings_data['wes_email_verification_time']) * 60);
                     if (!empty($user_data)) {
                         $otp_sent_time = $user_data['usr_email_otp_sent_time'];
                         $otp_sent_verify_time = change_to_custom_date($otp_sent_time . '+' . $expires_time . ' minutes', SYSTEM_DATE_TIME_FORMAT_LONG);
@@ -279,7 +284,7 @@ class AuthController
                             $headers = "From: $from\r\n" . "MIME-Version: 1.0\r\n";
                             $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
                             // Message Body
-                            $expires_time  =   $settings_data['wes_email_verification_time'] * 60;
+                            $expires_time  =   (intVal($settings_data['wes_email_verification_time']) * 60);
                             $body = "HI, " . $otp . " is your one time password (OTP) for <a href='http://conectai.chat/'>conectai chat</a>. Please use the OTP to proceed further. this otp will expires in " . $expires_time . " minutes. <br> Thank You<br>From ConectAi Chat";
                             // If there are no errors, send the email
                             if (mail($to, $subject, $body, $headers)) {
