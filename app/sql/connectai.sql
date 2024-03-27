@@ -6038,3 +6038,10 @@ ALTER TABLE `ca_plan_features` ADD `pfe_extra_desc` TEXT NOT NULL AFTER `pfe_des
 
  ALTER TABLE `ca_users` ADD `usr_demo_chat` TINYINT(1) NOT NULL DEFAULT '0' AFTER `usr_id`;
 ALTER TABLE `ca_plans` DROP `plan_link`;
+
+DROP TABLE `ca_order_items`;
+
+ALTER TABLE `ca_orders` ADD `ord_plan_price_id` INT(11) UNSIGNED NOT NULL AFTER `ord_plan_id`; 
+ALTER TABLE `ca_orders` ADD `ord_plan_feature_id` INT(11) UNSIGNED NOT NULL AFTER `ord_plan_price_id`; 
+ALTER TABLE `ca_orders` ADD FOREIGN KEY (`ord_plan_price_id`) REFERENCES `ca_plan_prices`(`ppr_id`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
+ALTER TABLE `ca_orders` ADD FOREIGN KEY (`ord_plan_feature_id`) REFERENCES `ca_plan_features`(`pfe_id`) ON DELETE RESTRICT ON UPDATE RESTRICT; 

@@ -206,6 +206,7 @@ class PricingController
 
         $this->_view->setVal('id', $id);
         $this->_view->enable_jquery = true;
+        $this->_view->set_header_footer = true;
         $this->_view->setVal('meta_description', 'Admin || Pricing Page');
         $this->_view->setVal('title', 'Admin || Pricing Page');
         $this->_view->setVal('meta_author', 'Mayank Gupta');
@@ -289,7 +290,7 @@ class PricingController
         $plans_prices = $this->_db->resultSet();
         $this->_view->setVal('plans_prices', $plans_prices);
 
-        $this->_db->query("SELECT *,CONCAT( (SELECT cun_currency_symbol FROM " . COUNTRIES . " WHERE cun_id = (SELECT ppr_cun_id FROM " . PLANS_PRICES . " WHERE ppr_id = pfe_ppr_ids)),'-',(SELECT ppr_amount FROM " . PLANS_PRICES . " WHERE ppr_id = pfe_ppr_ids),'-',(SELECT ppr_duration FROM " . PLANS_PRICES . " WHERE ppr_id = pfe_ppr_ids)) AS price_name FROM " . PLANS_FEATURES . " WHERE 1 AND pfe_plan_id = " . $id);
+        $this->_db->query("SELECT *, (SELECT GROUP_CONCAT(concat((SELECT cun_currency_symbol FROM " . COUNTRIES . " WHERE cun_id = ppr_cun_id ),' ',ppr_amount ,' ',ppr_duration) SEPARATOR  '<br>') FROM " . PLANS_PRICES . " WHERE FIND_IN_SET(ppr_id,pfe_ppr_ids)) AS price_name FROM " . PLANS_FEATURES . " WHERE 1 AND pfe_plan_id = " . $id);
         $plans_features = $this->_db->resultSet();
         $this->_view->setVal('plans_features', $plans_features);
 
@@ -305,6 +306,7 @@ class PricingController
 
         $this->_view->setVal('id', $id);
         $this->_view->enable_jquery = true;
+        $this->_view->set_header_footer = true;
         $this->_view->setVal('meta_description', 'Admin || Pricing Features Page');
         $this->_view->setVal('title', 'Admin || Pricing Features Page');
         $this->_view->setVal('meta_author', 'Mayank Gupta');

@@ -50,7 +50,7 @@
                         <select class="form-select form-control select2 select2-multiple" multiple id="price" name="price[]">
                             <option value="">Select Plans Price Duration</option>
                             <?php foreach ($plans_prices  as $prK => $prV) { ?>
-                                <option value="<?= $prV['ppr_id'] ?>" <?= $prV['ppr_id'] == ($edit_data['pfe_ppr_ids'] ?? '') ? 'selected' : '' ?>>
+                                <option value="<?= $prV['ppr_id'] ?>" <?= (isset($edit_results['pfe_ppr_ids']) ? (in_array($prV['ppr_id'], explode(',', $edit_results['pfe_ppr_ids'])) ? 'selected' : '') : '') ?>>
                                     <?= $prV['currency_code'] . $prV['ppr_amount'] . ' ' . $prV['ppr_duration'] ?>
                                 </option>
                             <?php } ?>
@@ -59,7 +59,7 @@
 
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <input class="form-checkbox" type="checkbox" role="switch" name="required" id="required" <?= (isset($edit_data['pfe_required']) ? ($edit_data['pfe_required'] == 1 ? 'checked' : '') : '') ?>>
+                            <input class="form-checkbox" type="checkbox" role="switch" name="required" id="required" <?= (isset($edit_results['pfe_required']) ? ($edit_results['pfe_required'] == 1 ? 'checked' : '') : '') ?>>
                             <label for="required">Feature Required</label>
                         </div>
                     </div>
