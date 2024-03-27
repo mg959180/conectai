@@ -6045,3 +6045,53 @@ ALTER TABLE `ca_orders` ADD `ord_plan_price_id` INT(11) UNSIGNED NOT NULL AFTER 
 ALTER TABLE `ca_orders` ADD `ord_plan_feature_id` INT(11) UNSIGNED NOT NULL AFTER `ord_plan_price_id`; 
 ALTER TABLE `ca_orders` ADD FOREIGN KEY (`ord_plan_price_id`) REFERENCES `ca_plan_prices`(`ppr_id`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
 ALTER TABLE `ca_orders` ADD FOREIGN KEY (`ord_plan_feature_id`) REFERENCES `ca_plan_features`(`pfe_id`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
+
+ALTER TABLE `ca_plan_features` CHANGE `pfe_extra_desc` `pfe_extra_desc` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL; 
+
+
+
+INSERT INTO `ca_plans` (`plan_id`, `plan_code`, `plan_name`, `plan_desc`, `plan_short_desc`, `plan_status`, `plan_best_selling`, `plan_created_by`, `plan_created_date`, `plan_modified_by`, `plan_modified_date`) VALUES
+(6, 'basic', 'Basic', 'A 10X faster way to writing your professional copy', 'A 10X faster way to writing your professional copy', 1, 0, 1, '2024-03-28 00:42:08', NULL, NULL),
+(7, 'standard', 'Standard', 'A 10X faster way to writing your professional copy', 'A 10X faster way to writing your professional copy', 1, 0, 1, '2024-03-28 00:42:31', NULL, NULL),
+(8, 'professional', 'Professional', 'A 10X faster way to writing your professional copy', 'A 10X faster way to writing your professional copy', 1, 1, 1, '2024-03-28 00:42:57', NULL, NULL),
+(9, 'enterprise', 'Enterprise', 'A 10X faster way to writing your professional copy', 'A 10X faster way to writing your professional copy', 1, 0, 1, '2024-03-28 00:43:14', NULL, NULL);
+COMMIT;
+
+
+
+
+INSERT INTO `ca_plan_prices` (`ppr_id`, `ppr_plan_id`, `ppr_cun_id`, `ppr_amount`, `ppr_duration`, `ppr_status`) VALUES
+(5, 6, 101, 499, 'monthly', 1),
+(6, 6, 101, 39999, 'yearly', 1),
+(7, 6, 233, 19, 'monthly', 1),
+(8, 6, 233, 49, 'yearly', 1),
+(9, 7, 101, 999, 'monthly', 1),
+(10, 7, 101, 9999, 'yearly', 1),
+(11, 7, 233, 29, 'monthly', 1),
+(12, 7, 233, 189, 'yearly', 1),
+(13, 8, 101, 1499, 'monthly', 1),
+(14, 8, 101, 14990, 'yearly', 1),
+(15, 8, 233, 39, 'monthly', 1),
+(16, 8, 233, 279, 'yearly', 1),
+(17, 9, 101, 4499, 'monthly', 1),
+(18, 9, 101, 29999, 'yearly', 1),
+(19, 9, 233, 99, 'monthly', 1),
+(20, 9, 233, 559, 'yearly', 1);
+COMMIT;
+
+
+
+
+INSERT INTO `ca_plan_features` (`pfe_id`, `pfe_plan_id`, `pfe_ppr_ids`, `pfe_title`, `pfe_value`, `pfe_desc`, `pfe_extra_desc`, `pfe_required`, `pfe_status`) VALUES
+(3, 6, '5,6,7,8', 'Web Pages', '20', ' 20 web pages', 'A web page is any one website page URL ', 1, 1),
+(4, 6, '5,6,7,8', 'Website', '1', ' 1 Website ', '1 Website = 1 Chatbot. ', 1, 1),
+(5, 6, '5,6,7,8', 'Chat Inbox', '', 'Chat Inbox', '', 1, 1),
+(6, 6, '5,6,7,8', ' Chat Ratings', '', ' Chat Ratings', '', 1, 1),
+(7, 6, '5,6,7,8', 'Chat Analytics', '', 'Chat Analytics', '', 1, 1),
+(8, 6, '5,6,7,8', 'Unlimited Chat Replies', '', 'Unlimited Chat Replies', '', 1, 1),
+(9, 6, '5,6,7,8', 'Chat History', '', 'Chat History', '', 1, 1),
+(10, 6, '5,6,7,8', 'Remove \"Powered By\" Branding', '', 'Remove \"Powered By\" Branding', '', 1, 1),
+(11, 6, '5,6,7,8', 'WordPress Plugin', '', 'WordPress Plugin', '', 1, 1),
+(12, 6, '5,6,7,8', ' ChatGPT 3.5', '', ' ChatGPT 3.5', '', 1, 1),
+(13, 6, '5,6,7,8', 'ChatGPT 4.0 ', '', 'ChatGPT 4.0 ', '', 0, 1);
+COMMIT;

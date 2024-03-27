@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
                         <label class="feature_value">Feature Value</label>
-                        <input type="text" name="feature_value" id="feature_value" class="form-control" placeholder="Feature Value " value="<?= isset($edit_results['pfe_value']) ? $edit_results['pfe_value'] : '' ?>" required>
+                        <input type="text" name="feature_value" id="feature_value" class="form-control" placeholder="Feature Value " value="<?= isset($edit_results['pfe_value']) ? $edit_results['pfe_value'] : '' ?>">
                     </div>
                     <div class="col-sm-4 col-md-4 col-lg-4">
                         <label class="desc">Feature Description</label>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-sm-4 col-md-4 col-lg-4">
                         <label class="extra_desc">Feature Extra Desc</label>
-                        <input type="text" name="extra_desc" id="extra_desc" class="form-control" placeholder="Feature Extra Desc" value="<?= isset($edit_results['pfe_extra_desc']) ? $edit_results['pfe_extra_desc'] : '' ?>" required>
+                        <input type="text" name="extra_desc" id="extra_desc" class="form-control" placeholder="Feature Extra Desc" value="<?= isset($edit_results['pfe_extra_desc']) ? $edit_results['pfe_extra_desc'] : '' ?>">
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
                         <label>Select Status</label>
@@ -171,13 +171,7 @@
             feature_title: {
                 required: true,
             },
-            feature_value: {
-                required: true,
-            },
             desc: {
-                required: true,
-            },
-            extra_desc: {
                 required: true,
             },
             'price[]': {
@@ -191,14 +185,8 @@
             feature_title: {
                 required: "Feature Title must be required",
             },
-            feature_value: {
-                required: "Feature Value must be required",
-            },
             desc: {
                 required: "Feature Desc must be required",
-            },
-            extra_desc: {
-                required: "Feature Extra Desc must be required",
             },
             'price[]': {
                 required: "Feature Price must be required",
