@@ -171,10 +171,20 @@
                 required: true,
             },
             maintenance_start_time: {
-                required: true,
+                required: function() {
+                    if ($('#maintenance_mode:selected').val() == 1) {
+                        return true;
+                    }
+                    return false;
+                }
             },
             maintenance_end_time: {
-                required: true,
+                required: function() {
+                    if ($('#maintenance_mode:selected').val() == 1) {
+                        return true;
+                    }
+                    return false;
+                }
             },
         },
         messages: {

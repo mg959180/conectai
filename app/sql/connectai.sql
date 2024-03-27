@@ -5913,9 +5913,6 @@ AFTER `wes_open_ai_key`,
 AFTER `wes_demo_websites`,
   ADD `wes_open_ai_demo_days` MEDIUMINT(3) NULL DEFAULT '3'
 AFTER `wes_demo_websites`;
-
-
-
 CREATE TABLE `ca_users` (
   `usr_id` int(11) NOT NULL,
   `usr_email` varchar(250) NOT NULL,
@@ -5935,12 +5932,10 @@ CREATE TABLE `ca_users` (
 --
 -- Indexes for table `ca_users`
 --
+ALTER TABLE `ca_users` CHANGE `usr_id` `usr_id` INT(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `ca_users`
 ADD PRIMARY KEY (`usr_id`);
 COMMIT;
-
-ALTER TABLE `ca_users` CHANGE `usr_id` `usr_id` INT(11) NOT NULL AUTO_INCREMENT; 
-
 ALTER TABLE `ca_website_settings`
 ADD `wes_is_bank_active` TINYINT(1) NOT NULL DEFAULT '0'
 AFTER `wes_open_ai_demo_days`,
@@ -5999,6 +5994,47 @@ AFTER `wes_name`;
 ALTER TABLE `ca_website_settings`
 ADD `wes_otp_attempts` SMALLINT(5) NOT NULL DEFAULT '2'
 AFTER `wes_email_verification_time`;
+ALTER TABLE `ca_users`
+ADD `usr_chat_demo_start_date` DATETIME NULL DEFAULT NULL
+AFTER `usr_chat_account_created`;
+ALTER TABLE `ca_users`
+ADD `usr_chat_demo_end_date` DATETIME NULL DEFAULT NULL
+AFTER `usr_chat_demo_start_date`;
 
-ALTER TABLE `ca_users` ADD `usr_chat_demo_start_date` DATETIME NULL DEFAULT NULL AFTER `usr_chat_account_created`;
-ALTER TABLE `ca_users` ADD `usr_chat_demo_end_date` DATETIME NULL DEFAULT NULL AFTER `usr_chat_demo_start_date`;
+
+
+//alter table on  27-03-2024
+
+ ALTER TABLE `ca_plans` DROP `plan_duration`;
+ALTER TABLE `ca_plans` DROP `plan_currency`;
+ALTER TABLE `ca_plans` DROP `plan_section_type`,
+  DROP `plan_min_price`,
+  DROP `plan_category`,
+  DROP `plan_sub_category`,
+  DROP `plan_icon`,
+  DROP `plan_icon_type`;
+ALTER TABLE `ca_plan_prices` DROP `ppr_discount_percentage`;
+ALTER TABLE `ca_plan_prices` DROP `ppr_extra_duration`;
+ALTER TABLE `ca_plans`
+ADD FOREIGN KEY (`plan_created_by`) REFERENCES `ca_admin_users`(`adm_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `ca_plans`
+ADD FOREIGN KEY (`plan_modified_by`) REFERENCES `ca_admin_users`(`adm_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `ca_plan_prices`
+ADD FOREIGN KEY (`ppr_plan_id`) REFERENCES `ca_plans`(`plan_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `ca_plan_prices`
+ADD FOREIGN KEY (`ppr_cun_id`) REFERENCES `ca_countries`(`cun_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `ca_plan_features`
+  DROP `pfe_icon`,
+  DROP `pfe_icon_type`;
+
+ALTER TABLE `ca_plan_features` ADD FOREIGN KEY (`pfe_plan_id`) REFERENCES `ca_plans`(`plan_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `ca_plan_features` CHANGE `pfe_ppr_id` `pfe_ppr_ids` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;
+
+ALTER TABLE `ca_plan_features` ADD `pfe_extra_desc` TEXT NOT NULL AFTER `pfe_desc`,
+ ADD `pfe_required` TINYINT(1) NOT NULL DEFAULT '1' AFTER `pfe_extra_desc`;
+ ALTER TABLE `ca_plan_prices` CHANGE `ppr_duraion` `ppr_duration` ENUM('monthly','quarterly','half_yearly','yearly','bi_annually','tri_annually','quad_annually','pent_annually') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;
+
+ ALTER TABLE `ca_users` ADD `usr_demo_chat` TINYINT(1) NOT NULL DEFAULT '0' AFTER `usr_id`;
+ALTER TABLE `ca_plans` DROP `plan_link`;

@@ -2,6 +2,7 @@
 require_once APP_DIR . 'libs/View.php';
 require_once APP_DIR . 'libs/Input.php';
 require_once APP_DIR . 'libs/Database.php';
+require_once APP_DIR . 'libs/Hash.php';
 class MetaDetailsController
 {
 
@@ -13,7 +14,6 @@ class MetaDetailsController
         $this->_view  = new View();
         $this->_db = new Database();
     }
-
 
     public function index()
     {
@@ -140,6 +140,16 @@ class MetaDetailsController
                     $this->_db->commit();
                     set_session_alert('success', 'Meta Details Details ' . $label . ' Successfully');
                     redirect(SITE_ADMIN_URL . 'meta-details/mode/' . $last_id);
+                } else {
+                    if ($data['mode'] == 'edit') {
+                        $last_id = $data['id'];
+                        $label = " Updated";
+                    } else if ($data['mode'] == 'add') {
+                        $last_id = '';
+                        $label = " Saved";
+                    }
+                    set_session_alert('error', ' Unable to ' . $label . ' Meta Details');
+                    redirect(SITE_ADMIN_URL . 'meta-details/mode/' . $last_id);
                 }
             } catch (Exception $ex) {
                 $this->_db->rollBack();
@@ -154,5 +164,33 @@ class MetaDetailsController
             set_session_alert('error', 'Invalid Data');
             redirect(SITE_ADMIN_URL . 'meta-details');
         }
+    }
+
+    public function delete($id)
+    {
+        if (isset($id)) {
+            $record_id = Hash::decrypt($id);
+            if (!empty($record_id)) {
+                $this->_db->query("SELECT * FROM " . META_DETAILS . " WHERE 1 AND wmd_id = " . $record_id);
+                $meta_details = $this->_db->single();
+                if (!empty($meta_details)) {
+                    $this->_db->query("DELETE FROM " . META_DETAILS . " WHERE 1 AND wmd_id = " . $record_id);
+                    $data = $this->_db->execute();
+                    deleteImage($meta_details['wmd_meta_image'], UPLOAD_ROOT . 'admin/meta_images/');
+                    if ($data) {
+                        set_session_alert('success', 'Meta Details Deleted Successfully!');
+                    } else {
+                        set_session_alert('error', 'Error to Deleting Meta Details!');
+                    }
+                } else {
+                    set_session_alert('error', 'Invalid Data');
+                }
+            } else {
+                set_session_alert('error', 'Invalid Data');
+            }
+        } else {
+            set_session_alert('error', 'Invalid Data');
+        }
+        redirect(SITE_ADMIN_URL . 'meta-details');
     }
 }

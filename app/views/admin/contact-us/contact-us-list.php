@@ -19,8 +19,8 @@
                                 <th width="15%">Name</th>
                                 <th width="15%">Email</th>
                                 <th width="15%">Contact No.</th>
-                                <!-- <th>Subject</th> -->
                                 <th>Message</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,8 +29,12 @@
                                     <td width="15%"><?= $con_data['con_name'] ?></td>
                                     <td width="15%"><?= $con_data['con_email'] ?></td>
                                     <td width="15%"><?= $con_data['con_mobile'] ?></td>
-                                    <!-- <td>< ?= $con_data['con_subject'] ?></td> -->
                                     <td><?= $con_data['con_message'] ?></td>
+                                    <td>
+                                        <div class="form-group">
+                                            <a href="javascript:void(0);" data-href="<?= SITE_ADMIN_URL . 'contact-enquiry/delete/' . encryptData($con_data['con_id']) ?>" class="btn btn-sm btn-danger" onclick="deleteData(this)"> Delete</a>
+                                        </div>
+                                    </td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -49,3 +53,29 @@
 
 </div>
 <!-- /.container-fluid -->
+
+
+<link rel="stylesheet" href="<?= SITE_URL ?>public/front/assets/css/sweet_alert.css" />
+<script src="<?= SITE_URL ?>public/front/assets/js/sweet_alert.js"></script>
+<script>
+    function deleteData(_this) {
+        let link = _this.getAttribute('data-href');
+        console.log(link);
+        Swal.fire({
+                title: "Are you sure?",
+                text: "You will not be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = link;
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
+    }
+</script>

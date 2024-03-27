@@ -58,22 +58,20 @@ function alert($type, $msg)
     echo <<<alert
       <div class="alert $bs_class alert-dismissible fade show custom-alert" role="alert">
         <strong class="me-3">$msg</strong>
-        <button type="button" class="btn-close" onclick="return remAlert();" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class=" btn btn-sm btn-close" onclick="return remAlert();" data-bs-dismiss="alert" aria-label="Close">x</button>
       </div>
     alert;
 }
-
 
 function set_session_alert($type, $msg)
 {
     $bs_class = (($type == "success") ? "alert-success" : "alert-danger");
     $msg = "<div class='alert $bs_class alert-dismissible fade show custom-alert' role='alert'>
         <strong class='me-3'>$msg</strong>        
-        <button type='button' class='btn-close' onclick='return remAlert();' data-bs-dismiss='alert' aria-label='Close'></button>
+        <button type='button' class=' btn btn-sm btn-close' onclick='return remAlert();' data-bs-dismiss='alert' aria-label='Close'>x</button>
       </div>";
     $_SESSION['msg_stack'][] = $msg;
 }
-
 
 function display_alert()
 {
@@ -86,14 +84,11 @@ function display_alert()
     }
 }
 
-
 function response($response_data)
 {
     echo json_encode(['sts' => $response_data['sts'], 'type' => $response_data['type'], 'msg' => $response_data['msg'], 'results' => $response_data['results']]);
     die;
 }
-
-
 
 function debug_results($var, $strict = false)
 {
@@ -119,7 +114,6 @@ function debug_results($var, $strict = false)
         var_dump($var);
     }
 }
-
 
 function change_to_custom_date($date, $df = DATE_USER_FORMAT_SMALL)
 {
@@ -150,7 +144,6 @@ function get_phone_format($val)
     return $phone;
 }
 
-
 function get_client_ip()
 {
     if (getenv('HTTP_CLIENT_IP'))
@@ -169,7 +162,6 @@ function get_client_ip()
         $ipaddress = 'UNKNOWN';
     return $ipaddress;
 }
-
 
 function get_ip_address()
 {
@@ -200,7 +192,6 @@ function get_ip_address()
 
     return $ip;
 }
-
 
 function sanitize_string_for_module($string)
 {
@@ -255,13 +246,11 @@ function get_plan_validity_format($start_date, $end_date)
     return $validity;
 }
 
-
 function generate_user_pin()
 {
     $randstr = mt_rand(1001, 9999);
     return $randstr;
 }
-
 
 function get_serial_number($number, $mode = '.')
 {
@@ -271,7 +260,6 @@ function get_serial_number($number, $mode = '.')
     }
     return $retval;
 }
-
 
 function get_discounted_values($amount, $discount)
 {
@@ -284,7 +272,6 @@ function get_discounted_values($amount, $discount)
 
     return array('discount' => $discount_val, 'final_amount' => $discounted_amount);
 }
-
 
 function thousands_currency_format($num)
 {
@@ -305,7 +292,6 @@ function thousands_currency_format($num)
 
     return $num;
 }
-
 
 function generate_random_code($length = 10)
 {
@@ -353,4 +339,15 @@ function deleteImage($image, $folder)
     } else {
         return false;
     }
+}
+
+
+function encryptData($string)
+{
+    return strtr(base64_encode($string), '+/=', '-_-');
+}
+
+function decryptData($string)
+{
+    return base64_decode(strtr($string, '-_-', '+/='));
 }

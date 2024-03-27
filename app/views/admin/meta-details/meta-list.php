@@ -45,6 +45,7 @@
                                     <td>
                                         <div class="form-group">
                                             <a href="<?= SITE_ADMIN_URL . 'meta-details/mode/' . $me_data['wmd_id'] ?>" class="btn btn-sm btn-info"> Edit</a>
+                                            <a href="javascript:void(0);" data-href="<?= SITE_ADMIN_URL . 'meta-details/delete/' . encryptData($me_data['wmd_id']) ?>" class="btn btn-sm btn-danger" onclick="deleteData(this)"> Delete</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -84,3 +85,27 @@
         }
     </script>
 <?php } ?>
+<link rel="stylesheet" href="<?= SITE_URL ?>public/front/assets/css/sweet_alert.css" />
+<script src="<?= SITE_URL ?>public/front/assets/js/sweet_alert.js"></script>
+<script>
+    function deleteData(_this) {
+        let link = _this.getAttribute('data-href');
+        console.log(link);
+        Swal.fire({
+                title: "Are you sure?",
+                text: "You will not be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = link;
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
+    }
+</script>

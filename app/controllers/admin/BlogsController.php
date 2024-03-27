@@ -1,6 +1,7 @@
 <?php
 require_once APP_DIR . 'libs/View.php';
 require_once APP_DIR . 'libs/Input.php';
+require_once APP_DIR . 'libs/Hash.php';
 require_once APP_DIR . 'libs/Database.php';
 class BlogsController
 {
@@ -51,6 +52,8 @@ class BlogsController
             } else {
                 response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => '0']);
             }
+        } else {
+            response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => '0']);
         }
     }
 
@@ -78,6 +81,8 @@ class BlogsController
             } else {
                 response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => '0']);
             }
+        } else {
+            response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => '0']);
         }
     }
 
@@ -126,7 +131,7 @@ class BlogsController
             } else {
                 $image_name = Input::post('old_images');
             }
-         
+
             if ($data['mode'] == 'edit') {
                 $sql = "UPDATE  " . BLOGS . " SET blo_title = :title, blo_slug = :slug, blo_desc = :desc, blo_extra_dec = :extra_dec, blo_images = :images, 
                 blo_image_alt_text = :image_alt_text, blo_meta_title = :meta_title, blo_meta_keyword = :meta_keyword, blo_meta_description = :meta_description, 
@@ -135,7 +140,7 @@ class BlogsController
                 $sql = " INSERT INTO  " . BLOGS . " (blo_title, blo_slug, blo_desc, blo_extra_dec, blo_images, blo_image_alt_text, blo_meta_title, blo_meta_keyword, blo_meta_description, blo_status, blo_sort_order, blo_created_by, blo_created_date)
                  VALUES (:title,:slug,:desc,:extra_dec,:images,:image_alt_text,:meta_title,:meta_keyword,:meta_description,:status,:sort_order,:by,:date)";
             }
-       
+
             try {
                 $this->_db->beginTransaction();
                 $this->_db->query($sql);
@@ -153,7 +158,7 @@ class BlogsController
                 $this->_db->bind(":by", Session::get('admin')['uId']);
                 $this->_db->bind(":date", date(SYSTEM_DATE_TIME_FORMAT_LONG));
                 $retVal = $this->_db->execute();
-             
+
                 if ($data['mode'] == 'edit') {
                     $last_id = $data['id'];
                     $label = " Updated";
@@ -164,6 +169,16 @@ class BlogsController
                 if ($retVal) {
                     $this->_db->commit();
                     set_session_alert('success', 'Blogs Details ' . $label . ' Successfully');
+                    redirect(SITE_ADMIN_URL . 'blogs/mode/' . $last_id);
+                } else {
+                    if ($data['mode'] == 'edit') {
+                        $last_id = $data['id'];
+                        $label = " Updated";
+                    } else if ($data['mode'] == 'add') {
+                        $last_id = '';
+                        $label = " Saved";
+                    }
+                    set_session_alert('error', ' Unable to ' . $label . ' Blogs Details');
                     redirect(SITE_ADMIN_URL . 'blogs/mode/' . $last_id);
                 }
             } catch (Exception $ex) {
@@ -179,5 +194,33 @@ class BlogsController
             set_session_alert('error', 'Invalid Data');
             redirect(SITE_ADMIN_URL . 'blogs');
         }
+    }
+
+    public function delete($id)
+    {
+        if (isset($id)) {
+            $record_id = Hash::decrypt($id);
+            if (!empty($record_id)) {
+                $this->_db->query("SELECT * FROM " . BLOGS . " WHERE 1 AND blo_id = " . $record_id);
+                $blogs = $this->_db->single();
+                if (!empty($blogs)) {
+                    $this->_db->query("DELETE FROM " . BLOGS . " WHERE 1 AND blo_id = " . $record_id);
+                    $data = $this->_db->execute();
+                    deleteImage($blogs['blo_images'], UPLOAD_ROOT . 'admin/blog_images/');
+                    if ($data) {
+                        set_session_alert('success', 'Blogs Deleted Successfully!');
+                    } else {
+                        set_session_alert('error', 'Error to Deleting Blogs!');
+                    }
+                } else {
+                    set_session_alert('error', 'Invalid Data');
+                }
+            } else {
+                set_session_alert('error', 'Invalid Data');
+            }
+        } else {
+            set_session_alert('error', 'Invalid Data');
+        }
+        redirect(SITE_ADMIN_URL . 'blogs');
     }
 }

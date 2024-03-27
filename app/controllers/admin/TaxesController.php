@@ -4,6 +4,7 @@ require_once APP_DIR . 'libs/View.php';
 require_once APP_DIR . 'libs/Input.php';
 require_once APP_DIR . 'libs/Database.php';
 require_once APP_DIR . 'libs/Session.php';
+require_once APP_DIR . 'libs/Hash.php';
 class TaxesController
 {
     private $_view;
@@ -17,7 +18,7 @@ class TaxesController
 
     public function index()
     {
-        $this->_db->query("SELECT *, (SELECT cun_name FROM " . COUNTRIES . " WHERE cun_id = tax_cnt_id) as cnt_name FROM " . TAXES . " WHERE 1 ORDER BY tax_id ASC");
+        $this->_db->query("SELECT *,(SELECT count(ord_id)>0 FROM " . ORDERS . " WHERE 1 AND ord_tax_id = tax_id) as tax_used, (SELECT cun_name FROM " . COUNTRIES . " WHERE cun_id = tax_cnt_id) as cnt_name FROM " . TAXES . " WHERE 1 ORDER BY tax_id ASC");
         $taxes_data = $this->_db->resultSet();
         $this->_view->show_data_table = true;
         $this->_view->set_header_footer = true;
@@ -52,6 +53,8 @@ class TaxesController
             } else {
                 response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => '0']);
             }
+        }else {
+            response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => '0']);
         }
     }
 
@@ -116,6 +119,16 @@ class TaxesController
                     $this->_db->commit();
                     set_session_alert('success', 'Taxes Details ' . $label . ' Successfully');
                     redirect(SITE_ADMIN_URL . 'taxes/mode/' . $last_id);
+                } else {
+                    if ($data['mode'] == 'edit') {
+                        $last_id = $data['id'];
+                        $label = " Updated";
+                    } else if ($data['mode'] == 'add') {
+                        $last_id = '';
+                        $label = " Saved";
+                    }
+                    set_session_alert('error', ' Unable to ' . $label . ' Taxes Details');
+                    redirect(SITE_ADMIN_URL . 'taxes/mode/' . $last_id);
                 }
             } catch (Exception $ex) {
                 $this->_db->rollBack();
@@ -130,5 +143,32 @@ class TaxesController
             set_session_alert('error', 'Invalid Data');
             redirect(SITE_ADMIN_URL . 'taxes');
         }
+    }
+
+    public function delete($id)
+    {
+        if (isset($id)) {
+            $record_id = Hash::decrypt($id);
+            if (!empty($record_id)) {
+                $this->_db->query("SELECT  * FROM " . TAXES . " WHERE 1 AND tax_id = " . $record_id);
+                $edit_plans_prices = $this->_db->single();
+                if (!empty($edit_plans_prices)) {
+                    $this->_db->query("DELETE FROM " . TAXES . " WHERE 1 AND tax_id = " . $record_id);
+                    $data = $this->_db->execute();
+                    if ($data) {
+                        set_session_alert('success', 'Taxes Data Deleted Successfully!');
+                    } else {
+                        set_session_alert('error', 'Error to Deleting Taxes Data!');
+                    }
+                } else {
+                    set_session_alert('error', 'Invalid Data');
+                }
+            } else {
+                set_session_alert('error', 'Invalid Data');
+            }
+        } else {
+            set_session_alert('error', 'Invalid Data');
+        }
+        redirect(SITE_ADMIN_URL . 'taxes');
     }
 }

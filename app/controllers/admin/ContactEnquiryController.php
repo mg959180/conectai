@@ -1,6 +1,7 @@
 <?php
 require_once APP_DIR . 'libs/View.php';
 require_once APP_DIR . 'libs/Database.php';
+require_once APP_DIR . 'libs/Hash.php';
 class ContactEnquiryController
 {
     private $_view;
@@ -48,5 +49,32 @@ class ContactEnquiryController
         $this->_view->setVal('title', 'Admin || Contact Us Page');
         $this->_view->setVal('meta_author', 'Mayank Gupta');
         $this->_view->adminPageRender(ADMIN_VIEW_DIR . 'contact-us/contact-us-list');
+    }
+
+    public function delete($id)
+    {
+        if (isset($id)) {
+            $record_id = Hash::decrypt($id);
+            if (!empty($record_id)) {
+                $this->_db->query("SELECT  * FROM " . CONTACT_US . " WHERE 1 AND con_id = " . $record_id);
+                $edit_plans_prices = $this->_db->single();
+                if (!empty($edit_plans_prices)) {
+                    $this->_db->query("DELETE FROM " . CONTACT_US . " WHERE 1 AND con_id = " . $record_id);
+                    $data = $this->_db->execute();
+                    if ($data) {
+                        set_session_alert('success', 'Enquiry Deleted Successfully!');
+                    } else {
+                        set_session_alert('error', 'Error to Deleting Enquiry!');
+                    }
+                } else {
+                    set_session_alert('error', 'Invalid Data');
+                }
+            } else {
+                set_session_alert('error', 'Invalid Data');
+            }
+        } else {
+            set_session_alert('error', 'Invalid Data');
+        }
+        redirect(SITE_ADMIN_URL . 'contact-enquiry');
     }
 }

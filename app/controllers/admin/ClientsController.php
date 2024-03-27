@@ -1,6 +1,7 @@
 <?php
 require_once APP_DIR . 'libs/View.php';
 require_once APP_DIR . 'libs/Input.php';
+require_once APP_DIR . 'libs/Hash.php';
 require_once APP_DIR . 'libs/Database.php';
 class ClientsController
 {
@@ -13,7 +14,6 @@ class ClientsController
         $this->_view  = new View();
         $this->_db = new Database();
     }
-
 
     public function index()
     {
@@ -52,6 +52,8 @@ class ClientsController
             } else {
                 response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => '0']);
             }
+        } else {
+            response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => '0']);
         }
     }
 
@@ -79,6 +81,8 @@ class ClientsController
             } else {
                 response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => '0']);
             }
+        } else {
+            response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => '0']);
         }
     }
 
@@ -159,6 +163,16 @@ class ClientsController
                     $this->_db->commit();
                     set_session_alert('success', 'Clients Details ' . $label . ' Successfully');
                     redirect(SITE_ADMIN_URL . 'clients/mode/' . $last_id);
+                } else {
+                    if ($data['mode'] == 'edit') {
+                        $last_id = $data['id'];
+                        $label = " Updated";
+                    } else if ($data['mode'] == 'add') {
+                        $last_id = '';
+                        $label = " Saved";
+                    }
+                    set_session_alert('error', ' Unable to ' . $label . ' Clients Details');
+                    redirect(SITE_ADMIN_URL . 'clients/mode/' . $last_id);
                 }
             } catch (Exception $ex) {
                 $this->_db->rollBack();
@@ -173,5 +187,33 @@ class ClientsController
             set_session_alert('error', 'Invalid Data');
             redirect(SITE_ADMIN_URL . 'clients');
         }
+    }
+
+    public function delete($id)
+    {
+        if (isset($id)) {
+            $record_id = Hash::decrypt($id);
+            if (!empty($record_id)) {
+                $this->_db->query("SELECT * FROM " . CLIENTS . " WHERE 1 AND poi_id = " . $record_id);
+                $clients = $this->_db->single();
+                if (!empty($clients)) {
+                    $this->_db->query("DELETE FROM " . CLIENTS . " WHERE 1 AND poi_id = " . $record_id);
+                    $data = $this->_db->execute();
+                    deleteImage($clients['poi_image'], UPLOAD_ROOT . 'admin/client_images/');
+                    if ($data) {
+                        set_session_alert('success', 'Clients Deleted Successfully!');
+                    } else {
+                        set_session_alert('error', 'Error to Deleting Clients!');
+                    }
+                } else {
+                    set_session_alert('error', 'Invalid Data');
+                }
+            } else {
+                set_session_alert('error', 'Invalid Data');
+            }
+        } else {
+            set_session_alert('error', 'Invalid Data');
+        }
+        redirect(SITE_ADMIN_URL . 'clients');
     }
 }

@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Taxes List</h1>
-        <a href="<?= SITE_ADMIN_URL . 'taxes/mode'?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add</a>
+        <a href="<?= SITE_ADMIN_URL . 'taxes/mode' ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add</a>
     </div>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -43,6 +43,7 @@
                                     <td>
                                         <div class="form-group">
                                             <a href="<?= SITE_ADMIN_URL . 'taxes/mode/' . $tax_data['tax_id'] ?>" class="btn btn-sm btn-info"> Edit</a>
+                                            <a href="javascript:void(0);" data-href="<?= SITE_ADMIN_URL . 'taxes/delete/' . encryptData($tax_data['tax_id']) ?>" class="btn btn-sm btn-danger" onclick="deleteData(this)"> Delete</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -61,6 +62,9 @@
     </div>
 </div>
 <!-- /.container-fluid -->
+
+<link rel="stylesheet" href="<?= SITE_URL ?>public/front/assets/css/sweet_alert.css" />
+<script src="<?= SITE_URL ?>public/front/assets/js/sweet_alert.js"></script>
 <script>
     function changeStatus(id, _this) {
         let this_item = _this;
@@ -78,5 +82,25 @@
             }
             xhr.send(data);
         }
+    }
+
+    function deleteData(_this) {
+        let link = _this.getAttribute('data-href');
+        Swal.fire({
+                title: "Are you sure?",
+                text: "You will not be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = link;
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
     }
 </script>
