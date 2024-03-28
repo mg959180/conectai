@@ -28,6 +28,12 @@ class OurPricingController
             $this->_view->setVal('meta_image',  UPLOAD_URL . 'admin/meta_images/' . $meta_data['wmd_meta_image']);
             $this->_view->setVal('meta_image_alt', $meta_data['wmd_meta_image_alt']);
         }
+
+
+        $this->_db->query("SELECT * FROM " . META_DETAILS . " WHERE 1 AND wmd_website_url = '" . $http_ref . "'");
+        $meta_data =  $this->_db->single();
+
+
         $this->_view->setBreadCrumb('main_title', 'Pricing & Plan');
         $this->_view->setBreadCrumb('submenu', [['link' => SITE_URL, 'name' => 'Home'], ['last' => true, 'name' => 'Pricing']]);
         $this->_view->show_extra_script = true;

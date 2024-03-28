@@ -13,11 +13,11 @@
     <meta name="description" content="<?= $meta_description ?? 'Author: Marvel Theme, AI content writing and copywriting html5 and Bootstrap 5 landing page template' ?>" />
     <meta name="keywords" content="<?= $meta_keyword ?? 'Author: Marvel Theme, AI content writing and copywriting html5 and Bootstrap 5 landing page template' ?>" />
     <!-- Favicon -->
-    <link rel="icon" href="<?= SITE_URL ?>public/front/assets/images/conect_png_logo.png" type="image/svg+xml" />
+    <link rel="icon" href="<?= FRONT_ASSETS_URL ?>images/conect_png_logo.png" type="image/svg+xml" />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="<?= SITE_URL ?>public/front/assets/css/plugins.css" />
-    <link rel="stylesheet" href="<?= SITE_URL ?>public/front/assets/css/style.css" />
+    <link rel="stylesheet" href="<?= FRONT_ASSETS_URL ?>css/plugins.css" />
+    <link rel="stylesheet" href="<?= FRONT_ASSETS_URL ?>css/style.css" />
     <!--Font awesome Version--5-->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
@@ -27,7 +27,7 @@
     <link rel="canonical" href="<?= (isset($_SERVER['SCRIPT_URI'])) ?  $_SERVER['SCRIPT_URI'] : 'http://conectai.chat/'; ?>" />
     <meta property="og:title" content="<?= $meta_title ?? 'Website Design Development & Digital Marketing Company in India- MWS' ?>" />
     <meta property="og:description" content="<?= $meta_description ?? 'Boost your online presence with our expert website design, development, and digital marketing services in Mumbai, India at MagicWebService. Call Now!' ?>" />
-    <meta property="og:image" content="<?= $meta_image ?? SITE_URL . 'public/front/assets/images/conect_png_logo.png' ?>" />
+    <meta property="og:image" content="<?= $meta_image ?? FRONT_ASSETS_URL . 'images/conect_png_logo.png' ?>" />
     <meta property="og:image:alt" content="<?= $meta_image_alt ?? '' ?>" />
     <meta property="og:site_name" content="Magic Web Services" />
     <meta property="og:type" content="website" />
@@ -41,7 +41,7 @@
     <meta property="twitter:title" content="<?= $meta_title ?? 'Website Design Development & Digital Marketing Company in India , Website Design Company in Mumbai, India, Website Development Services in Mumbai, Website Design & Development Company India - MWS' ?>" />
     <meta property="twitter:description" content="<?= $meta_description ?? 'Boost your online presence with our expert website design, development, and digital marketing services in Mumbai, India at MagicWebService. Call Now!' ?>" />
     <meta property="twitter:url" content="<?= (isset($_SERVER['SCRIPT_URI'])) ?  $_SERVER['SCRIPT_URI'] : 'http://conectai.chat/'; ?>" />
-    <meta name="twitter:image" content="<?= $meta_image ??  SITE_URL . 'public/front/assets/images/conect_png_logo.png' ?>">
+    <meta name="twitter:image" content="<?= $meta_image ??  FRONT_ASSETS_URL . 'images/conect_png_logo.png' ?>">
     <meta property="twitter:image:alt" content="<?= $meta_image_alt ?? '' ?>" />
     <meta name="twitter:image:width" content="1200">
     <meta name="twitter:image:height" content="566">
@@ -109,7 +109,7 @@
                 <div class="container">
                     <!-- Logo -->
                     <a href="<?= SITE_URL ?>" class="navbar-logo">
-                        <img src="<?= SITE_URL ?>public/front/assets/images/connect_ai_png.png" alt="" width="200">
+                        <img src="<?= FRONT_ASSETS_URL ?>images/connect_ai_png.png" alt="" width="200">
                     </a>
 
                     <!-- Navbar toggler button -->

@@ -52,7 +52,7 @@
                             <option value="">Select Plans Price Duration</option>
                             <?php foreach ($plans_prices  as $prK => $prV) { ?>
                                 <option value="<?= $prV['ppr_id'] ?>" <?= (isset($edit_results['pfe_ppr_ids']) ? (in_array($prV['ppr_id'], explode(',', $edit_results['pfe_ppr_ids'])) ? 'selected' : '') : '') ?>>
-                                    <?= $prV['currency_code'] . $prV['ppr_amount'] . ' ' . $prV['ppr_duration'] ?>
+                                    <?= $prV['currency_code'] . $prV['ppr_amount'] . ' ' . WEBSITE_DURATION[$prV['ppr_duration']] ?>
                                 </option>
                             <?php } ?>
                         </select>

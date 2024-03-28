@@ -31,6 +31,12 @@ defined('WEEK_DAYS') || define('WEEK_DAYS', [
     'sunday' => 'Sunday'
 ]);
 
+
+defined('WEBSITE_DURATION') || define('WEBSITE_DURATION', [
+    'monthly' => 'Monthly',
+    'yearly' => 'Yearly'
+]);
+
 defined('ALLOWED_CHARS') ||  define('ALLOWED_CHARS', '123456789aeubcdfghjkmnpqrstvwxyz');
 
 

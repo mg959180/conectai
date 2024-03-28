@@ -32,7 +32,7 @@
         let bs_class = (type == 'success') ? 'alert-success' : 'alert-danger';
         let element = `<div class="alert ${bs_class} alert-dismissible fade show" role="alert">
         <strong class="me-3">${msg}</strong>
-        <button type="button" class="btn-close" onclick="return remAlert();" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close btn btn-sm" onclick="return remAlert();" data-bs-dismiss="alert" aria-label="Close">X</button>
       </div>`;
         let error_div = document.getElementById('error-div');
         error_div.innerHTML= element;

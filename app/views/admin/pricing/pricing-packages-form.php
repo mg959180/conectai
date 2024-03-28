@@ -42,10 +42,9 @@
                         <label>Select Duration</label>
                         <select class="form-select form-control select2" id="duration" name="duration">
                             <option value=""> Select</option>
-                            <option value="monthly" <?= (isset($edit_plans_prices['ppr_duration']) ? ($edit_plans_prices['ppr_duration'] == 'monthly' ? 'selected' : '') : '') ?>>Monthly</option>
-                            <option value="quarterly" <?= (isset($edit_plans_prices['ppr_duration']) ? ($edit_plans_prices['ppr_duration'] == 'quarterly' ? 'selected' : '') : '') ?>>Quarterly</option>
-                            <option value="half_yearly" <?= (isset($edit_plans_prices['ppr_duration']) ? ($edit_plans_prices['ppr_duration'] == 'half_yearly' ? 'selected' : '') : '') ?>>Half Yearly</option>
-                            <option value="yearly" <?= (isset($edit_plans_prices['ppr_duration']) ? ($edit_plans_prices['ppr_duration'] == 'yearly' ? 'selected' : '') : '') ?>>Yearly</option>
+                            <?php foreach (WEBSITE_DURATION as $wk => $wv) { ?>
+                                <option value="<?= $wk ?>" <?= (isset($edit_plans_prices['ppr_duration']) ? ($edit_plans_prices['ppr_duration'] == $wk ? 'selected' : '') : '') ?>><?= $wv ?></option>
+                            <?php } ?>
                         </select>
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
@@ -89,7 +88,7 @@
                             <?php foreach ($plans_prices as $rk => $rV) {  ?>
                                 <tr>
                                     <th scope="row"><?= ++$rk ?></th>
-                                    <td><?= $rV['ppr_duration'] ?></td>
+                                    <td><?= WEBSITE_DURATION[$rV['ppr_duration']] ?></td>
                                     <td><?= $rV['currency_code'] . ' ' . $rV['ppr_amount'] ?></td>
                                     <td><?= ($rV['ppr_status'] ? 'Active' : 'Inactive') ?></td>
                                     <td>
