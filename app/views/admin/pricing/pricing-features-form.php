@@ -6,16 +6,17 @@
     }
 </style>
 
+<link rel="stylesheet" href="<?= ADMIN_ASSETS_URL . 'vendor/select2/select2.min.css' ?>">
 <div class="container-fluid">
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Plans Pricing List</h1>
+        <h1 class="h3 mb-0 text-gray-800">Plans Features List</h1>
     </div>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Plans Pricing List</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Plans Features List</h6>
         </div>
         <div class="card-body">
             <form action="<?= SITE_ADMIN_URL . 'pricing/save-plans-features' ?>" method="post" id="save-form" class="g-3" enctype="multipart/form-data">
@@ -47,7 +48,7 @@
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
                         <label>Select Plans Price Duration</label>
-                        <select class="form-select form-control select2 select2-multiple" multiple id="price" name="price[]">
+                        <select class="form-select form-control select2-multiple" multiple id="price" name="price[]">
                             <option value="">Select Plans Price Duration</option>
                             <?php foreach ($plans_prices  as $prK => $prV) { ?>
                                 <option value="<?= $prV['ppr_id'] ?>" <?= (isset($edit_results['pfe_ppr_ids']) ? (in_array($prV['ppr_id'], explode(',', $edit_results['pfe_ppr_ids'])) ? 'selected' : '') : '') ?>>
@@ -182,6 +183,7 @@
 </script>
 
 
+<script src="<?= ADMIN_ASSETS_URL . 'vendor/select2/select2.min.js' ?>"></script>
 <script src="<?= ADMIN_ASSETS_URL . 'vendor/jquery/jquery.validate.min.js' ?>"></script>
 <script>
     $('#save-form').validate({
@@ -218,6 +220,11 @@
         }
     });
 
+    $(document).ready(function() {
+       
+    });
+
+    $('.select2-multiple').select2();
 
     function changeOrder(id, _this) {
         let this_item = _this;
