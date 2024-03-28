@@ -57,14 +57,20 @@
                         </select>
                     </div>
 
-                    <div class="col-sm-3">
-                        <div class="form-group">
+                    <div class="col-sm-2">
+                        <div class="form-group mt-5">
                             <input class="form-checkbox" type="checkbox" role="switch" name="required" id="required" <?= (isset($edit_results['pfe_required']) ? ($edit_results['pfe_required'] == 1 ? 'checked' : '') : '') ?>>
                             <label for="required">Feature Required</label>
                         </div>
                     </div>
+                    <div class="col-sm-2">
+                        <div class="form-group mt-5">
+                            <input class="form-checkbox" type="checkbox" role="switch" name="show_in_plans" id="show_in_plans" <?= (isset($edit_results['pfe_show_in_plans']) ? ($edit_results['pfe_show_in_plans'] == 1 ? 'checked' : '') : '') ?>>
+                            <label for="show_in_plans">Feature Show In Plans</label>
+                        </div>
+                    </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
-                        <div class="btn-group mt-4">
+                        <div class="btn-group mt-5">
                             <input type="hidden" name="mid" value="<?= isset($id) ? $id : '' ?>">
                             <button type="submit" name="submit_plan_prices" class="btn btn-sm btn-success" id="submit_plan_prices"><?= isset($edit_results) && !empty($edit_results) ? 'Update' : 'Add' ?></button>
                             <?php if (isset($edit_results) && !empty($edit_results)) { ?>
@@ -92,6 +98,7 @@
                                 <th scope="col" style="width:20%;">Feature Desc</th>
                                 <th scope="col" style="width:20%;">Feature Extra Desc</th>
                                 <th scope="col" style="width:5%;">Feature Required</th>
+                                <th scope="col" style="width:5%;">Feature Show In Plans</th>
                                 <th scope="col" style="width:5%;">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -102,10 +109,11 @@
                                     <th scope="row"><?= ++$rk ?></th>
                                     <td><?= $rV['price_name'] ?></td>
                                     <td><?= $rV['pfe_title'] ?></td>
-                                    <td><?= $rV['pfe_value'] ?></td>
+                                    <td><?= !empty($rV['pfe_value']) ? $rV['pfe_value'] : '--' ?></td>
                                     <td><?= $rV['pfe_desc'] ?></td>
-                                    <td><?= $rV['pfe_extra_desc'] ?></td>
+                                    <td><?= !empty($rV['pfe_extra_desc']) ? $rV['pfe_extra_desc'] : '--' ?></td>
                                     <td><?= ($rV['pfe_required'] == 1 ? 'Yes' : 'No') ?></td>
+                                    <td><?= ($rV['pfe_show_in_plans'] == 1 ? 'Yes' : 'No') ?></td>
                                     <td><?= ($rV['pfe_status'] == 1 ? 'Active' : 'Inactive') ?></td>
                                     <td>
                                         <div class="btn-group">

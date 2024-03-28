@@ -56,6 +56,10 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
+                        <label for="sort_order">Display Order</label>
+                        <input type="number" name="sort_order" id="sort_order" class="form-control" value="<?= $pricing_form_data['plan_sort_order'] ?? '' ?>" placeholder="Plan display order">
+                    </div>
+                    <div class="col-sm-3">
                         <label for="status">Select Status</label>
                         <select class="form-control" name="status" id="status">
                             <option value="">Select</option>

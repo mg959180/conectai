@@ -18,10 +18,11 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Plan Name</th>
-                                <th scope="col">Plan Code</th>
+                                <th scope="col" width="25%">Plan Name</th>
+                                <th scope="col" width="25%">Plan Code</th>
                                 <th scope="col">Best Selling</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Sort Order</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -40,6 +41,12 @@
                                                 <option value="1" <?= ($plan_data['plan_status'] == 1 ? 'selected' : ''); ?>>Active</option>
                                                 <option value="0" <?= ($plan_data['plan_status'] == 0 ? 'selected' : ''); ?>>inactive</option>
                                             </select>
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="sort_order" onchange="changeOrder('<?= $plan_data['plan_id'] ?>',this)" value="<?= $plan_data['plan_sort_order'] ?>">
                                         </div>
                                     </td>
                                     <td>
@@ -114,5 +121,24 @@
                     swal("Your imaginary file is safe!");
                 }
             });
+    }
+
+
+    function changeOrder(id, _this) {
+        let this_item = _this;
+        if (id > 0) {
+            let status = this_item.value;
+            let data = new FormData();
+            data.append('id', id);
+            data.append('order', status);
+            data.append('change_order', 1);
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "<?= SITE_ADMIN_URL ?>pricing/plans-order", true);
+            xhr.onload = function() {
+                let res = JSON.parse(this.response);
+                custom_alert(res.type, res.msg);
+            }
+            xhr.send(data);
+        }
     }
 </script>

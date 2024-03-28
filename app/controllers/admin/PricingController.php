@@ -121,16 +121,45 @@ class PricingController
         }
     }
 
+    public function plansOrder()
+    {
+        if (Input::post('change_order')) {
+            $data = Input::filter_param($_POST);
+            $id = $data['id'];
+            if ($id > 0) {
+                try {
+                    $sql = "UPDATE  " . PLANS . " SET plan_sort_order = '" . $data['order'] . "'  WHERE plan_id  = " . $id;
+                    $this->_db->beginTransaction();
+                    $this->_db->query($sql);
+                    $retVal = $this->_db->execute();
+                    if ($retVal) {
+                        $this->_db->commit();
+                        response(['sts' => true, 'type' => 'success', 'msg' => 'Plan Order Updated Successfully', 'results' => '0']);
+                    } else {
+                        response(['sts' => false, 'type' => 'error', 'msg' => 'Failed to upload Plan Order', 'results' => '0']);
+                    }
+                } catch (Exception $ex) {
+                    $this->_db->rollBack();
+                    response(['sts' => false, 'type' => 'error', 'msg' => $ex->getMessage(), 'results' => '0']);
+                }
+            } else {
+                response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => '0']);
+            }
+        } else {
+            response(['sts' => false, 'type' => 'error', 'msg' => 'Invalid Data', 'results' => '0']);
+        }
+    }
+
     public function savePlans()
     {
         if (isset($_POST['save_plans'])) {
             $data = Input::filter_param($_POST);
 
             if ($data['mode'] == 'edit') {
-                $sql = "UPDATE  " . PLANS . " SET plan_name = :name, plan_code = :code, plan_desc = :desc, plan_short_desc = :short_desc, plan_status = :status, plan_best_selling = :best_selling, plan_modified_by = :by, plan_modified_date = :date WHERE plan_id = " . $data['id'];
+                $sql = "UPDATE  " . PLANS . " SET plan_name = :name, plan_code = :code, plan_desc = :desc, plan_short_desc = :short_desc, plan_status = :status, plan_sort_order = :sort_order, plan_best_selling = :best_selling, plan_modified_by = :by, plan_modified_date = :date WHERE plan_id = " . $data['id'];
             } else if ($data['mode'] == 'add') {
-                $sql = " INSERT INTO  " . PLANS . " (plan_name, plan_code, plan_desc, plan_short_desc, plan_status, plan_best_selling, plan_created_by , plan_created_date)
-                 VALUES (:name,:code,:desc,:short_desc,:status,:best_selling,:by,:date)";
+                $sql = " INSERT INTO  " . PLANS . " (plan_name, plan_code, plan_desc, plan_short_desc, plan_status, plan_sort_order, plan_best_selling, plan_created_by , plan_created_date)
+                 VALUES (:name,:code,:desc,:short_desc,:status,:sort_order,:best_selling,:by,:date)";
             }
 
             try {
@@ -141,6 +170,7 @@ class PricingController
                 $this->_db->bind(":desc", $data['desc']);
                 $this->_db->bind(":short_desc", $data['short_desc']);
                 $this->_db->bind(":status", $data['status']);
+                $this->_db->bind(":sort_order", $data['sort_order']);
                 $this->_db->bind(":best_selling", (!empty($data['best_selling']) ? 1 : 0));
                 $this->_db->bind(":by", Session::get('admin')['uId']);
                 $this->_db->bind(":date", date(SYSTEM_DATE_TIME_FORMAT_LONG));
@@ -206,6 +236,7 @@ class PricingController
 
         $this->_view->setVal('id', $id);
         $this->_view->enable_jquery = true;
+        $this->_view->show_data_table = true;
         $this->_view->set_header_footer = true;
         $this->_view->setVal('meta_description', 'Admin || Pricing Page');
         $this->_view->setVal('title', 'Admin || Pricing Page');
@@ -307,6 +338,7 @@ class PricingController
         $this->_view->setVal('id', $id);
         $this->_view->enable_jquery = true;
         $this->_view->set_header_footer = true;
+        $this->_view->show_data_table = true;
         $this->_view->setVal('meta_description', 'Admin || Pricing Features Page');
         $this->_view->setVal('title', 'Admin || Pricing Features Page');
         $this->_view->setVal('meta_author', 'Mayank Gupta');
@@ -348,10 +380,10 @@ class PricingController
             try {
                 if ($_POST['mode'] == 'edit') {
                     $sql = "UPDATE  " . PLANS_FEATURES . " SET pfe_title = :title, pfe_value = :value, pfe_desc = :desc,pfe_extra_desc = :extra_desc,
-                    pfe_ppr_ids  = :ppr_ids, pfe_plan_id = :plan_id, pfe_required = :required, pfe_status = :status WHERE pfe_id = " . $_POST['id'];
+                    pfe_ppr_ids  = :ppr_ids, pfe_plan_id = :plan_id, pfe_required = :required,pfe_show_in_plans = :show_in_plans , pfe_status = :status WHERE pfe_id = " . $_POST['id'];
                 } else if ($_POST['mode'] == 'add') {
-                    $sql = " INSERT INTO  " . PLANS_FEATURES . " (pfe_title, pfe_value, pfe_desc,pfe_extra_desc, pfe_ppr_ids, pfe_plan_id, pfe_required,pfe_status)
-                 VALUES (:title,:value,:desc,:extra_desc,:ppr_ids,:plan_id,:required,:status)";
+                    $sql = " INSERT INTO  " . PLANS_FEATURES . " (pfe_title, pfe_value, pfe_desc,pfe_extra_desc, pfe_ppr_ids, pfe_plan_id, pfe_required,pfe_show_in_plans,pfe_status)
+                 VALUES (:title,:value,:desc,:extra_desc,:ppr_ids,:plan_id,:required,:show_in_plans,:status)";
                 }
 
                 $this->_db->beginTransaction();
@@ -363,6 +395,7 @@ class PricingController
                 $this->_db->bind(":ppr_ids", implode(',', array_filter($_POST['price'])));
                 $this->_db->bind(":plan_id", $_POST['mid']);
                 $this->_db->bind(":required", ((isset($_POST['required'])) ? 1 : 0));
+                $this->_db->bind(":show_in_plans", ((isset($_POST['show_in_plans'])) ? 1 : 0));
                 $this->_db->bind(":status", $_POST['status']);
                 $retVal = $this->_db->execute();
                 if ($_POST['mode'] == 'edit') {

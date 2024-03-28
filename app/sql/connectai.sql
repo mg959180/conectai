@@ -6048,50 +6048,97 @@ ALTER TABLE `ca_orders` ADD FOREIGN KEY (`ord_plan_feature_id`) REFERENCES `ca_p
 
 ALTER TABLE `ca_plan_features` CHANGE `pfe_extra_desc` `pfe_extra_desc` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL; 
 
+ALTER TABLE `ca_plans` ADD `plan_sort_order` INT(5) NOT NULL DEFAULT '1' AFTER `plan_status`;
+ALTER TABLE `ca_plan_features` ADD `pfe_show_in_plans` TINYINT(1) NOT NULL DEFAULT '0' AFTER `pfe_required`;
 
 
-INSERT INTO `ca_plans` (`plan_id`, `plan_code`, `plan_name`, `plan_desc`, `plan_short_desc`, `plan_status`, `plan_best_selling`, `plan_created_by`, `plan_created_date`, `plan_modified_by`, `plan_modified_date`) VALUES
-(6, 'basic', 'Basic', 'A 10X faster way to writing your professional copy', 'A 10X faster way to writing your professional copy', 1, 0, 1, '2024-03-28 00:42:08', NULL, NULL),
-(7, 'standard', 'Standard', 'A 10X faster way to writing your professional copy', 'A 10X faster way to writing your professional copy', 1, 0, 1, '2024-03-28 00:42:31', NULL, NULL),
-(8, 'professional', 'Professional', 'A 10X faster way to writing your professional copy', 'A 10X faster way to writing your professional copy', 1, 1, 1, '2024-03-28 00:42:57', NULL, NULL),
-(9, 'enterprise', 'Enterprise', 'A 10X faster way to writing your professional copy', 'A 10X faster way to writing your professional copy', 1, 0, 1, '2024-03-28 00:43:14', NULL, NULL);
-COMMIT;
-
-
+INSERT INTO `ca_plans` (`plan_id`, `plan_code`, `plan_name`, `plan_desc`, `plan_short_desc`, `plan_status`, `plan_sort_order`, `plan_best_selling`, `plan_created_by`, `plan_created_date`, `plan_modified_by`, `plan_modified_date`) VALUES
+(1, 'basic', 'Basic', 'A 10X faster way to writing your professional copy', 'A 10X faster way to writing your professional copy', 1, 1, 0, 1, '2024-03-28 00:42:08', NULL, NULL),
+(2, 'standard', 'Standard', 'A 10X faster way to writing your professional copy', 'A 10X faster way to writing your professional copy', 1, 3, 0, 1, '2024-03-28 00:42:31', 1, '2024-03-28 17:33:14'),
+(3, 'professional', 'Professional', 'A 10X faster way to writing your professional copy', 'A 10X faster way to writing your professional copy', 1, 3, 1, 1, '2024-03-28 00:42:57', NULL, NULL),
+(4, 'enterprise', 'Enterprise', 'A 10X faster way to writing your professional copy', 'A 10X faster way to writing your professional copy', 1, 4, 0, 1, '2024-03-28 00:43:14', NULL, NULL);
 
 
 INSERT INTO `ca_plan_prices` (`ppr_id`, `ppr_plan_id`, `ppr_cun_id`, `ppr_amount`, `ppr_duration`, `ppr_status`) VALUES
-(5, 6, 101, 499, 'monthly', 1),
-(6, 6, 101, 39999, 'yearly', 1),
-(7, 6, 233, 19, 'monthly', 1),
-(8, 6, 233, 49, 'yearly', 1),
-(9, 7, 101, 999, 'monthly', 1),
-(10, 7, 101, 9999, 'yearly', 1),
-(11, 7, 233, 29, 'monthly', 1),
-(12, 7, 233, 189, 'yearly', 1),
-(13, 8, 101, 1499, 'monthly', 1),
-(14, 8, 101, 14990, 'yearly', 1),
-(15, 8, 233, 39, 'monthly', 1),
-(16, 8, 233, 279, 'yearly', 1),
-(17, 9, 101, 4499, 'monthly', 1),
-(18, 9, 101, 29999, 'yearly', 1),
-(19, 9, 233, 99, 'monthly', 1),
-(20, 9, 233, 559, 'yearly', 1);
-COMMIT;
+(1, 1, 101, 499, 'monthly', 1),
+(2, 1, 101, 39999, 'yearly', 1),
+(3, 1, 233, 19, 'monthly', 1),
+(4, 1, 233, 49, 'yearly', 1),
+(5, 2, 101, 999, 'monthly', 1),
+(6, 2, 101, 9999, 'yearly', 1),
+(7, 2, 233, 29, 'monthly', 1),
+(8, 2, 233, 189, 'yearly', 1),
+(9, 3, 101, 1499, 'monthly', 1),
+(10, 3, 101, 14990, 'yearly', 1),
+(11, 3, 233, 39, 'monthly', 1),
+(12, 3, 233, 279, 'yearly', 1),
+(13, 4, 101, 4499, 'monthly', 1),
+(14, 4, 101, 29999, 'yearly', 1),
+(15, 4, 233, 99, 'monthly', 1),
+(16, 4, 233, 559, 'yearly', 1);
 
 
-
-
-INSERT INTO `ca_plan_features` (`pfe_id`, `pfe_plan_id`, `pfe_ppr_ids`, `pfe_title`, `pfe_value`, `pfe_desc`, `pfe_extra_desc`, `pfe_required`, `pfe_status`) VALUES
-(3, 6, '5,6,7,8', 'Web Pages', '20', ' 20 web pages', 'A web page is any one website page URL ', 1, 1),
-(4, 6, '5,6,7,8', 'Website', '1', ' 1 Website ', '1 Website = 1 Chatbot. ', 1, 1),
-(5, 6, '5,6,7,8', 'Chat Inbox', '', 'Chat Inbox', '', 1, 1),
-(6, 6, '5,6,7,8', ' Chat Ratings', '', ' Chat Ratings', '', 1, 1),
-(7, 6, '5,6,7,8', 'Chat Analytics', '', 'Chat Analytics', '', 1, 1),
-(8, 6, '5,6,7,8', 'Unlimited Chat Replies', '', 'Unlimited Chat Replies', '', 1, 1),
-(9, 6, '5,6,7,8', 'Chat History', '', 'Chat History', '', 1, 1),
-(10, 6, '5,6,7,8', 'Remove \"Powered By\" Branding', '', 'Remove \"Powered By\" Branding', '', 1, 1),
-(11, 6, '5,6,7,8', 'WordPress Plugin', '', 'WordPress Plugin', '', 1, 1),
-(12, 6, '5,6,7,8', ' ChatGPT 3.5', '', ' ChatGPT 3.5', '', 1, 1),
-(13, 6, '5,6,7,8', 'ChatGPT 4.0 ', '', 'ChatGPT 4.0 ', '', 0, 1);
-COMMIT;
+INSERT INTO `ca_plan_features` (`pfe_id`, `pfe_plan_id`, `pfe_ppr_ids`, `pfe_title`, `pfe_value`, `pfe_desc`, `pfe_extra_desc`, `pfe_required`, `pfe_show_in_plans`, `pfe_status`) VALUES
+(1, 1, '1,2,3,4', 'Web Pages', '20', ' 20 web pages', 'A web page is any one website page URL ', 1, 1, 1),
+(2, 1, '1,2,3,4', 'Website', '1', ' 1 Website ', '1 Website = 1 Chatbot. ', 1, 1, 1),
+(3, 1, '1,2,3,4', 'Chat Inbox', '', 'Chat Inbox', '', 1, 1, 1),
+(4, 1, '1,2,3,4', ' Chat Ratings', '', ' Chat Ratings', '', 1, 1, 1),
+(5, 1, '1,2,3,4', 'Chat Analytics', '', 'Chat Analytics', '', 1, 1, 1),
+(6, 1, '1,2,3,4', 'Unlimited Chat Replies', '', 'Unlimited Chat Replies', '', 1, 1, 1),
+(7, 1, '1,2,3,4', 'Chat History', '', 'Chat History', '', 1, 1, 1),
+(8, 1, '1,2,3,4', 'Remove \"Powered By\" Branding', '', 'Remove \"Powered By\" Branding', '', 1, 1, 1),
+(9, 1, '1,2,3,4', 'WordPress Plugin', '', 'WordPress Plugin', '', 1, 1, 1),
+(10, 1, '1,2,3,4', ' ChatGPT 3.5', '', ' ChatGPT 3.5', '', 1, 1, 1),
+(11, 1, '1,2,3,4', 'ChatGPT 4.0 ', '', 'ChatGPT 4.0 ', '', 0, 1, 1),
+(12, 1, '1,2,3,4', 'Open AI Key Included', '', 'Open AI Key Included', 'We will use our open ai key so that you don\'t have to pay anything extra.', 1, 0, 1),
+(13, 1, '1,2,3,4', 'Messages', 'Unlimited', 'Messages', '', 0, 0, 1),
+(14, 1, '1,2,3,4', 'Chatbot Creation Support', '', 'Chatbot Creation Support', '', 1, 0, 1),
+(15, 1, '1,2,3,4', 'Customizable Chatbot Design', '', 'Customizable Chatbot Design', '', 1, 0, 1),
+(16, 1, '1,2,3,4', 'WhatsApp Channel', '', 'WhatsApp Channel', '', 1, 0, 1),
+(17, 1, '1,2,3,4', 'Meeting - Zoom, Calendly, etc', '', 'Meeting - Zoom, Calendly, etc', '', 1, 0, 1),
+(18, 1, '1,2,3,4', 'FB Messenger', '', 'FB Messenger', '', 1, 0, 1),
+(19, 1, '1,2,3,4', 'Email & Callback', '', 'Email & Callback', '', 1, 0, 1),
+(20, 1, '1,2,3,4', 'Advance Settings', '', 'Advance Settings', '', 1, 0, 1),
+(21, 1, '1,2,3,4', 'License Management For Reselling', '', 'License Management For Reselling', '', 0, 0, 1),
+(22, 2, '5,6,7,8', 'Web Pages', '100', ' 100 web pages', 'A web page is any one website page URL ', 1, 1, 1),
+(23, 2, '5,6,7,8', 'Website', '2', ' 2 Website ', '1 Website = 1 Chatbot. ', 1, 1, 1),
+(24, 2, '5,6,7,8', 'Chat Inbox', '', 'Chat Inbox', '', 1, 1, 1),
+(25, 2, '5,6,7,8', ' Chat Ratings', '', ' Chat Ratings', '', 1, 1, 1),
+(26, 2, '5,6,7,8', 'Chat Analytics', '', 'Chat Analytics', '', 1, 1, 1),
+(27, 2, '5,6,7,8', 'Unlimited Chat Replies', '', 'Unlimited Chat Replies', '', 1, 1, 1),
+(28, 2, '5,6,7,8', 'Chat History', '', 'Chat History', '', 1, 1, 1),
+(29, 2, '5,6,7,8', 'Remove \"Powered By\" Branding', '', 'Remove \"Powered By\" Branding', '', 1, 1, 1),
+(30, 2, '5,6,7,8', 'WordPress Plugin', '', 'WordPress Plugin', '', 1, 1, 1),
+(31, 2, '5,6,7,8', ' ChatGPT 3.5', '', ' ChatGPT 3.5', '', 1, 1, 1),
+(32, 2, '5,6,7,8', 'ChatGPT 4.0 ', '', 'ChatGPT 4.0 ', '', 0, 1, 1),
+(33, 2, '5,6,7,8', 'Open AI Key Included', '', 'Open AI Key Included', 'We will use our open ai key so that you don\'t have to pay anything extra.', 1, 0, 1),
+(34, 2, '5,6,7,8', 'Messages', 'Unlimited', 'Messages', '', 0, 0, 1),
+(35, 2, '5,6,7,8', 'Chatbot Creation Support', '', 'Chatbot Creation Support', '', 1, 0, 1),
+(36, 2, '5,6,7,8', 'Customizable Chatbot Design', '', 'Customizable Chatbot Design', '', 1, 0, 1),
+(37, 2, '5,6,7,8', 'WhatsApp Channel', '', 'WhatsApp Channel', '', 1, 0, 1),
+(38, 2, '5,6,7,8', 'Meeting - Zoom, Calendly, etc', '', 'Meeting - Zoom, Calendly, etc', '', 1, 0, 1),
+(39, 2, '5,6,7,8', 'FB Messenger', '', 'FB Messenger', '', 1, 0, 1),
+(40, 2, '5,6,7,8', 'Email & Callback', '', 'Email & Callback', '', 1, 0, 1),
+(41, 2, '5,6,7,8', 'Advance Settings', '', 'Advance Settings', '', 1, 0, 1),
+(42, 2, '5,6,7,8', 'License Management For Reselling', '', 'License Management For Reselling', '', 0, 0, 1),
+(43, 3, '9,10,11,12', 'Web Pages', '1000', ' 1000 web pages', 'A web page is any one website page URL ', 1, 1, 1),
+(44, 3, '9,10,11,12', 'Website', '5', '5 Website ', '1 Website = 1 Chatbot. ', 1, 1, 1),
+(45, 3, '9,10,11,12', 'Chat Inbox', '', 'Chat Inbox', '', 1, 1, 1),
+(46, 3, '9,10,11,12', ' Chat Ratings', '', ' Chat Ratings', '', 1, 1, 1),
+(47, 3, '9,10,11,12', 'Chat Analytics', '', 'Chat Analytics', '', 1, 1, 1),
+(48, 3, '9,10,11,12', 'Unlimited Chat Replies', '', 'Unlimited Chat Replies', '', 1, 1, 1),
+(49, 3, '9,10,11,12', 'Chat History', '', 'Chat History', '', 1, 1, 1),
+(50, 3, '9,10,11,12', 'Remove \"Powered By\" Branding', '', 'Remove \"Powered By\" Branding', '', 1, 1, 1),
+(51, 3, '9,10,11,12', 'WordPress Plugin', '', 'WordPress Plugin', '', 1, 1, 1),
+(52, 3, '9,10,11,12', ' ChatGPT 3.5', '', ' ChatGPT 3.5', '', 1, 1, 1),
+(53, 3, '9,10,11,12', 'ChatGPT 4.0 ', '', 'ChatGPT 4.0 ', '', 0, 1, 1),
+(54, 3, '9,10,11,12', 'Open AI Key Included', '', 'Open AI Key Included', 'We will use our open ai key so that you don\'t have to pay anything extra.', 1, 0, 1),
+(55, 3, '9,10,11,12', 'Messages', 'Unlimited', 'Messages', '', 0, 0, 1),
+(56, 3, '9,10,11,12', 'Chatbot Creation Support', '', 'Chatbot Creation Support', '', 1, 0, 1),
+(57, 3, '9,10,11,12', 'Customizable Chatbot Design', '', 'Customizable Chatbot Design', '', 1, 0, 1),
+(58, 3, '9,10,11,12', 'WhatsApp Channel', '', 'WhatsApp Channel', '', 1, 0, 1),
+(59, 3, '9,10,11,12', 'Meeting - Zoom, Calendly, etc', '', 'Meeting - Zoom, Calendly, etc', '', 1, 0, 1),
+(60, 3, '9,10,11,12', 'FB Messenger', '', 'FB Messenger', '', 1, 0, 1),
+(61, 3, '9,10,11,12', 'Email & Callback', '', 'Email & Callback', '', 1, 0, 1),
+(62, 3, '9,10,11,12', 'Advance Settings', '', 'Advance Settings', '', 1, 0, 1),
+(63, 3, '9,10,11,12', 'License Management For Reselling', '', 'License Management For Reselling', '', 0, 0, 1);
