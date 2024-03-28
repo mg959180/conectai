@@ -26,10 +26,12 @@
                     </div>
                     <div class="text-center mt-12" data-aos="fade-up-sm" data-aos-delay="200">
                         <div class="switch-wrapper border d-inline-flex rounded p-2 ">
-                            <input id="monthly" type="radio" name="switch" checked />
-                            <input id="yearly" type="radio" name="switch" />
-                            <label for="monthly">Monthly</label>
-                            <label for="yearly">Yearly</label>
+                            <?php foreach (WEBSITE_DURATION as $wdk => $wdv) { ?>
+                                <input id="<?= $wdk ?>" type="radio" name="switch" <?= ($wdk == 'monthly') ? 'checked' : '' ?> />
+                            <?php } ?>
+                            <?php foreach (WEBSITE_DURATION as $wdk => $wdv) { ?>
+                                <label for="<?= $wdk ?>"><?= $wdv ?></label>
+                            <?php } ?>
                             <span class="highlighter"></span>
                         </div>
                     </div>
@@ -248,221 +250,28 @@
                     <thead class="bg-primary text-white">
                         <tr>
                             <th></th>
-                            <th>Free</th>
-                            <th>Basic</th>
-                            <th>Standard</th>
-                            <th>Professional</th>
-                            <th>Enterprise</th>
-                            <!-- <th>Reseller</th> -->
+                            <?php foreach ($comparison_data as $cdk => $cdv) { ?>
+                                <th><?= $cdv['plan_name'] ?></th>
+                            <?php } ?>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Web Pages</td>
-                            <td>5</td>
-                            <td>20</td>
-                            <td>100</td>
-                            <td>1000</td>
-                            <td>10000</td>
-                            <!-- <td>10000</td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Website</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>5</td>
-                            <td>10</td>
-                            <!-- <td>50</td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Open AI Key Included
-                                <div class="tooltip-container">
-                                    <span class="text-with-tooltip"><i class="fa fa-info-circle"></i></span>
-                                    <div id="tooltip">
-                                        We will use our open ai key so that you don't have to pay anything extra.
-                                        <div class="arrow"></div>
-                                    </div>
-                                </div>
 
-                            </td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td><i class="fas fa-times text-primary"></i>
-                                        <div class="tooltip-container ms-2">
-                                            <span class="text-with-tooltip"><i class="fa fa-info-circle"></i></span>
-                                            <div id="tooltip">
-                                                Open AI key is not included. You have to create a new open AI account on https://openai.com/
-                                              <div class="arrow"></div>
-                                            </div>
-                                        </div>
-                                    </td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Messages</td>
-                            <td>1000</td>
-                            <td>Unlimited</td>
-                            <td>Unlimited</td>
-                            <td>Unlimited</td>
-                            <td>Unlimited</td>
-                            <!-- <td>Unlimited</td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Chatbot Creation Support</td>
-                            <td><i class="fas fa-times text-primary"></i></td>
-                            <td><i class="fas fa-times text-primary"></i></td>
-                            <td><i class="fas fa-times text-primary"></i></td>
-                            <td><i class="fas fa-times text-primary"></i></td>
-                            <td>Yes</td>
-                            <!-- <td><i class="fas fa-times text-primary"></i></td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Chat Inbox</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td>Yes</td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Chat Ratings</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td>Yes</td> -->
-                        </tr>
-                        <tr class="bg-light text-dark">
-                            <td colspan="7" class="font-weight-bold text-center" style="font-weight: bold;">Create Free Chatbot Now!</td>
-
-                        </tr>
-
-
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Chat Analytics</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td>Yes</td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Unlimited Chat Replies</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td>Yes</td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Chat History
-                            </td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td>Yes
-                                    </td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Customizable Chatbot Design</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td>Yes
-                                    </td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Remove "Powered By" branding</td>
-                            <td><i class="fas fa-times text-primary"></i></td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td>Yes</td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">WordPress Plugin</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td>Yes</td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">WhatsApp Channel</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td>Yes</td> -->
-                        </tr>
-                        <tr class="bg-light text-dark">
-                            <td colspan="7" class="font-weight-bold text-center" style="font-weight: bold;">Create Free Chatbot Now!</td>
-                        </tr>
-
-
-
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Meeting - Zoom, Calendly, etc</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td>Yes</td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">FB Messenger</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td>Yes</td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Email & Callback
-                            </td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td>Yes
-                                    </td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">Advance Settings</td>
-                            <td><i class="fas fa-times text-primary"></i></td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <!-- <td>Yes
-                                    </td> -->
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">License Management For Reselling</td>
-                            <td><i class="fas fa-times text-primary"></i></td>
-                            <td><i class="fas fa-times text-primary"></i></td>
-                            <td><i class="fas fa-times text-primary"></i></td>
-                            <td><i class="fas fa-times text-primary"></i></td>
-                            <td><i class="fas fa-times text-primary"></i></td>
-                            <!-- <td>Yes</td> -->
-                        </tr>
+                        <?php foreach ($plan_features_data as $cdk => $cdv) { ?>
+                            <tr>
+                                <td class="font-weight-bold text-center" style="background-color: #902885; color: white; font-weight: bold;">
+                                    <?= $cdv[0]['pfe_title'] ?>
+                                </td>
+                                <?php foreach ($cdv as $ck => $cv) { ?>
+                                    <td><?= !empty($cv['pfe_value']) ? $cv['pfe_value'] : (($cv['pfe_required'] == 1) ? 'Yes' : '<i class="fas fa-times text-primary"></i>'); ?></td>
+                                <?php } ?>
+                            </tr>
+                            <?php if ($cdk % 7 == 0) { ?>
+                                <tr class="bg-light text-dark">
+                                    <td colspan="7" class="font-weight-bold text-center" style="font-weight: bold;">Create Free Chatbot Now!</td>
+                                </tr>
+                            <?php } ?>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>

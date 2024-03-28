@@ -6157,7 +6157,7 @@ INSERT INTO `ca_plan_features` (`pfe_id`, `pfe_plan_id`, `pfe_ppr_ids`, `pfe_tit
 (71, 4, '13,14,15,16', 'Remove \"Powered By\" Branding', '', 'Remove \"Powered By\" Branding', '', 1, 1, 1, 11),
 (72, 4, '13,14,15,16', 'WordPress Plugin', '', 'WordPress Plugin', '', 1, 1, 1, 12),
 (73, 4, '13,14,15,16', ' ChatGPT 3.5', '', ' ChatGPT 3.5', '', 1, 1, 1, 13),
-(74, 4, '13,14,15,16', 'ChatGPT 4.0 ', '', 'ChatGPT 4.0 ', '', 0, 1, 1, 14),
+(74, 4, '13,14,15,16', 'ChatGPT 4.0 ', '', 'ChatGPT 4.0 ', '', 1, 1, 1, 14),
 (75, 4, '13,14,15,16', 'Open AI Key Included', '', 'Open AI Key Included', 'We will use our open ai key so that you don\'t have to pay anything extra.', 1, 0, 1, 3),
 (76, 4, '13,14,15,16', 'Messages', 'Unlimited', 'Messages', '', 1, 0, 1, 4),
 (77, 4, '13,14,15,16', 'Chatbot Creation Support', '', 'Chatbot Creation Support', '', 1, 0, 1, 5),
@@ -6186,4 +6186,6 @@ INSERT INTO `ca_plan_features` (`pfe_id`, `pfe_plan_id`, `pfe_ppr_ids`, `pfe_tit
 (100, 5, NULL, 'FB Messenger', '', 'FB Messenger', '', 1, 0, 1, 18),
 (101, 5, NULL, 'Email & Callback', '', 'Email & Callback', '', 1, 0, 1, 19),
 (102, 5, NULL, 'Advance Settings', '', 'Advance Settings', '', 1, 0, 1, 20),
-(103, 5, NULL, 'License Management For Reselling', '', 'License Management For Reselling', '', 0, 0, 1, 21);
+(103, 5, NULL, 'License Management For Reselling', '', 'License Management For Reselling', '', 0, 0, 1, 21),
+(104, '5', NULL, ' ChatGPT 3.5', '', ' ChatGPT 3.5', '', '1', '0', '1', '13'),
+(105, '5', NULL, 'ChatGPT 4.0 ', '', 'ChatGPT 4.0 ', '', '0', '0', '1', '14');
