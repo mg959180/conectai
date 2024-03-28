@@ -252,12 +252,12 @@ class AuthController
 
                     $this->_db->query("SELECT wes_email_verification_time FROM " . WEBSITE_SETTINGS . " WHERE wes_id = 1");
                     $settings_data =  $this->_db->single();
-                    $expires_time  =   (intVal($settings_data['wes_email_verification_time']) * 60);
+                    $expires_time  =   (intVal($settings_data['wes_email_verification_time']) / 60);
                     if (!empty($user_data)) {
                         $otp_sent_time = $user_data['usr_email_otp_sent_time'];
                         $otp_sent_verify_time = change_to_custom_date($otp_sent_time . '+' . $expires_time . ' minutes', SYSTEM_DATE_TIME_FORMAT_LONG);
                         if ($user_data['usr_email_otp'] == $data['otp']) {
-                            if (strtotime($otp_sent_time) <= strtotime($otp_sent_verify_time)) {
+                            if (strtotime(date(SYSTEM_DATE_TIME_FORMAT_LONG)) <= strtotime($otp_sent_verify_time)) {
                                 $sent_time = date(SYSTEM_DATE_TIME_FORMAT_LONG);
                                 $sql = "UPDATE  " . USERS . " SET usr_email_verified = :email_verified, usr_modified_date = :modified_date WHERE usr_email = '" . $data['email'] . "'";
                                 $this->_db->beginTransaction();
@@ -313,7 +313,7 @@ class AuthController
                             $headers = "From: $from\r\n" . "MIME-Version: 1.0\r\n";
                             $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
                             // Message Body
-                            $expires_time  =   (intVal($settings_data['wes_email_verification_time']) * 60);
+                            $expires_time  =   (intVal($settings_data['wes_email_verification_time']) / 60);
                             $body = "HI, " . $otp . " is your one time password (OTP) for <a href='http://conectai.chat/'>conectai chat</a>. Please use the OTP to proceed further. this otp will expires in " . $expires_time . " minutes. <br> Thank You<br>From ConectAi Chat";
                             // If there are no errors, send the email
                             if (mail($to, $subject, $body, $headers)) {
