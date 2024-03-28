@@ -69,6 +69,10 @@
                             <label for="show_in_plans">Feature Show In Plans</label>
                         </div>
                     </div>
+                    <div class="col-sm-3">
+                        <label for="sort_order">Display Order</label>
+                        <input type="number" name="sort_order" id="sort_order" class="form-control" value="<?= $edit_results['pfe_sort_order'] ?? '' ?>" placeholder="Feature display order">
+                    </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
                         <div class="btn-group mt-5">
                             <input type="hidden" name="mid" value="<?= isset($id) ? $id : '' ?>">
@@ -99,6 +103,7 @@
                                 <th scope="col" style="width:20%;">Feature Extra Desc</th>
                                 <th scope="col" style="width:5%;">Feature Required</th>
                                 <th scope="col" style="width:5%;">Feature Show In Plans</th>
+                                <th scope="col" style="width:5%;">Display Order</th>
                                 <th scope="col" style="width:5%;">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -107,7 +112,7 @@
                             <?php foreach ($plans_features as $rk => $rV) {  ?>
                                 <tr>
                                     <th scope="row"><?= ++$rk ?></th>
-                                    <td><?= $rV['price_name'] ?></td>
+                                    <td><?= !empty($rV['price_name']) ? $rV['price_name'] : '--' ?></td>
                                     <td><?= $rV['pfe_title'] ?></td>
                                     <td><?= !empty($rV['pfe_value']) ? $rV['pfe_value'] : '--' ?></td>
                                     <td><?= $rV['pfe_desc'] ?></td>
@@ -115,6 +120,11 @@
                                     <td><?= ($rV['pfe_required'] == 1 ? 'Yes' : 'No') ?></td>
                                     <td><?= ($rV['pfe_show_in_plans'] == 1 ? 'Yes' : 'No') ?></td>
                                     <td><?= ($rV['pfe_status'] == 1 ? 'Active' : 'Inactive') ?></td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="sort_order" onchange="changeOrder('<?= $rV['pfe_id'] ?>',this)" value="<?= $rV['pfe_sort_order'] ?>">
+                                        </div>
+                                    </td>
                                     <td>
                                         <div class="btn-group">
                                             <a class="btn btn-sm btn-primary" style="margin-right: 5px; padding:5px;" href="<?= SITE_ADMIN_URL . 'pricing/define-plans-features/' . encryptData($rV['pfe_plan_id']) . '/' . encryptData($rV['pfe_id']) ?>">
@@ -182,7 +192,7 @@
             desc: {
                 required: true,
             },
-            'price[]': {
+            sort_order: {
                 required: true,
             },
             status: {
@@ -196,8 +206,8 @@
             desc: {
                 required: "Feature Desc must be required",
             },
-            'price[]': {
-                required: "Feature Price must be required",
+            sort_order: {
+                required: "Display order must be required",
             },
             status: {
                 required: "Status must be required",
@@ -207,4 +217,23 @@
             form.submit();
         }
     });
+
+
+    function changeOrder(id, _this) {
+        let this_item = _this;
+        if (id > 0) {
+            let status = this_item.value;
+            let data = new FormData();
+            data.append('id', id);
+            data.append('order', status);
+            data.append('change_order', 1);
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "<?= SITE_ADMIN_URL ?>pricing/plans-features-order", true);
+            xhr.onload = function() {
+                let res = JSON.parse(this.response);
+                custom_alert(res.type, res.msg);
+            }
+            xhr.send(data);
+        }
+    }
 </script>

@@ -50,9 +50,15 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group mt-5">
                             <input class="form-checkbox" type="checkbox" role="switch" name="best_selling" id="best_selling" <?= (isset($pricing_form_data['plan_best_selling']) ? ($pricing_form_data['plan_best_selling'] == 1 ? 'checked' : '') : '') ?>>
                             <label for="best_selling">Plans best selling</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group mt-5">
+                            <input class="form-checkbox" type="checkbox" role="switch" name="show_in_plans" id="show_in_plans" <?= (isset($pricing_form_data['plan_show_in_plans']) ? ($pricing_form_data['plan_show_in_plans'] == 1 ? 'checked' : '') : '') ?>>
+                            <label for="show_in_plans">Show In Plans</label>
                         </div>
                     </div>
                     <div class="col-sm-3">
